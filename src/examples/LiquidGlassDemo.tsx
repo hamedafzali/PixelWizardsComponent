@@ -219,7 +219,8 @@ export const LiquidGlassDemo: React.FC = () => {
               Dynamic Blur
             </h3>
             <p className="text-white text-sm">
-              Advanced blur effects that adapt to content and user interaction.
+              Advanced glassmorphism effects with modern Liquid Glass content
+              and user interaction.
             </p>
           </LiquidGlassCard>
 
@@ -299,7 +300,7 @@ export const LiquidGlassDemo: React.FC = () => {
           <p className="text-white">
             This is a liquid glass modal with strong blur effects and enhanced
             transparency. The modal uses advanced glassmorphism techniques
-            inspired by iOS 26's Liquid Glass design.
+            inspired by modern Liquid Glass design.
           </p>
           <div className="flex space-x-4">
             <LiquidGlassButton onClick={() => setIsModalOpen(false)}>

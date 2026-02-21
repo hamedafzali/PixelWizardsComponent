@@ -1378,9 +1378,9 @@ const ComponentShowcase: React.FC = () => {
                   color: "var(--color-text-secondary)",
                 }}
               >
-                Advanced glassmorphism effects with iOS 26-inspired Liquid Glass
-                design. These components use backdrop-filter, transparency, and
-                light effects.
+                Advanced glassmorphism effects with modern Liquid Glass design.
+                These components use backdrop-filter, transparency, and light
+                effects.
               </p>
 
               <div

@@ -53,7 +53,7 @@ PW includes a powerful multi-theme system with support for:
 
 - **Light Theme** (`light`) - Clean, modern light theme
 - **Dark Theme** (`dark`) - Elegant dark theme
-- **Liquid Glass Light** (`liquid-glass-light`) - iOS 26-inspired glassmorphism
+- **Liquid Glass Light** (`liquid-glass-light`) - Modern glassmorphism
 - **Liquid Glass Dark** (`liquid-glass-dark`) - Dark glassmorphism with blur effects
 
 ### Theme Provider
@@ -112,7 +112,7 @@ function ThemeInfo() {
 
 ## Liquid Glass Theme
 
-The Liquid Glass theme provides iOS 26-inspired glassmorphism effects with:
+The Liquid Glass theme provides modern glassmorphism effects with:
 
 ### Features
 

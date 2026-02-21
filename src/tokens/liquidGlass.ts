@@ -1,4 +1,4 @@
-// iOS 26 Liquid Glass Design Tokens
+// Modern Liquid Glass Design Tokens
 // Enhanced glassmorphism with advanced blur, transparency, and light effects
 
 export const liquidGlassTokens = {

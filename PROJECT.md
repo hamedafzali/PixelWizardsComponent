@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**@pw/components** is a professional React component library featuring a sophisticated multi-theme system with liquid glass effects inspired by iOS 26 design language.
+**pixelwizards-components** is a professional React component library featuring a sophisticated multi-theme system with liquid glass effects inspired by modern design language.
 
 ### Current Status: **Production Ready with Technical Debt**
 
@@ -48,7 +48,7 @@ The component library is functional and can be used in other projects, but has s
 - **4 Themes Available**: Light, Dark, Liquid Glass Light, Liquid Glass Dark
 - **Multi-Theme Provider** - Context-based theme management
 - **CSS Custom Properties** - Consistent design tokens
-- **Liquid Glass Effects** - iOS 26-inspired glassmorphism
+- **Liquid Glass Effects** - Modern glassmorphism
 
 ## Current Issues & Technical Debt
 
@@ -92,17 +92,17 @@ The build currently fails with TypeScript errors in:
 ### Installation
 
 ```bash
-npm install @pw/components
+npm install pixelwizards-components
 # or
-yarn add @pw/components
+yarn add pixelwizards-components
 ```
 
 ### Basic Integration
 
 ```tsx
 import React from "react";
-import { MultiThemeProvider } from "@pw/components";
-import { Button, Card, Input } from "@pw/components";
+import { MultiThemeProvider } from "pixelwizards-components";
+import { Button, Card, Input } from "pixelwizards-components";
 
 function App() {
   return (
@@ -219,7 +219,7 @@ npm run type-check   # TypeScript validation
 ### For Consumer Projects
 
 1. **Wrap your app** in `MultiThemeProvider`
-2. **Import components** from `@pw/components`
+2. **Import components** from `pixelwizards-components`
 3. **Use CSS custom properties** for custom styling
 4. **Test all themes** including liquid glass variants
 

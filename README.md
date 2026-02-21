@@ -4,14 +4,14 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
 
-A modern, glassmorphism-inspired React component library with a powerful multi-theme system featuring iOS 26-style liquid glass effects.
+A modern, glassmorphism-inspired React component library with a powerful multi-theme system featuring liquid glass effects.
 
 ![PixelWizards Preview](https://via.placeholder.com/800x400/ffffff/000000?text=PixelWizards+Component+Library+Preview)
 
 ## ✨ Features
 
 - 🎨 **Multi-Theme System** - Light, Dark, and Liquid Glass themes
-- 🥂 **Liquid Glass Effects** - iOS 26-inspired glassmorphism with blur and transparency
+- 🥂 **Liquid Glass Effects** - Modern glassmorphism with blur and transparency
 - 🔧 **TypeScript Support** - Full type safety and IntelliSense
 - 📱 **Responsive Design** - Mobile-first approach
 - ♿ **Accessibility** - WCAG compliant components
@@ -23,14 +23,19 @@ A modern, glassmorphism-inspired React component library with a powerful multi-t
 ### Installation
 
 ```bash
-npm install @pw/components
+npm install pixelwizards-components
 ```
 
 ### Basic Usage
 
 ```tsx
 import React from "react";
-import { MultiThemeProvider, Button, Card, Input } from "@pw/components";
+import {
+  MultiThemeProvider,
+  Button,
+  Card,
+  Input,
+} from "pixelwizards-components";
 
 function App() {
   return (
@@ -53,25 +58,25 @@ export default App;
 
 - **Light Theme** (`light`) - Clean, modern light theme
 - **Dark Theme** (`dark`) - Elegant dark theme with perfect contrast
-- **Liquid Glass Light** (`liquid-glass-light`) - iOS 26-inspired glassmorphism
+- **Liquid Glass Light** (`liquid-glass-light`) - Modern glassmorphism
 - **Liquid Glass Dark** (`liquid-glass-dark`) - Dark glassmorphism with blur effects
 
 ### Theme Provider
 
 ```tsx
-import { MultiThemeProvider } from "@pw/components";
+import { MultiThemeProvider } from "pixelwizards-components";
 
 <MultiThemeProvider defaultTheme="liquid-glass-light">
   <YourApp />
-</MultiThemeProvider>
+</MultiThemeProvider>;
 ```
 
 ### Theme Toggle
 
 ```tsx
-import { MultiThemeToggle } from "@pw/components";
+import { MultiThemeToggle } from "pixelwizards-components";
 
-<MultiThemeToggle size="md" />
+<MultiThemeToggle size="md" />;
 ```
 
 ## 🧩 Components
@@ -79,6 +84,7 @@ import { MultiThemeToggle } from "@pw/components";
 ### Core Components
 
 #### Button
+
 ```tsx
 <Button variant="primary" size="md" loading={false}>
   Click me
@@ -86,6 +92,7 @@ import { MultiThemeToggle } from "@pw/components";
 ```
 
 #### Card
+
 ```tsx
 <Card variant="glass">
   <h3>Glass Card</h3>
@@ -94,6 +101,7 @@ import { MultiThemeToggle } from "@pw/components";
 ```
 
 #### Input
+
 ```tsx
 <Input
   placeholder="Enter text"
@@ -103,6 +111,7 @@ import { MultiThemeToggle } from "@pw/components";
 ```
 
 #### Modal
+
 ```tsx
 <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
   <h2>Modal Title</h2>
@@ -113,8 +122,9 @@ import { MultiThemeToggle } from "@pw/components";
 ### Specialized Components
 
 #### Liquid Glass Components
+
 ```tsx
-import { LiquidGlassCard, LiquidGlassButton } from "@pw/components";
+import { LiquidGlassCard, LiquidGlassButton } from "pixelwizards-components";
 
 <LiquidGlassCard blur="medium" alpha={0.75}>
   <h3>Premium Glass</h3>
@@ -127,12 +137,13 @@ import { LiquidGlassCard, LiquidGlassButton } from "@pw/components";
 ```
 
 #### Other Components
+
 - Alert, Avatar, Badge, Checkbox, Progress, Tooltip, Login
 
 ## 🖥️ Programmatic Control
 
 ```tsx
-import { useMultiTheme } from "@pw/components";
+import { useMultiTheme } from "pixelwizards-components";
 
 function ThemeControls() {
   const {
@@ -156,7 +167,7 @@ function ThemeControls() {
 
 ## 🎨 Liquid Glass Effects
 
-The Liquid Glass theme provides stunning iOS 26-inspired effects:
+The Liquid Glass theme provides modern glassmorphism effects:
 
 - **Backdrop Blur**: Adjustable blur intensities (8px to 32px)
 - **Transparency**: Multiple alpha levels (0.65 to 0.95)
@@ -188,20 +199,20 @@ The Liquid Glass theme provides stunning iOS 26-inspired effects:
 
 ```tsx
 const {
-  theme,           // Current theme object
-  setTheme,        // Set theme programmatically
-  toggleMode,      // Toggle light/dark mode
+  theme, // Current theme object
+  setTheme, // Set theme programmatically
+  toggleMode, // Toggle light/dark mode
   toggleDirection, // Toggle LTR/RTL
-  isDark,          // Is dark mode active
-  isRTL,           // Is RTL direction
-  currentThemeType,// Current theme type string
-  setThemeType,    // Set theme by type
+  isDark, // Is dark mode active
+  isRTL, // Is RTL direction
+  currentThemeType, // Current theme type string
+  setThemeType, // Set theme by type
   availableThemes, // Array of available themes
   themeCategories, // Theme categories object
-  cycleTheme,      // Cycle to next theme
+  cycleTheme, // Cycle to next theme
   cycleThemeCategory, // Cycle theme category
-  isLiquidGlass,   // Is liquid glass theme
-  themeInfo,       // Theme metadata
+  isLiquidGlass, // Is liquid glass theme
+  themeInfo, // Theme metadata
 } = useMultiTheme();
 ```
 
@@ -253,17 +264,20 @@ src/
 ## 🎯 Best Practices
 
 ### Theme Usage
+
 - Use `useMultiTheme` for new components
 - Leverage CSS custom properties for styling
 - Test in all themes including liquid glass
 
 ### Component Design
+
 - Use semantic HTML elements
 - Include ARIA labels and keyboard navigation
 - Design for mobile and desktop
 - Follow existing component patterns
 
 ### Performance
+
 - Use `React.memo` for expensive components
 - Optimize re-renders with proper dependencies
 - Minimize bundle size with tree shaking
@@ -282,7 +296,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Inspired by iOS 26 glassmorphism effects
+- Inspired by modern glassmorphism effects
 - Built with modern React and TypeScript
 - Designed for performance and accessibility
 

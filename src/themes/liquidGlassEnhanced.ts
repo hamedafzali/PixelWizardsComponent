@@ -1,6 +1,6 @@
 import { lightTheme, darkTheme } from "./index";
 
-// iOS 26 Liquid Glass Enhancement CSS Variables
+// Modern Liquid Glass Enhancement CSS Variables
 export const liquidGlassCSSVariables = {
   // Advanced blur effects
   "--glass-blur-subtle": "blur(8px) saturate(120%)",
@@ -119,7 +119,7 @@ export const applyGlassEffect = (
     alpha?: number;
     border?: boolean;
     shadow?: boolean;
-  } = {}
+  } = {},
 ) => {
   const {
     blur = "medium",

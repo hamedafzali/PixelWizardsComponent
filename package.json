@@ -1,6 +1,6 @@
 {
-  "name": "@pw/components",
-  "version": "1.0.0",
+  "name": "pixelwizards-components",
+  "version": "1.0.1",
   "description": "PixelWizards Component Library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,8 +10,8 @@
   "scripts": {
     "dev": "vite",
     "storybook": "storybook dev -p 6006",
-    "build": "tsc",
-    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "build": "tsc -p tsconfig.build.json",
+    "build:types": "tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --outDir dist",
     "prepublishOnly": "npm run build && npm run build:types",
     "lint": "eslint . --ext ts,tsx",
     "test": "vitest"

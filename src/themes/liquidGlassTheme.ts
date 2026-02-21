@@ -1,11 +1,11 @@
 import { Theme } from "./types";
 import { liquidGlassTokens } from "../tokens/liquidGlass";
 
-// Enhanced Liquid Glass Theme for iOS 26-inspired design
+// Enhanced Liquid Glass Theme for modern glassmorphism design
 export const createLiquidGlassTheme = (baseTheme: Theme): Theme => {
   return {
     ...baseTheme,
-    // Enhanced glass properties with iOS 26 Liquid Glass effects
+    // Enhanced glass properties with modern Liquid Glass effects
     glass: {
       background: "rgba(255, 255, 255, 0.7)",
       backgroundDark: "rgba(10, 10, 10, 0.85)",
