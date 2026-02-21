@@ -1,0 +1,279 @@
+/* ===========================
+   iOS 26 Liquid Glass UI
+   Complete glassmorphism system
+============================ */
+
+/* ---------- LIQUID GLASS THEME CLASSES ---------- */
+.theme-liquid-glass {
+  /* Glass background colors */
+  --glass-bg-primary: rgba(255, 255, 255, 0.85);
+  --glass-bg-secondary: rgba(255, 255, 255, 0.75);
+  --glass-bg-tertiary: rgba(255, 255, 255, 0.65);
+  --glass-bg-overlay: rgba(255, 255, 255, 0.95);
+
+  /* Glass borders */
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-border-subtle: rgba(255, 255, 255, 0.1);
+
+  /* Glass blur effects */
+  --glass-blur: blur(16px) saturate(150%);
+  --glass-blur-strong: blur(24px) saturate(180%);
+
+  /* Glass shadows */
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  --glass-shadow-hover: 0 16px 64px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+
+  /* LIGHT THEME text colors - Dark text on light glass */
+  --glass-text-primary: #1e293b;
+  --glass-text-secondary: #475569;
+  --glass-text-tertiary: #64748b;
+  --glass-text-muted: #94a3b8;
+
+  /* Override theme colors for glass compatibility */
+  --color-text-primary: var(--glass-text-primary);
+  --color-text-secondary: var(--glass-text-secondary);
+  --color-text-tertiary: var(--glass-text-tertiary);
+  --color-bg-surface: var(--glass-bg-primary);
+  --color-border: var(--glass-border);
+  --color-border-light: var(--glass-border-subtle);
+}
+
+.theme-liquid-glass.theme-dark {
+  /* Dark glass colors */
+  --glass-bg-primary: rgba(10, 10, 10, 0.85);
+  --glass-bg-secondary: rgba(20, 20, 20, 0.75);
+  --glass-bg-tertiary: rgba(30, 30, 30, 0.65);
+  --glass-bg-overlay: rgba(10, 10, 10, 0.95);
+
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-border-subtle: rgba(255, 255, 255, 0.08);
+
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  --glass-shadow-hover: 0 16px 64px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+
+  /* DARK THEME text colors - Light text on dark glass */
+  --glass-text-primary: #f8fafc;
+  --glass-text-secondary: #e2e8f0;
+  --glass-text-tertiary: #cbd5e1;
+  --glass-text-muted: #94a3b8;
+
+  /* Override theme colors for dark glass compatibility */
+  --color-text-primary: var(--glass-text-primary);
+  --color-text-secondary: var(--glass-text-secondary);
+  --color-text-tertiary: var(--glass-text-tertiary);
+  --color-bg-surface: var(--glass-bg-primary);
+  --color-border: var(--glass-border);
+  --color-border-light: var(--glass-border-subtle);
+}
+
+/* ---------- LIQUID GLASS COMPONENT STYLES ---------- */
+
+/* Glass Card */
+.theme-liquid-glass .pw-card--glass {
+  background: var(--glass-bg-primary) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  color: var(--glass-text-primary) !important;
+}
+
+.theme-liquid-glass .pw-card--glass:hover {
+  background: var(--glass-bg-secondary) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+  border-color: var(--glass-border-subtle) !important;
+}
+
+/* Glass Button */
+.theme-liquid-glass .pw-button {
+  background: var(--glass-bg-tertiary) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--glass-text-primary) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+.theme-liquid-glass .pw-button:hover:not(:disabled) {
+  background: var(--glass-bg-secondary) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+  border-color: var(--glass-border-subtle) !important;
+  transform: translateY(-1px) scale(1.02);
+}
+
+.theme-liquid-glass .pw-button--primary {
+  background: rgba(59, 130, 246, 0.8) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.theme-liquid-glass .pw-button--primary:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.9) !important;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+}
+
+/* Glass Input */
+.theme-liquid-glass .pw-input {
+  background: var(--glass-bg-secondary) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--glass-text-primary) !important;
+}
+
+.theme-liquid-glass .pw-input::placeholder {
+  color: var(--glass-text-muted) !important;
+}
+
+.theme-liquid-glass .pw-input:focus {
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Glass Modal */
+.theme-liquid-glass .pw-modal {
+  background: var(--glass-bg-overlay) !important;
+  backdrop-filter: var(--glass-blur-strong) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+}
+
+/* Glass Alert */
+.theme-liquid-glass .pw-alert {
+  background: var(--glass-bg-primary) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--glass-text-primary) !important;
+}
+
+/* Typography overrides for glass */
+.theme-liquid-glass h1,
+.theme-liquid-glass h2,
+.theme-liquid-glass h3,
+.theme-liquid-glass h4,
+.theme-liquid-glass h5,
+.theme-liquid-glass h6 {
+  color: var(--glass-text-primary) !important;
+}
+
+.theme-liquid-glass p,
+.theme-liquid-glass span,
+.theme-liquid-glass div,
+.theme-liquid-glass label,
+.theme-liquid-glass input,
+.theme-liquid-glass textarea {
+  color: var(--glass-text-secondary) !important;
+}
+
+.theme-liquid-glass .pw-card--glass h1,
+.theme-liquid-glass .pw-card--glass h2,
+.theme-liquid-glass .pw-card--glass h3,
+.theme-liquid-glass .pw-card--glass h4,
+.theme-liquid-glass .pw-card--glass h5,
+.theme-liquid-glass .pw-card--glass h6 {
+  color: var(--glass-text-primary) !important;
+}
+
+.theme-liquid-glass .pw-card--glass p,
+.theme-liquid-glass .pw-card--glass span,
+.theme-liquid-glass .pw-card--glass div,
+.theme-liquid-glass .pw-card--glass label {
+  color: var(--glass-text-secondary) !important;
+}
+
+/* Input placeholder text */
+.theme-liquid-glass input::placeholder,
+.theme-liquid-glass textarea::placeholder {
+  color: var(--glass-text-muted) !important;
+}
+
+/* Button text colors */
+.theme-liquid-glass .pw-button {
+  color: var(--glass-text-primary) !important;
+}
+
+.theme-liquid-glass .pw-button--primary {
+  color: #ffffff !important;
+}
+
+.theme-liquid-glass .pw-button--secondary {
+  color: var(--glass-text-primary) !important;
+}
+
+.theme-liquid-glass .pw-button--ghost {
+  color: var(--glass-text-secondary) !important;
+}
+
+/* ---------- LIQUID GLASS ANIMATIONS ---------- */
+@keyframes glassFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glassPulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.liquid-glass--floating {
+  animation: glassFloat 6s ease-in-out infinite;
+}
+
+.liquid-glass--pulse {
+  animation: glassPulse 4s ease-in-out infinite;
+}
+
+/* ---------- LIQUID GLASS UTILITIES ---------- */
+.glass-text-primary {
+  color: var(--glass-text-primary) !important;
+}
+.glass-text-secondary {
+  color: var(--glass-text-secondary) !important;
+}
+.glass-text-tertiary {
+  color: var(--glass-text-tertiary) !important;
+}
+.glass-text-muted {
+  color: var(--glass-text-muted) !important;
+}
+
+.glass-bg-primary {
+  background: var(--glass-bg-primary) !important;
+}
+.glass-bg-secondary {
+  background: var(--glass-bg-secondary) !important;
+}
+.glass-bg-tertiary {
+  background: var(--glass-bg-tertiary) !important;
+}
+
+.glass-border {
+  border: 1px solid var(--glass-border) !important;
+}
+.glass-border-subtle {
+  border: 1px solid var(--glass-border-subtle) !important;
+}
+
+.glass-blur {
+  backdrop-filter: var(--glass-blur) !important;
+}
+.glass-blur-strong {
+  backdrop-filter: var(--glass-blur-strong) !important;
+}
+
+.glass-shadow {
+  box-shadow: var(--glass-shadow) !important;
+}
+.glass-shadow-hover {
+  box-shadow: var(--glass-shadow-hover) !important;
+}
