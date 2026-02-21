@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { CheckboxProps } from "./Checkbox.types";
 import { clsx } from "clsx";
-import { useTheme } from "../../themes";
 
 export const Checkbox: React.FC<CheckboxProps> = ({
   label,
@@ -14,7 +13,6 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   size = "md",
   ...props
 }) => {
-  const { theme } = useTheme ? useTheme() : { theme: {} };
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Indeterminate visual state

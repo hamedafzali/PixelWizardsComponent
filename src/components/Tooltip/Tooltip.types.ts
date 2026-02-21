@@ -1,12 +1,12 @@
-import { ReactNode, HTMLAttributes } from 'react';
+import { ReactNode } from "react";
 
 /** Tooltip position variants */
-export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
+export type TooltipPlacement = "top" | "right" | "bottom" | "left";
 
 /**
  * Props for Tooltip component.
  */
-export interface TooltipProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface TooltipProps {
   /** The tooltip content */
   content: ReactNode;
   /** Where to place the tooltip relative to the child (default: top) */
@@ -16,7 +16,7 @@ export interface TooltipProps extends Omit<HTMLAttributes<HTMLDivElement>, 'titl
   /** Delay before hiding (ms, default: 80) */
   hideDelay?: number;
   /**
-   * Single child element that receives the tooltip. 
+   * Single child element that receives the tooltip.
    * Tooltip wraps and clones this child, adding ARIA and event handlers.
    */
   children: ReactNode;

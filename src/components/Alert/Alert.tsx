@@ -2,7 +2,7 @@ import React from "react";
 import { AlertProps, AlertStatus } from "./Alert.types";
 import { clsx } from "clsx";
 
-const statusIcon: Record<AlertStatus, JSX.Element> = {
+const statusIcon: Record<AlertStatus, React.JSX.Element> = {
   info: (
     <svg width="1em" height="1em" viewBox="0 0 20 20" fill="none">
       <circle cx="10" cy="10" r="9" stroke="#2563eb" strokeWidth="2" />
@@ -42,30 +42,19 @@ const statusIcon: Record<AlertStatus, JSX.Element> = {
 export const Alert: React.FC<AlertProps> = ({
   status = "info",
   title,
-  children,
+  description,
   icon,
-  dismissable = false,
+  closable = false,
   onClose,
   className,
-  toast = false,
-  ...props
+  variant = "subtle",
 }) => {
   return (
     <div
       role="alert"
       className={clsx("pw-alert", className, `pw-alert--${status}`, {
-        "pw-alert--toast": toast,
+        [`pw-alert--${variant}`]: variant,
       })}
-      style={{
-        position: toast ? "fixed" : undefined,
-        top: toast ? 24 : undefined,
-        right: toast ? 24 : undefined,
-        minWidth: toast ? 260 : undefined,
-        maxWidth: 400,
-        zIndex: toast ? 2000 : undefined,
-        ...props.style,
-      }}
-      {...props}
     >
       <span
         style={{ fontSize: 22, marginTop: 1 }}
@@ -84,10 +73,10 @@ export const Alert: React.FC<AlertProps> = ({
           </div>
         )}
         <div className="pw-alert__desc" style={{ fontSize: 15 }}>
-          {children}
+          {description}
         </div>
       </div>
-      {dismissable && (
+      {closable && (
         <button
           aria-label="Dismiss alert"
           onClick={onClose}

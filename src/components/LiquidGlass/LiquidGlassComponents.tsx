@@ -32,7 +32,7 @@ export const LiquidGlassCard: React.FC<LiquidGlassCardProps> = ({
   style,
   onClick,
 }) => {
-  const { elementRef, glassClasses } = useLiquidGlass({
+  const { elementRef, glassClasses } = useLiquidGlass<HTMLDivElement>({
     variant,
     blur,
     alpha,
@@ -83,7 +83,7 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
   onClick,
   className,
 }) => {
-  const { elementRef, glassClasses } = useLiquidGlass({
+  const { elementRef, glassClasses } = useLiquidGlass<HTMLButtonElement>({
     variant: "button",
     blur,
     alpha,
@@ -125,7 +125,7 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
         "rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2",
         disabled && "opacity-50 cursor-not-allowed",
         loading && "cursor-wait",
-        className
+        className,
       )}
       style={variantStyles[variant]}
       disabled={disabled || loading}
@@ -184,7 +184,7 @@ export const LiquidGlassModal: React.FC<LiquidGlassModalProps> = ({
   reflection = "medium",
   className,
 }) => {
-  const { elementRef, glassClasses } = useLiquidGlass({
+  const { elementRef, glassClasses } = useLiquidGlass<HTMLDivElement>({
     variant: "modal",
     blur,
     alpha,
@@ -217,7 +217,7 @@ export const LiquidGlassModal: React.FC<LiquidGlassModalProps> = ({
           glassClasses,
           sizeClasses[size],
           "relative w-full mx-4 max-h-[90vh] overflow-auto rounded-2xl p-6",
-          className
+          className,
         )}
       >
         {/* Header */}
@@ -274,7 +274,7 @@ export const LiquidGlassNav: React.FC<LiquidGlassNavProps> = ({
   className,
   sticky = true,
 }) => {
-  const { elementRef, glassClasses } = useLiquidGlass({
+  const { elementRef, glassClasses } = useLiquidGlass<HTMLDivElement>({
     variant: "navigation",
     blur,
     alpha,
@@ -291,7 +291,7 @@ export const LiquidGlassNav: React.FC<LiquidGlassNavProps> = ({
         glassClasses,
         "top-0 left-0 right-0 z-40 px-6 py-4",
         sticky && "sticky",
-        className
+        className,
       )}
     >
       <div className="flex items-center justify-between">{children}</div>

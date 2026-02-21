@@ -5,7 +5,6 @@ import { Button } from "../Button";
 import { Checkbox } from "../Checkbox";
 import { Card } from "../Card";
 import { clsx } from "clsx";
-import { useTheme } from "../../themes";
 
 export const Login: React.FC<LoginProps> = ({
   onSubmit,
@@ -22,7 +21,6 @@ export const Login: React.FC<LoginProps> = ({
   children,
   className,
 }) => {
-  const { theme } = useTheme ? useTheme() : { theme: {} };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);

@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from "react";
+import { Meta, StoryObj } from '@storybook/react';
 import { Card } from './Card';
 
-const meta: Meta<typeof Card> = {
+const meta = {
   title: 'Components/Card',
   component: Card,
   tags: ['autodocs'],
@@ -18,37 +19,36 @@ const meta: Meta<typeof Card> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Card>;
 
-export const Default: Story = {
+export const Default= {
   args: {
     children: 'This is a default card with some content.',
     variant: 'default',
   },
 };
 
-export const Elevated: Story = {
+export const Elevated= {
   args: {
     children: 'This is an elevated card with shadow.',
     variant: 'elevated',
   },
 };
 
-export const Outlined: Story = {
+export const Outlined= {
   args: {
     children: 'This is an outlined card with border.',
     variant: 'outlined',
   },
 };
 
-export const Glass: Story = {
+export const Glass= {
   args: {
     children: 'This is a glass morphism card.',
     variant: 'glass',
   },
 };
 
-export const WithPadding: Story = {
+export const WithPadding= {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <Card padding="sm">Small padding</Card>
@@ -59,7 +59,7 @@ export const WithPadding: Story = {
   ),
 };
 
-export const WithHover: Story = {
+export const WithHover= {
   args: {
     children: 'Hover over this card to see the effect.',
     hover: true,

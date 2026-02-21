@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { applyLiquidGlassVariables } from "../themes/liquidGlassEnhanced";
 
 // Hook for applying liquid glass effects to components
-export const useLiquidGlass = (
+export const useLiquidGlass = <T extends HTMLElement = HTMLElement>(
   options: {
     variant?: "navigation" | "card" | "modal" | "button" | "panel";
     blur?: "subtle" | "medium" | "strong" | "ultra";
@@ -14,7 +14,7 @@ export const useLiquidGlass = (
     layer?: "background" | "glass" | "solid" | "dynamic" | "modal" | "toast";
   } = {},
 ) => {
-  const elementRef = useRef<HTMLElement>(null);
+  const elementRef = useRef<T>(null);
 
   const {
     variant = "card",

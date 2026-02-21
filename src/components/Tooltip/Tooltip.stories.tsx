@@ -1,32 +1,40 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Tooltip } from './Tooltip';
-import { Button } from '../Button';
+import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import { Tooltip } from "./Tooltip";
+import { Button } from "../Button";
 
-const meta: Meta<typeof Tooltip> = {
-  title: 'Components/Tooltip',
+const meta = {
+  title: "Components/Tooltip",
   component: Tooltip,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     placement: {
-      control: 'select',
-      options: ['top', 'right', 'bottom', 'left'],
+      control: "select",
+      options: ["top", "right", "bottom", "left"],
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Tooltip>;
 
-export const Default: Story = {
+export const Default= {
   args: {
-    content: 'This is a tooltip',
+    content: "This is a tooltip",
     children: <Button>Hover me</Button>,
   },
 };
 
-export const Placements: Story = {
+export const Placements= {
   render: () => (
-    <div style={{ display: 'flex', gap: '2rem', padding: '4rem', justifyContent: 'center', alignItems: 'center' }}>
+    <div
+      style={{
+        display: "flex",
+        gap: "2rem",
+        padding: "4rem",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Tooltip content="Top tooltip" placement="top">
         <Button>Top</Button>
       </Tooltip>
@@ -42,4 +50,3 @@ export const Placements: Story = {
     </div>
   ),
 };
-

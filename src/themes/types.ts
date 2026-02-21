@@ -111,6 +111,8 @@ export interface Theme {
       border: DesignTokens["colors"]["semantic"]["border"] & {
         primary: string;
         secondary: string;
+        elevated?: string;
+        overlay?: string;
         focus: string;
         error: string;
         success: string;

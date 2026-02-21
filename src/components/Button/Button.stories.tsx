@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from "react";
+import { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
 
-const meta: Meta<typeof Button> = {
+const meta = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
@@ -18,44 +19,43 @@ const meta: Meta<typeof Button> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {
+export const Primary= {
   args: {
     children: 'Button',
     variant: 'primary',
   },
 };
 
-export const Secondary: Story = {
+export const Secondary= {
   args: {
     children: 'Button',
     variant: 'secondary',
   },
 };
 
-export const Outline: Story = {
+export const Outline= {
   args: {
     children: 'Button',
     variant: 'outline',
   },
 };
 
-export const Ghost: Story = {
+export const Ghost= {
   args: {
     children: 'Button',
     variant: 'ghost',
   },
 };
 
-export const Danger: Story = {
+export const Danger= {
   args: {
     children: 'Button',
     variant: 'danger',
   },
 };
 
-export const Sizes: Story = {
+export const Sizes= {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
       <Button size="sm">Small</Button>
@@ -66,21 +66,21 @@ export const Sizes: Story = {
   ),
 };
 
-export const Loading: Story = {
+export const Loading= {
   args: {
     children: 'Loading...',
     loading: true,
   },
 };
 
-export const Disabled: Story = {
+export const Disabled= {
   args: {
     children: 'Disabled',
     disabled: true,
   },
 };
 
-export const FullWidth: Story = {
+export const FullWidth= {
   args: {
     children: 'Full Width Button',
     fullWidth: true,

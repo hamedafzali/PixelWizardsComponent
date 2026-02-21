@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from "react";
+import { Meta, StoryObj } from '@storybook/react';
 import { Progress } from './Progress';
 
-const meta: Meta<typeof Progress> = {
+const meta = {
   title: 'Components/Progress',
   component: Progress,
   tags: ['autodocs'],
@@ -25,22 +26,21 @@ const meta: Meta<typeof Progress> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Progress>;
 
-export const Default: Story = {
+export const Default= {
   args: {
     value: 50,
   },
 };
 
-export const WithLabel: Story = {
+export const WithLabel= {
   args: {
     value: 75,
     showLabel: true,
   },
 };
 
-export const Colors: Story = {
+export const Colors= {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
       <Progress value={60} color="primary" showLabel />
@@ -52,7 +52,7 @@ export const Colors: Story = {
   ),
 };
 
-export const Variants: Story = {
+export const Variants= {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
       <Progress value={60} variant="default" showLabel />
@@ -62,7 +62,7 @@ export const Variants: Story = {
   ),
 };
 
-export const Sizes: Story = {
+export const Sizes= {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
       <Progress value={60} size="sm" showLabel />
@@ -72,7 +72,7 @@ export const Sizes: Story = {
   ),
 };
 
-export const Animated: Story = {
+export const Animated= {
   args: {
     value: 75,
     animated: true,

@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from "react";
+import { Meta, StoryObj } from '@storybook/react';
 import { Badge } from './Badge';
 
-const meta: Meta<typeof Badge> = {
+const meta = {
   title: 'Components/Badge',
   component: Badge,
   tags: ['autodocs'],
@@ -22,15 +23,14 @@ const meta: Meta<typeof Badge> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Badge>;
 
-export const Default: Story = {
+export const Default= {
   args: {
     children: 'Badge',
   },
 };
 
-export const Colors: Story = {
+export const Colors= {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       <Badge color="primary">Primary</Badge>
@@ -43,7 +43,7 @@ export const Colors: Story = {
   ),
 };
 
-export const Sizes: Story = {
+export const Sizes= {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
       <Badge size="sm">Small</Badge>
@@ -53,7 +53,7 @@ export const Sizes: Story = {
   ),
 };
 
-export const Dot: Story = {
+export const Dot= {
   args: {
     dot: true,
   },

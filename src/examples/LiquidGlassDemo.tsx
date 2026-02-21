@@ -5,7 +5,7 @@ import {
   LiquidGlassModal,
   LiquidGlassNav,
 } from "../components/LiquidGlass/LiquidGlassComponents";
-import { ThemeToggle } from "../components/ThemeToggle/ThemeToggle";
+import ThemeToggle from "../components/ThemeToggle/ThemeToggle";
 
 export const LiquidGlassDemo: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,7 +66,7 @@ export const LiquidGlassDemo: React.FC = () => {
                     >
                       {blur}
                     </LiquidGlassButton>
-                  )
+                  ),
                 )}
               </div>
             </div>

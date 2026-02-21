@@ -87,7 +87,8 @@ export const Modal: React.FC<ModalProps> = ({
           background: "var(--modal-bg, #fff)",
           color: "var(--modal-color, #111)",
           borderRadius: "var(--radius-lg, 16px)",
-          boxShadow: theme?.shadows?.xl || "0 8px 32px rgba(0,0,0,0.15)",
+          boxShadow:
+            (theme as any)?.shadows?.xl || "0 8px 32px rgba(0,0,0,0.15)",
           padding: 24,
           outline: "none",
           ...props.style,

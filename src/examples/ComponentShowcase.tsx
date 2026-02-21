@@ -1073,27 +1073,34 @@ const ComponentShowcase: React.FC = () => {
             maxWidth: "500px",
           }}
         >
-          <Alert status="info" title="Information">
-            This is an informational alert message.
-          </Alert>
-          <Alert status="success" title="Success">
-            Your action was completed successfully!
-          </Alert>
-          <Alert status="warning" title="Warning">
-            Please be careful with this action.
-          </Alert>
-          <Alert status="error" title="Error">
-            Something went wrong. Please try again.
-          </Alert>
+          <Alert
+            status="info"
+            title="Information"
+            description="This is an informational alert message."
+          />
+          <Alert
+            status="success"
+            title="Success"
+            description="Your action was completed successfully!"
+          />
+          <Alert
+            status="warning"
+            title="Warning"
+            description="Please be careful with this action."
+          />
+          <Alert
+            status="error"
+            title="Error"
+            description="Something went wrong. Please try again."
+          />
           {alertVisible && (
             <Alert
               status="info"
-              title="Dismissable Alert"
-              dismissable
+              title="Info Alert"
+              description="This is an informational message."
+              closable
               onClose={() => setAlertVisible(false)}
-            >
-              Click the X button to dismiss this alert.
-            </Alert>
+            />
           )}
         </div>
       </section>

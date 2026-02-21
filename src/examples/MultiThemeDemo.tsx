@@ -67,20 +67,11 @@ const MultiThemeDemoContent: React.FC = () => {
                 onChange={(e) => setThemeType(e.target.value as any)}
                 className="w-full p-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white"
               >
-                {availableThemes.map((themeType) => {
-                  const info = themeInfo; // This would need to be calculated per theme
-                  return (
-                    <option
-                      key={themeType}
-                      value={themeType}
-                      className="bg-gray-800"
-                    >
-                      {themeType
-                        .replace("-", " ")
-                        .replace(/\b\w/g, (l) => l.toUpperCase())}
-                    </option>
-                  );
-                })}
+                {availableThemes.map((themeType) => (
+                  <option key={themeType} value={themeType}>
+                    {themeType.replace("-", " ").toUpperCase()}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -137,7 +128,7 @@ const MultiThemeDemoContent: React.FC = () => {
                   "p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300",
                   isCurrent
                     ? "border-blue-400 bg-blue-500 bg-opacity-20"
-                    : "border-white border-opacity-20 bg-white bg-opacity-10 hover:bg-opacity-20"
+                    : "border-white border-opacity-20 bg-white bg-opacity-10 hover:bg-opacity-20",
                 )}
               >
                 <div className="text-center">
@@ -186,7 +177,7 @@ const MultiThemeDemoContent: React.FC = () => {
                           "px-2 py-1 rounded",
                           isLGTheme
                             ? "bg-blue-500 bg-opacity-30"
-                            : "bg-gray-500 bg-opacity-30"
+                            : "bg-gray-500 bg-opacity-30",
                         )}
                       >
                         {isLGTheme ? "Liquid Glass" : "Original"}
@@ -196,7 +187,7 @@ const MultiThemeDemoContent: React.FC = () => {
                           "px-2 py-1 rounded",
                           isDarkTheme
                             ? "bg-gray-800 bg-opacity-50"
-                            : "bg-yellow-500 bg-opacity-30"
+                            : "bg-yellow-500 bg-opacity-30",
                         )}
                       >
                         {isDarkTheme ? "Dark" : "Light"}

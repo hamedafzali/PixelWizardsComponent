@@ -178,7 +178,7 @@ export const getTheme = (themeType: ThemeType): Theme => {
 
 // Theme switching helper
 export const switchTheme = (
-  currentTheme: ThemeType,
+  _currentTheme: ThemeType,
   targetTheme: ThemeType,
 ): ThemeType => {
   return targetTheme;

@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from "react";
+import { Meta, StoryObj } from '@storybook/react';
 import { Login } from './Login';
 
-const meta: Meta<typeof Login> = {
+const meta = {
   title: 'Components/Login',
   component: Login,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof Login>;
 
-export const Default: Story = {
+export const Default= {
   args: {
     onSubmit: (values) => {
       console.log('Login submitted:', values);
@@ -19,7 +19,7 @@ export const Default: Story = {
   },
 };
 
-export const WithError: Story = {
+export const WithError= {
   args: {
     error: 'Invalid username or password',
     onSubmit: (values) => {
@@ -28,7 +28,7 @@ export const WithError: Story = {
   },
 };
 
-export const Loading: Story = {
+export const Loading= {
   args: {
     loading: true,
     onSubmit: (values) => {

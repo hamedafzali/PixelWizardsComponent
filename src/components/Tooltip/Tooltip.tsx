@@ -42,21 +42,21 @@ export const Tooltip: React.FC<TooltipProps> = ({
         "aria-describedby": open ? tooltipId : undefined,
         onFocus: (e: any) => {
           show();
-          children.props.onFocus?.(e);
+          (children as any).props?.onFocus?.(e);
         },
         onBlur: (e: any) => {
           hide();
-          children.props.onBlur?.(e);
+          (children as any).props?.onBlur?.(e);
         },
         onMouseEnter: (e: any) => {
           show();
-          children.props.onMouseEnter?.(e);
+          (children as any).props?.onMouseEnter?.(e);
         },
         onMouseLeave: (e: any) => {
           hide();
-          children.props.onMouseLeave?.(e);
+          (children as any).props?.onMouseLeave?.(e);
         },
-        tabIndex: children.props.tabIndex ?? 0,
+        tabIndex: (children as any).props?.tabIndex ?? 0,
       })
     : children;
 

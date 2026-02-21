@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from "react";
+import { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Modal } from './Modal';
 import { Button } from '../Button';
 
-const meta: Meta<typeof Modal> = {
+const meta = {
   title: 'Components/Modal',
   component: Modal,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof Modal>;
 
-export const Default: Story = {
+export const Default= {
   render: () => {
     const [open, setOpen] = useState(false);
     return (
@@ -26,7 +26,7 @@ export const Default: Story = {
   },
 };
 
-export const WithHeaderAndFooter: Story = {
+export const WithHeaderAndFooter= {
   render: () => {
     const [open, setOpen] = useState(false);
     return (

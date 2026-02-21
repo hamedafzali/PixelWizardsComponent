@@ -1,4 +1,4 @@
-import { forwardRef, useId } from "react";
+import React, { forwardRef, useId } from "react";
 import { clsx } from "clsx";
 import { useTheme } from "../../themes";
 import { InputProps } from "./Input.types";

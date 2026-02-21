@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from "react";
+import { Meta, StoryObj } from '@storybook/react';
 import { Avatar } from './Avatar';
 
-const meta: Meta<typeof Avatar> = {
+const meta = {
   title: 'Components/Avatar',
   component: Avatar,
   tags: ['autodocs'],
@@ -18,15 +19,14 @@ const meta: Meta<typeof Avatar> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Avatar>;
 
-export const WithInitials: Story = {
+export const WithInitials= {
   args: {
     name: 'John Doe',
   },
 };
 
-export const Sizes: Story = {
+export const Sizes= {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
       <Avatar name="John Doe" size="xs" />
@@ -38,14 +38,14 @@ export const Sizes: Story = {
   ),
 };
 
-export const Square: Story = {
+export const Square= {
   args: {
     name: 'Jane Smith',
     variant: 'square',
   },
 };
 
-export const WithImage: Story = {
+export const WithImage= {
   args: {
     src: 'https://i.pravatar.cc/150?img=1',
     alt: 'User avatar',
