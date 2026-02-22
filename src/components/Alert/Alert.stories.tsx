@@ -1,5 +1,3 @@
-import React from "react";
-import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Alert } from "./Alert";
 
@@ -49,18 +47,49 @@ export const Error = {
   },
 };
 
+const DismissableAlertStory = () => {
+  const [show, setShow] = useState(true);
+
+  if (!show) {
+    return <button onClick={() => setShow(true)}>Show Alert</button>;
+  }
+
+  return (
+    <Alert
+      status="info"
+      title="Dismissable Alert"
+      description="Click the X button to dismiss this alert."
+      closable
+      onClose={() => setShow(false)}
+    />
+  );
+};
+
 export const Dismissable = {
-  render: () => {
-    const [show, setShow] = useState(true);
-    if (!show) return <button onClick={() => setShow(true)}>Show Alert</button>;
-    return (
+  render: () => <DismissableAlertStory />,
+};
+
+export const Variants = {
+  render: () => (
+    <div style={{ display: "grid", gap: "0.75rem" }}>
       <Alert
         status="info"
-        title="Dismissable Alert"
-        description="Click the X button to dismiss this alert."
-        closable
-        onClose={() => setShow(false)}
+        variant="subtle"
+        title="Subtle"
+        description="Low emphasis inline message."
       />
-    );
-  },
+      <Alert
+        status="success"
+        variant="left-accent"
+        title="Left Accent"
+        description="Standard alert with accent border."
+      />
+      <Alert
+        status="error"
+        variant="solid"
+        title="Solid"
+        description="High emphasis alert for critical actions."
+      />
+    </div>
+  ),
 };

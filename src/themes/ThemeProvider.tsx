@@ -18,20 +18,17 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   defaultTheme = lightTheme,
   storageKey = "pw-theme",
 }) => {
-  const [theme, setThemeState] = useState<Theme>(defaultTheme as Theme);
-
-  // Load theme from localStorage on mount
-  useEffect(() => {
+  const [theme, setThemeState] = useState<Theme>(() => {
     try {
       const stored = localStorage.getItem(storageKey);
       if (stored) {
-        const parsedTheme = JSON.parse(stored);
-        setThemeState(parsedTheme);
+        return JSON.parse(stored) as Theme;
       }
     } catch (error) {
       console.warn("Failed to load theme from localStorage:", error);
     }
-  }, [storageKey]);
+    return defaultTheme as Theme;
+  });
 
   // Apply theme to document
   useEffect(() => {

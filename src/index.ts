@@ -17,7 +17,9 @@ export * from "./components/Tooltip";
 export * from "./components/Checkbox";
 export * from "./components/Avatar";
 export * from "./components/Alert";
+export * from "./components/Toast";
 export * from "./components/Login";
+export * from "./components/Select";
 export { default as Table } from "./components/Table";
 export * from "./components/Table";
 

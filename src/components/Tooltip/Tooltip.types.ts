@@ -15,9 +15,14 @@ export interface TooltipProps {
   showDelay?: number;
   /** Delay before hiding (ms, default: 80) */
   hideDelay?: number;
+  /** Disable tooltip rendering and interactions */
+  disabled?: boolean;
+  /** Max width of tooltip content */
+  maxWidth?: number | string;
+  /** Space between trigger and tooltip */
+  offset?: number;
   /**
    * Single child element that receives the tooltip.
-   * Tooltip wraps and clones this child, adding ARIA and event handlers.
    */
   children: ReactNode;
   /** Optional custom className */

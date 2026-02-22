@@ -20,7 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
   className,
   ...props
 }) => {
-  const { theme } = useTheme ? useTheme() : { theme: {} };
+  const { theme } = useTheme();
   const dialogRef = useRef<HTMLDivElement>(null);
 
   // Trap focus when open

@@ -8,9 +8,12 @@ import {
   Checkbox,
   Avatar,
   Alert,
+  Toast,
   Tooltip,
   Modal,
   Login,
+  Select,
+  ThemeToggle,
   Table,
 } from "../index";
 import MultiThemeToggle from "../components/MultiThemeToggle";
@@ -18,15 +21,51 @@ import { useMultiTheme } from "../themes/MultiThemeProvider";
 import { LiquidGlassCard, LiquidGlassButton } from "../components/LiquidGlass";
 
 const ComponentShowcase: React.FC = () => {
-  const { isLiquidGlass, themeInfo } = useMultiTheme();
+  const {
+    isLiquidGlass,
+    themeInfo,
+    isDark,
+    toggleMode,
+    setThemeType,
+    availableThemes,
+    currentThemeType,
+  } = useMultiTheme();
   const [loading, setLoading] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<
     "primary" | "secondary" | "ghost" | "outline" | "danger"
   >("primary");
   const [modalOpen, setModalOpen] = useState(false);
   const [alertVisible, setAlertVisible] = useState(true);
+  const [demoToasts, setDemoToasts] = useState<
+    Array<{
+      id: number;
+      status: "success" | "info" | "warning" | "error";
+      title: string;
+      description: string;
+      actionLabel?: string;
+      duration?: number;
+    }>
+  >([]);
   const [progressValue, setProgressValue] = useState(45);
   const [currentPage, setCurrentPage] = useState(1);
+  const [tableTheme, setTableTheme] = useState<
+    "glass" | "clean" | "zebra" | "compact"
+  >("glass");
+  const [singleSelectValue, setSingleSelectValue] = useState<
+    string | number | null
+  >(null);
+  const [multiSelectValue, setMultiSelectValue] = useState<
+    Array<string | number>
+  >([]);
+
+  const selectOptions = [
+    { value: "us", label: "United States", group: "North America" },
+    { value: "ca", label: "Canada", group: "North America" },
+    { value: "gb", label: "United Kingdom", group: "Europe" },
+    { value: "de", label: "Germany", group: "Europe" },
+    { value: "jp", label: "Japan", group: "Asia" },
+    { value: "au", label: "Australia", group: "Oceania" },
+  ];
 
   const handleButtonClick = () => {
     setLoading(true);
@@ -40,8 +79,126 @@ const ComponentShowcase: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const pushToast = (
+    status: "success" | "info" | "warning" | "error",
+    title: string,
+    description: string,
+    options?: { actionLabel?: string; duration?: number },
+  ) => {
+    setDemoToasts((prev) => [
+      {
+        id: Date.now() + Math.floor(Math.random() * 1000),
+        status,
+        title,
+        description,
+        actionLabel: options?.actionLabel,
+        duration: options?.duration,
+      },
+      ...prev,
+    ]);
+  };
+
+  const removeToast = (id: number) => {
+    setDemoToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
+  const navSections = [
+    { id: "buttons", label: "Buttons" },
+    { id: "cards", label: "Cards" },
+    { id: "inputs", label: "Inputs" },
+    { id: "selects", label: "Selects" },
+    { id: "badges", label: "Badges" },
+    { id: "progress", label: "Progress" },
+    { id: "checkboxes", label: "Checkboxes" },
+    { id: "avatars", label: "Avatars" },
+    { id: "alerts", label: "Alerts" },
+    { id: "toasts", label: "Toasts" },
+    { id: "tooltips", label: "Tooltips" },
+    { id: "modals", label: "Modals" },
+    { id: "themes", label: "Theme Toggle" },
+    { id: "login", label: "Login" },
+    { id: "table", label: "Table" },
+  ];
+
   return (
-    <div className="container" style={{ padding: "2rem 0" }}>
+    <div>
+      <aside
+        style={{
+          position: "fixed",
+          top: "1rem",
+          left: "1rem",
+          width: "250px",
+          maxHeight: "calc(100vh - 2rem)",
+          overflowY: "auto",
+          padding: "1rem",
+          borderRadius: "12px",
+          border: "1px solid var(--color-border)",
+          background: "var(--color-bg-surface)",
+          boxShadow: "var(--shadow-md)",
+          zIndex: 40,
+        }}
+      >
+        <div
+          style={{
+            fontWeight: 700,
+            marginBottom: "0.75rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Showcase Menu
+        </div>
+
+        <div style={{ display: "grid", gap: "0.4rem", marginBottom: "1rem" }}>
+          {navSections.map((section) => (
+            <a
+              key={section.id}
+              href={`#${section.id}`}
+              style={{
+                color: "var(--color-text-secondary)",
+                fontSize: "0.86rem",
+                textDecoration: "none",
+              }}
+            >
+              {section.label}
+            </a>
+          ))}
+        </div>
+
+        <div
+          style={{
+            borderTop: "1px solid var(--color-border-light)",
+            paddingTop: "0.75rem",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              marginBottom: "0.5rem",
+              color: "var(--color-text-secondary)",
+            }}
+          >
+            Theme
+          </div>
+          <div style={{ display: "grid", gap: "0.35rem" }}>
+            {availableThemes.map((theme) => (
+              <Button
+                key={theme}
+                size="sm"
+                variant={currentThemeType === theme ? "primary" : "outline"}
+                onClick={() => setThemeType(theme)}
+              >
+                {theme}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </aside>
+
+      <div
+        className="container"
+        style={{ padding: "2rem 0", marginLeft: "290px", width: "calc(100% - 290px)" }}
+      >
       <header
         style={{
           marginBottom: "3rem",
@@ -96,7 +253,7 @@ const ComponentShowcase: React.FC = () => {
       </header>
 
       {/* Buttons Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="buttons" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -198,7 +355,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Cards Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="cards" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -721,7 +878,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Input Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="inputs" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -757,8 +914,56 @@ const ComponentShowcase: React.FC = () => {
         </div>
       </section>
 
+      {/* Select Section */}
+      <section id="selects" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Select Fields
+        </h2>
+        <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
+          <Select
+            options={selectOptions}
+            value={singleSelectValue}
+            onChange={(next) =>
+              setSingleSelectValue(
+                typeof next === "string" || typeof next === "number"
+                  ? next
+                  : null,
+              )
+            }
+            placeholder="Choose a country"
+            searchable
+            clearable
+            helperText="Single-select searchable dropdown"
+          />
+          <Select
+            options={selectOptions}
+            value={multiSelectValue}
+            onChange={(next) =>
+              setMultiSelectValue(Array.isArray(next) ? next : [])
+            }
+            placeholder="Choose multiple countries"
+            multiple
+            clearable
+            helperText="Multi-select dropdown"
+          />
+          <ThemeToggle
+            isDark={isDark}
+            onToggle={toggleMode}
+            size="md"
+            className="pw-theme-toggle--liquid-glass"
+          />
+        </div>
+      </section>
+
       {/* Badge Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="badges" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -846,7 +1051,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Progress Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="progress" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -932,7 +1137,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Checkbox Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="checkboxes" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -968,7 +1173,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Avatar Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="avatars" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -1054,7 +1259,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Alert Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="alerts" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -1105,8 +1310,97 @@ const ComponentShowcase: React.FC = () => {
         </div>
       </section>
 
+      {/* Toast Section */}
+      <section id="toasts" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Toasts
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div
+            style={{
+              display: "grid",
+              gap: "1rem",
+            }}
+          >
+            <p style={{ margin: 0, color: "var(--color-text-secondary)" }}>
+              Show different toast variants and positions.
+            </p>
+            <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap" }}>
+              <Button
+                onClick={() =>
+                  pushToast(
+                    "success",
+                    "Saved",
+                    "Your settings were saved successfully.",
+                    { actionLabel: "Undo" },
+                  )
+                }
+              >
+                Success
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() =>
+                  pushToast("info", "Heads up", "A new release is available.")
+                }
+              >
+                Info
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() =>
+                  pushToast(
+                    "warning",
+                    "Storage almost full",
+                    "You are using 92% of your quota.",
+                    { actionLabel: "Manage" },
+                  )
+                }
+              >
+                Warning
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() =>
+                  pushToast(
+                    "error",
+                    "Upload failed",
+                    "Network timeout. Please retry.",
+                    { duration: 5000 },
+                  )
+                }
+              >
+                Error
+              </Button>
+            </div>
+          </div>
+        </Card>
+        {demoToasts.map((toast, index) => (
+          <Toast
+            key={toast.id}
+            open
+            status={toast.status}
+            title={toast.title}
+            description={toast.description}
+            actionLabel={toast.actionLabel}
+            onAction={() => removeToast(toast.id)}
+            onClose={() => removeToast(toast.id)}
+            position="bottom-right"
+            duration={toast.duration}
+            stackIndex={index}
+          />
+        ))}
+      </section>
+
       {/* Tooltip Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="tooltips" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -1145,7 +1439,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Modal Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="modals" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -1204,7 +1498,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Theme Toggle Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="themes" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -1245,7 +1539,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Login Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="login" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -1327,7 +1621,7 @@ const ComponentShowcase: React.FC = () => {
             submitText="Sign In"
           >
             <div>
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <a
                 href="#"
                 onClick={(e) => {
@@ -1473,7 +1767,7 @@ const ComponentShowcase: React.FC = () => {
       )}
 
       {/* Table Section */}
-      <section style={{ marginBottom: "3rem" }}>
+      <section id="table" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -1484,8 +1778,30 @@ const ComponentShowcase: React.FC = () => {
         >
           Data Table
         </h2>
+        <div
+          style={{
+            display: "flex",
+            gap: "0.5rem",
+            flexWrap: "wrap",
+            marginBottom: "1rem",
+          }}
+        >
+          {["glass", "clean", "zebra", "compact"].map((theme) => (
+            <Button
+              key={theme}
+              size="sm"
+              variant={tableTheme === theme ? "primary" : "outline"}
+              onClick={() =>
+                setTableTheme(theme as "glass" | "clean" | "zebra" | "compact")
+              }
+            >
+              {theme}
+            </Button>
+          ))}
+        </div>
 
         <Table
+          theme={tableTheme}
           data={{
             table: "Users",
             columns: [
@@ -1569,6 +1885,7 @@ const ComponentShowcase: React.FC = () => {
           Pixel Wizards Component Library - Modern, Professional, Accessible
         </p>
       </footer>
+      </div>
     </div>
   );
 };

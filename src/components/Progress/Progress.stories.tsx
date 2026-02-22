@@ -1,5 +1,3 @@
-import React from "react";
-import { Meta, StoryObj } from '@storybook/react';
 import { Progress } from './Progress';
 
 const meta = {

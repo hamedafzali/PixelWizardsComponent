@@ -1,5 +1,3 @@
-import React from "react";
-import { Meta, StoryObj } from "@storybook/react";
 import { Tooltip } from "./Tooltip";
 import { Button } from "../Button";
 
@@ -48,5 +46,22 @@ export const Placements= {
         <Button>Left</Button>
       </Tooltip>
     </div>
+  ),
+};
+
+export const RichContent = {
+  render: () => (
+    <Tooltip
+      placement="bottom"
+      maxWidth={260}
+      content={
+        <span>
+          This tooltip supports longer text and wraps naturally so it does not
+          look cramped.
+        </span>
+      }
+    >
+      <Button>Long Tooltip</Button>
+    </Tooltip>
   ),
 };
