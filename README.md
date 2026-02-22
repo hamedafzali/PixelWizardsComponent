@@ -1,307 +1,169 @@
 # PixelWizards Component Library
 
+[![npm version](https://img.shields.io/npm/v/pixelwizards-components.svg)](https://www.npmjs.com/package/pixelwizards-components)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
 
-A modern, glassmorphism-inspired React component library with a powerful multi-theme system featuring liquid glass effects.
+PixelWizards is a React + TypeScript component library with a built-in multi-theme system, including enhanced liquid glass themes and polished interactive components.
 
-![PixelWizards Preview](https://via.placeholder.com/800x400/ffffff/000000?text=PixelWizards+Component+Library+Preview)
+## Features
 
-## ✨ Features
+- 4 built-in themes: `light`, `dark`, `liquid-glass-light`, `liquid-glass-dark`
+- Theme context + hooks (`MultiThemeProvider`, `useMultiTheme`)
+- Core UI components with shared design tokens and consistent styling
+- Enhanced showcase/dev environment with section navigation and live theme switching
+- TypeScript definitions included
 
-- 🎨 **Multi-Theme System** - Light, Dark, and Liquid Glass themes
-- 🥂 **Liquid Glass Effects** - Modern glassmorphism with blur and transparency
-- 🔧 **TypeScript Support** - Full type safety and IntelliSense
-- 📱 **Responsive Design** - Mobile-first approach
-- ♿ **Accessibility** - WCAG compliant components
-- 🎯 **Tree Shakable** - Optimized bundle sizes
-- 🚀 **Production Ready** - Performance optimized and tested
-
-## 🚀 Quick Start
-
-### Installation
+## Installation
 
 ```bash
 npm install pixelwizards-components
 ```
 
-### Basic Usage
+Peer dependencies:
+
+- `react >=18 <20`
+- `react-dom >=18 <20`
+
+## Quick Start
 
 ```tsx
 import React from "react";
 import {
   MultiThemeProvider,
-  Button,
+  MultiThemeToggle,
   Card,
+  Button,
   Input,
 } from "pixelwizards-components";
 
-function App() {
+export default function App() {
   return (
     <MultiThemeProvider defaultTheme="liquid-glass-light">
-      <div className="app">
-        <Card variant="glass">
-          <h1>Welcome to PixelWizards</h1>
-          <Input placeholder="Enter your name" />
-          <Button variant="primary">Get Started</Button>
+      <div style={{ padding: 24 }}>
+        <MultiThemeToggle />
+        <Card variant="glass" style={{ marginTop: 16, padding: 16 }}>
+          <h2>PixelWizards</h2>
+          <Input placeholder="Your name" />
+          <Button variant="primary" style={{ marginTop: 12 }}>
+            Continue
+          </Button>
         </Card>
       </div>
     </MultiThemeProvider>
   );
 }
-
-export default App;
 ```
 
-## 🎨 Available Themes
+## Exported Components
 
-- **Light Theme** (`light`) - Clean, modern light theme
-- **Dark Theme** (`dark`) - Elegant dark theme with perfect contrast
-- **Liquid Glass Light** (`liquid-glass-light`) - Modern glassmorphism
-- **Liquid Glass Dark** (`liquid-glass-dark`) - Dark glassmorphism with blur effects
+- `Alert`
+- `Avatar`
+- `Badge`
+- `Button`
+- `Card`
+- `Checkbox`
+- `Input`
+- `Login`
+- `Modal`
+- `Progress`
+- `Select` (single and multi select)
+- `Table` (multiple visual themes)
+- `ThemeToggle`
+- `MultiThemeToggle`
+- `Toast`
+- `Tooltip`
+- `LiquidGlassCard`
+- `LiquidGlassButton`
 
-### Theme Provider
+## Theme System
+
+Use `MultiThemeProvider` at app root:
 
 ```tsx
 import { MultiThemeProvider } from "pixelwizards-components";
 
-<MultiThemeProvider defaultTheme="liquid-glass-light">
-  <YourApp />
+<MultiThemeProvider defaultTheme="dark">
+  <App />
 </MultiThemeProvider>;
 ```
 
-### Theme Toggle
-
-```tsx
-import { MultiThemeToggle } from "pixelwizards-components";
-
-<MultiThemeToggle size="md" />;
-```
-
-## 🧩 Components
-
-### Core Components
-
-#### Button
-
-```tsx
-<Button variant="primary" size="md" loading={false}>
-  Click me
-</Button>
-```
-
-#### Card
-
-```tsx
-<Card variant="glass">
-  <h3>Glass Card</h3>
-  <p>Beautiful glassmorphism effect</p>
-</Card>
-```
-
-#### Input
-
-```tsx
-<Input
-  placeholder="Enter text"
-  error={hasError}
-  helperText="This field is required"
-/>
-```
-
-#### Modal
-
-```tsx
-<Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-  <h2>Modal Title</h2>
-  <p>Modal content</p>
-</Modal>
-```
-
-### Specialized Components
-
-#### Liquid Glass Components
-
-```tsx
-import { LiquidGlassCard, LiquidGlassButton } from "pixelwizards-components";
-
-<LiquidGlassCard blur="medium" alpha={0.75}>
-  <h3>Premium Glass</h3>
-  <p>Advanced glass effects</p>
-</LiquidGlassCard>
-
-<LiquidGlassButton variant="primary">
-  Glass Button
-</LiquidGlassButton>
-```
-
-#### Other Components
-
-- Alert, Avatar, Badge, Checkbox, Progress, Tooltip, Login
-
-## 🖥️ Programmatic Control
+Use `useMultiTheme` for runtime controls:
 
 ```tsx
 import { useMultiTheme } from "pixelwizards-components";
 
 function ThemeControls() {
-  const {
-    setThemeType,
-    cycleTheme,
-    cycleThemeCategory,
-    currentThemeType,
-    isLiquidGlass,
-    themeInfo,
-  } = useMultiTheme();
+  const { themeInfo, cycleTheme, setThemeType } = useMultiTheme();
 
   return (
     <div>
-      <p>Current: {themeInfo.name}</p>
-      <button onClick={cycleTheme}>Next Theme</button>
-      <button onClick={cycleThemeCategory}>Toggle Style</button>
+      <p>Current theme: {themeInfo.name}</p>
+      <button onClick={cycleTheme}>Next theme</button>
+      <button onClick={() => setThemeType("liquid-glass-dark")}>
+        Liquid Dark
+      </button>
     </div>
   );
 }
 ```
 
-## 🎨 Liquid Glass Effects
+## Styling and Tokens
 
-The Liquid Glass theme provides modern glassmorphism effects:
-
-- **Backdrop Blur**: Adjustable blur intensities (8px to 32px)
-- **Transparency**: Multiple alpha levels (0.65 to 0.95)
-- **Edge Lighting**: Subtle glow effects
-- **Reflections**: Light reflection effects
-- **Perfect Contrast**: WCAG compliant text readability
-
-### CSS Custom Properties
+Core styles are token-driven. Reuse variables for custom components:
 
 ```css
-.my-component {
-  background: var(--color-bg-primary);
+.my-surface {
+  background: var(--color-bg-surface);
   color: var(--color-text-primary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
 }
-
-/* Glass effects */
-.glass-element {
-  background: var(--glass-bg-light-primary);
-  backdrop-filter: var(--glass-blur-medium);
-  border: 1px solid var(--glass-border-light);
-}
 ```
 
-## 📦 API Reference
+Liquid glass themes include additional variables used by shipped components:
 
-### useMultiTheme Hook
+- `--glass-bg-light-primary`
+- `--glass-bg-dark-primary`
+- `--glass-border-light`
+- `--glass-border-dark`
+- `--glass-blur-medium`
 
-```tsx
-const {
-  theme, // Current theme object
-  setTheme, // Set theme programmatically
-  toggleMode, // Toggle light/dark mode
-  toggleDirection, // Toggle LTR/RTL
-  isDark, // Is dark mode active
-  isRTL, // Is RTL direction
-  currentThemeType, // Current theme type string
-  setThemeType, // Set theme by type
-  availableThemes, // Array of available themes
-  themeCategories, // Theme categories object
-  cycleTheme, // Cycle to next theme
-  cycleThemeCategory, // Cycle theme category
-  isLiquidGlass, // Is liquid glass theme
-  themeInfo, // Theme metadata
-} = useMultiTheme();
-```
-
-## 🔧 Development
-
-### Prerequisites
-
-- Node.js 16+
-- npm or yarn
-
-### Setup
+## Development
 
 ```bash
-# Clone the repository
-git clone https://github.com/hamedafzali/PixelWizardsComponent.git
-cd PixelWizardsComponent
-
-# Install dependencies
+# install deps
 npm install
 
-# Start development server
+# run showcase/dev app
 npm run dev
 
-# Build for production
+# lint
+npm run lint
+
+# test
+npm test
+
+# build
 npm run build
 ```
 
-### Project Structure
+## Build and Publish
 
-```
-src/
-├── components/          # React components
-│   ├── Button/
-│   ├── Card/
-│   ├── LiquidGlass/     # Liquid glass components
-│   └── MultiThemeToggle/
-├── themes/              # Theme system
-│   ├── multiThemeSystem.ts
-│   ├── MultiThemeProvider.tsx
-│   └── types.ts
-├── styles/              # CSS files
-│   ├── global.css
-│   ├── components.css
-│   └── liquidGlass.css
-├── tokens/              # Design tokens
-└── examples/            # Demo components
+```bash
+# version bump example
+npm version patch
+
+# package checks and type build run automatically via prepublishOnly
+npm publish
 ```
 
-## 🎯 Best Practices
+## Repository
 
-### Theme Usage
+- GitHub: [PixelWizardsComponent](https://github.com/hamedafzali/PixelWizardsComponent)
+- npm: [pixelwizards-components](https://www.npmjs.com/package/pixelwizards-components)
 
-- Use `useMultiTheme` for new components
-- Leverage CSS custom properties for styling
-- Test in all themes including liquid glass
+## License
 
-### Component Design
-
-- Use semantic HTML elements
-- Include ARIA labels and keyboard navigation
-- Design for mobile and desktop
-- Follow existing component patterns
-
-### Performance
-
-- Use `React.memo` for expensive components
-- Optimize re-renders with proper dependencies
-- Minimize bundle size with tree shaking
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by modern glassmorphism effects
-- Built with modern React and TypeScript
-- Designed for performance and accessibility
-
----
-
-**Built with ❤️ by [Hamed Afzali](https://github.com/hamedafzali)**
-
-[⭐ Star this repo](https://github.com/hamedafzali/PixelWizardsComponent) if you find it useful!
+MIT - see [LICENSE](LICENSE).
