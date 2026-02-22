@@ -49,8 +49,8 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
       }. Click to toggle theme`}
       title={`${isDark ? "Dark" : "Light"} mode (Click to toggle)`}
       style={{
-        background: "var(--color-surface-primary)",
-        border: "1px solid var(--color-border-primary)",
+        background: "var(--color-bg-surface)",
+        border: "1px solid var(--color-border-light)",
         borderRadius: "50%",
         cursor: "pointer",
         display: "flex",

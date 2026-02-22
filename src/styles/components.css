@@ -906,12 +906,12 @@
 
 .pw-badge--solid.pw-badge--success {
   background: var(--color-success);
-  color: #fff;
+  color: #052e16;
 }
 
 .pw-badge--solid.pw-badge--warning {
   background: var(--color-warning);
-  color: #fff;
+  color: #1f2937;
 }
 
 .pw-badge--solid.pw-badge--error {
@@ -1052,6 +1052,14 @@
   background: currentColor;
   border: 1px solid currentColor;
   color: #ffffff;
+}
+
+.pw-alert--solid.pw-alert--success {
+  color: #052e16;
+}
+
+.pw-alert--solid.pw-alert--warning {
+  color: #1f2937;
 }
 
 .pw-alert--solid .pw-alert__title,
@@ -1328,13 +1336,20 @@
   position: absolute;
   z-index: 1001;
   padding: 0.45rem 0.7rem;
-  background: var(--color-neutral-900, #171717);
-  color: #fff;
+  background: color-mix(
+    in srgb,
+    var(--color-bg-elevated, #1a1a1a) 85%,
+    var(--color-bg-primary, #0a0a0a)
+  );
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-light);
   font-size: 0.875rem;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(8px);
   white-space: normal;
   line-height: 1.35;
+  width: max-content;
   max-width: var(--pw-tooltip-max-width, 280px);
   pointer-events: none;
   font-family: var(--font-sans);
@@ -1377,7 +1392,12 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  background: var(--color-neutral-900, #171717);
+  background: color-mix(
+    in srgb,
+    var(--color-bg-elevated, #1a1a1a) 85%,
+    var(--color-bg-primary, #0a0a0a)
+  );
+  border: 1px solid var(--color-border-light);
   transform: rotate(45deg);
 }
 

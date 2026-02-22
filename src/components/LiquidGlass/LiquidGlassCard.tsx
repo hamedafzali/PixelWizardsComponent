@@ -20,102 +20,56 @@ export const LiquidGlassCard = forwardRef<HTMLDivElement, LiquidGlassCardProps>(
       children,
       blur = "medium",
       alpha = 0.75,
-      edgeLight = "none",
-      reflection = "none",
+      edgeLight = "medium",
+      reflection = "subtle",
       floating = false,
       className,
       style,
       onClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { isLiquidGlass } = useMultiTheme();
 
-    const getBlurClass = () => {
-      const blurClasses = {
-        light: "backdrop-blur-sm",
-        medium: "backdrop-blur-md",
-        strong: "backdrop-blur-lg",
-        ultra: "backdrop-blur-xl",
-      };
-      return blurClasses[blur];
-    };
-
-    const getEdgeLightClass = () => {
-      if (edgeLight === "none") return "";
-      const edgeLightClasses = {
-        soft: "shadow-white/10",
-        medium: "shadow-white/20",
-        strong: "shadow-white/30",
-      };
-      return edgeLightClasses[edgeLight];
-    };
-
-    const getReflectionClass = () => {
-      if (reflection === "none") return "";
-      return `before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none`;
-    };
-
-    const baseClasses = `
-      relative rounded-xl border transition-all duration-300
-      focus:outline-none focus:ring-2 focus:ring-blue-500/50
-    `;
-
-    const glassClasses = isLiquidGlass
-      ? clsx(
-          getBlurClass(),
-          `bg-white/${Math.round(alpha * 100)}`,
-          "border-white/20",
-          "shadow-xl shadow-black/10",
-          getEdgeLightClass(),
-          floating && "transform hover:scale-105 hover:-translate-y-1",
-          getReflectionClass()
-        )
-      : clsx("bg-gray-100", "border-gray-200", "shadow-md");
+    const blurClass =
+      blur === "light"
+        ? "liquid-glass--blur-subtle"
+        : blur === "medium"
+          ? "liquid-glass--blur-medium"
+          : blur === "strong"
+            ? "liquid-glass--blur-strong"
+            : "liquid-glass--blur-ultra";
 
     const classes = clsx(
-      baseClasses,
-      glassClasses,
-      onClick && "cursor-pointer hover:shadow-2xl",
-      className
+      "liquid-glass",
+      "liquid-glass--card",
+      blurClass,
+      edgeLight !== "none" && `liquid-glass--edge-light-${edgeLight}`,
+      reflection !== "none" && `liquid-glass--reflection-${reflection}`,
+      floating && "liquid-glass--floating",
+      onClick && "liquid-glass--interactive",
+      className,
+      !isLiquidGlass && "pw-card pw-card--default",
     );
-
-    const glassStyle = isLiquidGlass
-      ? {
-          backdropFilter: `blur(${
-            blur === "light"
-              ? "8px"
-              : blur === "medium"
-              ? "16px"
-              : blur === "strong"
-              ? "24px"
-              : "32px"
-          }) saturate(${
-            blur === "light"
-              ? "120%"
-              : blur === "medium"
-              ? "150%"
-              : blur === "strong"
-              ? "180%"
-              : "200%"
-          })`,
-          ...style,
-        }
-      : style;
 
     return (
       <div
         ref={ref}
         className={classes}
-        style={glassStyle}
+        style={{
+          ["--lg-alpha" as string]: String(alpha),
+          ...style,
+        }}
         onClick={onClick}
         {...props}
       >
-        <div className="relative z-10">{children}</div>
+        <div className="relative" style={{ zIndex: 1 }}>
+          {children}
+        </div>
       </div>
     );
-  }
+  },
 );
 
 LiquidGlassCard.displayName = "LiquidGlassCard";

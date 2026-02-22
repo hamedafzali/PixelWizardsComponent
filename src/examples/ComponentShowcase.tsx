@@ -26,9 +26,6 @@ const ComponentShowcase: React.FC = () => {
     themeInfo,
     isDark,
     toggleMode,
-    setThemeType,
-    availableThemes,
-    currentThemeType,
   } = useMultiTheme();
   const [loading, setLoading] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<
@@ -115,7 +112,8 @@ const ComponentShowcase: React.FC = () => {
     { id: "toasts", label: "Toasts" },
     { id: "tooltips", label: "Tooltips" },
     { id: "modals", label: "Modals" },
-    { id: "themes", label: "Theme Toggle" },
+    { id: "theme-toggle", label: "Theme Toggle" },
+    { id: "multi-theme-toggle", label: "Multi Theme Toggle" },
     { id: "login", label: "Login" },
     { id: "table", label: "Table" },
   ];
@@ -180,17 +178,8 @@ const ComponentShowcase: React.FC = () => {
           >
             Theme
           </div>
-          <div style={{ display: "grid", gap: "0.35rem" }}>
-            {availableThemes.map((theme) => (
-              <Button
-                key={theme}
-                size="sm"
-                variant={currentThemeType === theme ? "primary" : "outline"}
-                onClick={() => setThemeType(theme)}
-              >
-                {theme}
-              </Button>
-            ))}
+          <div style={{ display: "grid", gap: "0.6rem" }}>
+            <MultiThemeToggle />
           </div>
         </div>
       </aside>
@@ -953,12 +942,6 @@ const ComponentShowcase: React.FC = () => {
             clearable
             helperText="Multi-select dropdown"
           />
-          <ThemeToggle
-            isDark={isDark}
-            onToggle={toggleMode}
-            size="md"
-            className="pw-theme-toggle--liquid-glass"
-          />
         </div>
       </section>
 
@@ -1422,17 +1405,17 @@ const ComponentShowcase: React.FC = () => {
               padding: "2rem",
             }}
           >
-            <Tooltip content="This is a top tooltip" placement="top">
+            <Tooltip content="This is a left tooltip" placement="left" maxWidth={360}>
+              <Button>Hover Left</Button>
+            </Tooltip>
+            <Tooltip content="This is a top tooltip" placement="top" maxWidth={360}>
               <Button>Hover Top</Button>
             </Tooltip>
-            <Tooltip content="This is a right tooltip" placement="right">
-              <Button>Hover Right</Button>
-            </Tooltip>
-            <Tooltip content="This is a bottom tooltip" placement="bottom">
+            <Tooltip content="This is a bottom tooltip" placement="bottom" maxWidth={360}>
               <Button>Hover Bottom</Button>
             </Tooltip>
-            <Tooltip content="This is a left tooltip" placement="left">
-              <Button>Hover Left</Button>
+            <Tooltip content="This is a right tooltip" placement="right" maxWidth={360}>
+              <Button>Hover Right</Button>
             </Tooltip>
           </div>
         </Card>
@@ -1498,7 +1481,7 @@ const ComponentShowcase: React.FC = () => {
       </section>
 
       {/* Theme Toggle Section */}
-      <section id="themes" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+      <section id="theme-toggle" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
           style={{
             fontSize: "1.5rem",
@@ -1508,6 +1491,27 @@ const ComponentShowcase: React.FC = () => {
           }}
         >
           Theme Toggle
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <ThemeToggle isDark={isDark} onToggle={toggleMode} size="sm" />
+            <ThemeToggle isDark={isDark} onToggle={toggleMode} size="md" />
+            <ThemeToggle isDark={isDark} onToggle={toggleMode} size="lg" />
+          </div>
+        </Card>
+      </section>
+
+      {/* Multi Theme Toggle Section */}
+      <section id="multi-theme-toggle" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Multi Theme Toggle
         </h2>
         <Card variant="elevated" padding="lg">
           <div
@@ -1686,12 +1690,12 @@ const ComponentShowcase: React.FC = () => {
                 }}
               >
                 <LiquidGlassCard blur="medium" alpha={0.75} edgeLight="soft">
-                  <h3 style={{ color: "white", marginBottom: "0.5rem" }}>
+                  <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.5rem" }}>
                     Basic Glass Card
                   </h3>
                   <p
                     style={{
-                      color: "rgba(255,255,255,0.8)",
+                      color: "var(--color-text-secondary)",
                       fontSize: "0.875rem",
                     }}
                   >
@@ -1706,12 +1710,12 @@ const ComponentShowcase: React.FC = () => {
                   edgeLight="medium"
                   reflection="subtle"
                 >
-                  <h3 style={{ color: "white", marginBottom: "0.5rem" }}>
+                  <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.5rem" }}>
                     Advanced Glass Card
                   </h3>
                   <p
                     style={{
-                      color: "rgba(255,255,255,0.8)",
+                      color: "var(--color-text-secondary)",
                       fontSize: "0.875rem",
                     }}
                   >
@@ -1727,12 +1731,12 @@ const ComponentShowcase: React.FC = () => {
                   reflection="medium"
                   floating={true}
                 >
-                  <h3 style={{ color: "white", marginBottom: "0.5rem" }}>
+                  <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.5rem" }}>
                     Premium Glass Card
                   </h3>
                   <p
                     style={{
-                      color: "rgba(255,255,255,0.8)",
+                      color: "var(--color-text-secondary)",
                       fontSize: "0.875rem",
                     }}
                   >

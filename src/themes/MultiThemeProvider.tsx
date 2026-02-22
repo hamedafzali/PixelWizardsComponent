@@ -6,6 +6,7 @@ import {
   getTheme,
   loadThemePreference,
   getRecommendedTheme,
+  applyThemeClasses,
 } from "./multiThemeSystem";
 import {
   availableThemes,
@@ -13,6 +14,7 @@ import {
   getThemeInfo,
   isValidTheme,
 } from "./multiThemeSystem";
+import { applyLiquidGlassVariables } from "./liquidGlassEnhanced";
 
 interface MultiThemeContextValue extends ThemeContextValue {
   currentThemeType: ThemeType;
@@ -83,7 +85,12 @@ export const MultiThemeProvider: React.FC<MultiThemeProviderProps> = ({
     root.setAttribute("data-theme", theme.mode);
     root.setAttribute("data-direction", theme.direction);
     root.dir = theme.direction;
-  }, [theme]);
+
+    applyThemeClasses(currentThemeType);
+    if (currentThemeType.includes("liquid-glass")) {
+      applyLiquidGlassVariables();
+    }
+  }, [theme, currentThemeType]);
 
   // Listen for system theme changes
   useEffect(() => {

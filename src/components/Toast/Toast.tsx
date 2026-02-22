@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { clsx } from "clsx";
 import { AlertStatus } from "../Alert";
 import { ToastProps } from "./Toast.types";
@@ -27,11 +27,17 @@ export const Toast: React.FC<ToastProps> = ({
   stackSpacing = 84,
   style,
 }) => {
+  const onCloseRef = useRef(onClose);
+
   useEffect(() => {
-    if (!open || duration <= 0 || !onClose) return;
-    const timer = window.setTimeout(() => onClose(), duration);
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
+  useEffect(() => {
+    if (!open || duration <= 0 || !onCloseRef.current) return;
+    const timer = window.setTimeout(() => onCloseRef.current?.(), duration);
     return () => window.clearTimeout(timer);
-  }, [open, duration, onClose]);
+  }, [open, duration]);
 
   useEffect(() => {
     if (!open) return;

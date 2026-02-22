@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { MultiThemeProvider } from "../themes/MultiThemeProvider";
 import ComponentShowcase from "./ComponentShowcase";
-import "../styles/global.css";
+import "../styles";
 
 const DemoApp: React.FC = () => {
   return (

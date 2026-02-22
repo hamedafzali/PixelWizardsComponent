@@ -10,7 +10,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   showDelay = 100,
   hideDelay = 80,
   disabled = false,
-  maxWidth = 280,
+  maxWidth = 360,
   offset = 10,
   ...props
 }) => {
