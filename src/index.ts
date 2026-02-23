@@ -23,5 +23,3 @@ export * from "./components/Select";
 export { default as Table } from "./components/Table";
 export * from "./components/Table";
 
-// Global styles
-export * from "./styles";
