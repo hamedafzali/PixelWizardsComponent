@@ -15,6 +15,13 @@ import {
   Select,
   ThemeToggle,
   Table,
+  LineChart,
+  BarChart,
+  DonutChart,
+  CandlestickChart,
+  RSIChart,
+  KpiChartCard,
+  StockMarketBoard,
 } from "../index";
 import MultiThemeToggle from "../components/MultiThemeToggle";
 import { useMultiTheme } from "../themes/MultiThemeProvider";
@@ -116,6 +123,53 @@ const ComponentShowcase: React.FC = () => {
     { id: "multi-theme-toggle", label: "Multi Theme Toggle" },
     { id: "login", label: "Login" },
     { id: "table", label: "Table" },
+    { id: "charts", label: "Charts" },
+  ];
+
+  const lineData = [
+    { x: "Mon", y: 42 },
+    { x: "Tue", y: 48 },
+    { x: "Wed", y: 45 },
+    { x: "Thu", y: 61 },
+    { x: "Fri", y: 58 },
+    { x: "Sat", y: 66 },
+    { x: "Sun", y: 64 },
+  ];
+
+  const barData = [
+    { label: "Tech", value: 132 },
+    { label: "Energy", value: 87 },
+    { label: "Financials", value: 74 },
+    { label: "Healthcare", value: 21 },
+  ];
+
+  const donutData = [
+    { label: "Large Cap", value: 38 },
+    { label: "Mid Cap", value: 23 },
+    { label: "Small Cap", value: 29 },
+    { label: "Cash", value: 10 },
+  ];
+
+  const candleData = [
+    { time: "D1", open: 102, high: 109, low: 99, close: 106, volume: 1400 },
+    { time: "D2", open: 106, high: 112, low: 103, close: 110, volume: 1700 },
+    { time: "D3", open: 110, high: 113, low: 104, close: 105, volume: 1620 },
+    { time: "D4", open: 105, high: 108, low: 97, close: 99, volume: 1950 },
+    { time: "D5", open: 99, high: 104, low: 95, close: 102, volume: 1540 },
+    { time: "D6", open: 102, high: 111, low: 100, close: 108, volume: 2100 },
+    { time: "D7", open: 108, high: 116, low: 106, close: 114, volume: 2250 },
+  ];
+  const rsiSeries = [
+    99, 101, 102, 100, 104, 106, 105, 108, 109, 107, 110, 112,
+    111, 113, 115, 114, 117, 116, 118, 121, 120, 122, 124, 123,
+  ];
+
+  const marketRows = [
+    { symbol: "AAPL", name: "Apple Inc.", price: 196, change: 1.6, volume: "High" as const, sector: "Tech" },
+    { symbol: "MSFT", name: "Microsoft Corp.", price: 421, change: 0.9, volume: "High" as const, sector: "Tech" },
+    { symbol: "TSLA", name: "Tesla Inc.", price: 218, change: -2.3, volume: "High" as const, sector: "Auto" },
+    { symbol: "JPM", name: "JPMorgan Chase", price: 203, change: 1.1, volume: "Medium" as const, sector: "Financials" },
+    { symbol: "XOM", name: "Exxon Mobil", price: 114, change: -0.7, volume: "Low" as const, sector: "Energy" },
   ];
 
   return (
@@ -1875,6 +1929,117 @@ const ComponentShowcase: React.FC = () => {
           }}
           onPageChange={setCurrentPage}
         />
+      </section>
+
+      {/* Charts Section */}
+      <section id="charts" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Charts
+        </h2>
+
+        <div
+          style={{
+            display: "grid",
+            gap: "1rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            marginBottom: "1rem",
+          }}
+        >
+          <KpiChartCard
+            title="Portfolio Value"
+            value="$1,284,200"
+            change="+8.2%"
+            subtitle="Last 30 sessions"
+            trendValues={[72, 78, 81, 74, 89, 92, 95, 99, 103, 110]}
+          />
+          <KpiChartCard
+            title="Daily P/L"
+            value="+$62,980"
+            change="+2.1%"
+            subtitle="Today"
+            trendValues={[66, 64, 62, 61, 63, 60, 58, 59, 57, 56]}
+          />
+          <KpiChartCard
+            title="Open Positions"
+            value="87"
+            change="+4.4%"
+            subtitle="Active book"
+            trendValues={[42, 45, 47, 44, 50, 58, 62, 71, 79, 87]}
+          />
+        </div>
+
+        <Card style={{ marginBottom: "1rem" }}>
+          <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
+            Price Trend
+          </h3>
+          <LineChart
+            data={lineData}
+            height={180}
+            showArea
+            movingAverages={[3, 5]}
+            supportLevel={46}
+            resistanceLevel={63}
+          />
+        </Card>
+
+        <div
+          style={{
+            display: "grid",
+            gap: "1rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            marginBottom: "1rem",
+          }}
+        >
+          <Card>
+            <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
+              Sector Rotation
+            </h3>
+            <BarChart data={barData} height={180} />
+          </Card>
+          <Card>
+            <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
+              Allocation Mix
+            </h3>
+            <DonutChart data={donutData} width={240} height={240} innerRadius={48} />
+          </Card>
+        </div>
+
+        <Card>
+          <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
+            Stock-Style Candlestick
+          </h3>
+          <CandlestickChart
+            data={candleData}
+            height={220}
+            showVolume
+            maPeriods={[3, 5]}
+            supportLevel={100}
+            resistanceLevel={113}
+          />
+        </Card>
+
+        <div style={{ marginTop: "1rem" }}>
+          <StockMarketBoard
+            title="US Market Watch"
+            rows={marketRows}
+            portfolioChange={2.8}
+            sortable
+          />
+        </div>
+
+        <Card style={{ marginTop: "1rem" }}>
+          <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
+            RSI Momentum
+          </h3>
+          <RSIChart values={rsiSeries} period={14} height={140} />
+        </Card>
       </section>
 
       {/* Footer */}

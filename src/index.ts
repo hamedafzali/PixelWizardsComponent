@@ -22,4 +22,4 @@ export * from "./components/Login";
 export * from "./components/Select";
 export { default as Table } from "./components/Table";
 export * from "./components/Table";
-
+export * from "./components/Charts";
