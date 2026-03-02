@@ -1,6 +1,6 @@
 {
   "name": "pixelwizards-components",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Modern React + TypeScript UI components with multi-theme support, liquid glass styles, and ready-to-use charts.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
