@@ -5,7 +5,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
 
-PixelWizards is a React + TypeScript component library with a built-in multi-theme system, including enhanced liquid glass themes and polished interactive components.
+PixelWizards is a modern React + TypeScript UI library with multi-theme support, liquid glass styling, data tables, form controls, feedback components, and stock-style charts.
 
 ## Features
 
