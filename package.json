@@ -1,7 +1,7 @@
 {
   "name": "pixelwizards-components",
   "version": "1.0.5",
-  "description": "Modern React + TypeScript UI components with multi-theme support, liquid glass styles, and ready-to-use charts.",
+  "description": "React + TypeScript component library with forms, tables, alerts, toasts, tooltips, modals, theme toggles, login UI, and stock-style charts.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -22,7 +22,12 @@
     "components",
     "ui",
     "design-system",
-    "erp"
+    "charts",
+    "table",
+    "toast",
+    "tooltip",
+    "select",
+    "theme"
   ],
   "author": "Hamed Afzali",
   "license": "MIT",
