@@ -5,14 +5,14 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
 
-PixelWizards is a modern React + TypeScript UI library with multi-theme support, form controls, feedback components, data tables, auth UI, and stock-style charts.
+PixelWizards is a professional React + TypeScript component library built for modern dashboards. It ships with a full theming system, polished form controls, rich data display, and stock‑style charting.
 
 ## Features
 
-- 4 built-in themes: `light`, `dark`, `liquid-glass-light`, `liquid-glass-dark`
+- 4 built‑in themes: `light`, `dark`, `liquid-glass-light`, `liquid-glass-dark`
 - Theme context + hooks (`MultiThemeProvider`, `useMultiTheme`)
-- Core UI components with shared design tokens and consistent styling
-- Enhanced showcase/dev environment with section navigation and live theme switching
+- Consistent design tokens and shared UX behavior
+- Ready‑to‑use charts for market dashboards
 - TypeScript definitions included
 
 ## Installation
@@ -56,41 +56,90 @@ export default function App() {
 }
 ```
 
-## Exported Components
+## Component Catalog
 
-- `Button`
-- `Input`
+### Layout and Surface
+
 - `Card`
-- `ThemeToggle`
-- `MultiThemeToggle`
+- `EmptyState`
+- `Skeleton`
+- `Drawer`
+
+### Navigation
+
+- `Tabs`
+- `Accordion`
+- `Breadcrumbs`
+- `Pagination`
+- `DropdownMenu`
+- `Popover`
+
+### Forms and Inputs
+
+- `Input`
+- `Textarea`
+- `Select`
+- `Checkbox`
+- `Radio`
+- `Switch`
+- `DatePicker`
+- `Slider`
+- `ToggleGroup`
+
+### Data Display
+
+- `Table`
 - `Badge`
 - `Progress`
-- `Modal`
-- `Tooltip`
-- `Checkbox`
 - `Avatar`
+
+### Feedback and Overlays
+
 - `Alert`
 - `Toast`
+- `Tooltip`
+- `Modal`
+
+### Auth
+
 - `Login`
-- `Select`
-- `Table`
+
+### Charts
+
 - `LineChart`
 - `BarChart`
 - `DonutChart`
 - `CandlestickChart`
 - `RSIChart`
+- `Sparkline`
 - `KpiChartCard`
 - `StockMarketBoard`
-- `Sparkline`
 
-## Component Usage
+### Theme Controls
 
-### Form and Input
+- `ThemeToggle`
+- `MultiThemeToggle`
+- `MultiThemeProvider`
+- `useMultiTheme`
+
+## Examples
+
+### Forms and Inputs
 
 ```tsx
-import { Input, Select, Checkbox } from "pixelwizards-components";
+import {
+  Input,
+  Textarea,
+  Select,
+  Checkbox,
+  Radio,
+  Switch,
+  DatePicker,
+  Slider,
+  ToggleGroup,
+} from "pixelwizards-components";
 
-const countryOptions = [
+const options = [
   { value: "us", label: "United States" },
   { value: "de", label: "Germany" },
 ];
@@ -99,46 +148,76 @@ function FormExample() {
   return (
     <>
       <Input label="Email" placeholder="name@domain.com" />
-      <Select
-        label="Country"
-        options={countryOptions}
-        value="us"
-        onChange={(v) => console.log(v)}
+      <Textarea label="Trade Notes" placeholder="Add context..." />
+      <Select label="Country" options={options} value="us" onChange={() => {}} />
+      <Checkbox label="I agree" checked onChange={() => {}} />
+      <Radio name="risk" label="Low risk" defaultChecked />
+      <Switch label="Live pricing" defaultChecked />
+      <DatePicker label="Trade date" />
+      <Slider label="Risk tolerance" min={0} max={100} defaultValue={45} />
+      <ToggleGroup
+        items={[
+          { id: "daily", label: "Daily" },
+          { id: "weekly", label: "Weekly" },
+        ]}
+        value="daily"
+        onChange={() => {}}
       />
-      <Select
-        label="Markets"
-        multiple
-        options={countryOptions}
-        value={["us"]}
-        onChange={(v) => console.log(v)}
-      />
-      <Checkbox label="I agree to terms" checked onChange={() => {}} />
     </>
   );
 }
 ```
 
-### Surface and Navigation
+### Navigation
 
 ```tsx
-import { Card, Badge, Avatar, ThemeToggle, MultiThemeToggle } from "pixelwizards-components";
+import {
+  Tabs,
+  Accordion,
+  Breadcrumbs,
+  Pagination,
+  DropdownMenu,
+  Popover,
+} from "pixelwizards-components";
 
-function SurfaceExample() {
+function NavigationExample() {
   return (
-    <Card variant="elevated" hover>
-      <Avatar name="Hamed Afzali" />
-      <Badge variant="success">Active</Badge>
-      <ThemeToggle />
-      <MultiThemeToggle />
-    </Card>
+    <>
+      <Tabs
+        tabs={[
+          { id: "overview", label: "Overview", content: "Summary" },
+          { id: "positions", label: "Positions", content: "Open positions" },
+        ]}
+        defaultValue="overview"
+      />
+      <Accordion
+        items={[
+          { id: "one", title: "Pre‑market", content: "Key catalysts" },
+          { id: "two", title: "Risk", content: "Exposure by sector" },
+        ]}
+      />
+      <Breadcrumbs
+        items={[
+          { label: "Portfolio", href: "#" },
+          { label: "Equities", href: "#" },
+          { label: "Large Cap" },
+        ]}
+      />
+      <Pagination page={2} totalPages={12} onPageChange={() => {}} />
+      <DropdownMenu
+        label="Actions"
+        items={[{ label: "Buy" }, { label: "Sell" }]}
+      />
+      <Popover trigger="Details" content="Bid/ask depth" />
+    </>
   );
 }
 ```
 
-### Feedback and Overlay
+### Feedback and Overlays
 
 ```tsx
-import { Alert, Toast, Tooltip, Modal, Button } from "pixelwizards-components";
+import { Alert, Toast, Tooltip, Modal, Button, Drawer } from "pixelwizards-components";
 
 function FeedbackExample() {
   return (
@@ -151,20 +230,30 @@ function FeedbackExample() {
       <Modal open onClose={() => {}} title="Confirm Trade">
         Confirm order execution.
       </Modal>
+      <Drawer open onClose={() => {}} title="Order Settings">
+        Configure execution rules and risk limits.
+      </Drawer>
     </>
   );
 }
 ```
 
-### Data and Auth
+### Data Display
 
 ```tsx
-import { Table, Progress, Login } from "pixelwizards-components";
+import { Table, Badge, Progress, Avatar, Skeleton, EmptyState } from "pixelwizards-components";
 
 function DataExample() {
   return (
     <>
       <Progress value={68} label="Portfolio Rebalance" />
+      <Badge color="success">Active</Badge>
+      <Avatar name="Alex Morgan" />
+      <Skeleton width="60%" height="1rem" />
+      <EmptyState
+        title="No positions yet"
+        description="Add a symbol to start tracking."
+      />
       <Table
         theme="glass"
         data={{
@@ -173,7 +262,6 @@ function DataExample() {
           pagination: { page: 1, limit: 10, total: 1, totalPages: 1 },
         }}
       />
-      <Login title="Welcome Back" subtitle="Sign in to your dashboard" />
     </>
   );
 }
@@ -210,7 +298,7 @@ function ChartsExample() {
       <BarChart data={bars} />
       <DonutChart data={donut} />
       <CandlestickChart data={candles} showVolume maPeriods={[2]} />
-      <RSIChart values={[99, 101, 100, 104, 106, 105, 108, 109, 107, 110]} />
+      <RSIChart values={[120, 114, 126, 110, 132, 108, 138, 112]} period={7} />
       <StockMarketBoard
         rows={[{ symbol: "AAPL", name: "Apple Inc.", price: 196, change: 1.6, volume: "High", sector: "Tech" }]}
         sortable
@@ -252,53 +340,20 @@ function ThemeControls() {
 }
 ```
 
-## Styling and Tokens
-
-Core styles are token-driven. Reuse variables for custom components:
-
-```css
-.my-surface {
-  background: var(--color-bg-surface);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-}
-```
-
-Liquid glass themes include additional variables used by shipped components:
-
-- `--glass-bg-light-primary`
-- `--glass-bg-dark-primary`
-- `--glass-border-light`
-- `--glass-border-dark`
-- `--glass-blur-medium`
-
 ## Development
 
 ```bash
-# install deps
 npm install
-
-# run showcase/dev app
 npm run dev
-
-# lint
 npm run lint
-
-# test
 npm test
-
-# build
 npm run build
 ```
 
 ## Build and Publish
 
 ```bash
-# version bump example
-npm version patch
-
-# package checks and type build run automatically via prepublishOnly
+npm version minor
 npm publish
 ```
 
