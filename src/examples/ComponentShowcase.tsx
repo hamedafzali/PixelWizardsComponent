@@ -16,6 +16,19 @@ import {
   Radio,
   RadioGroup,
   Switch,
+  Textarea,
+  DropdownMenu,
+  Tabs,
+  Accordion,
+  Pagination,
+  Breadcrumbs,
+  DatePicker,
+  Slider,
+  ToggleGroup,
+  Popover,
+  Drawer,
+  Skeleton,
+  EmptyState,
   ThemeToggle,
   Table,
   LineChart,
@@ -64,6 +77,12 @@ const ComponentShowcase: React.FC = () => {
   const [multiSelectValue, setMultiSelectValue] = useState<
     Array<string | number>
   >([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerSide, setDrawerSide] = useState<
+    "left" | "right" | "top" | "bottom" | "top-left" | "top-right" | "bottom-left" | "bottom-right"
+  >("right");
+  const [toggleValue, setToggleValue] = useState("daily");
+  const [toggleMultiValue, setToggleMultiValue] = useState<string[]>(["buy"]);
 
   const selectOptions = [
     { value: "us", label: "United States", group: "North America" },
@@ -113,12 +132,25 @@ const ComponentShowcase: React.FC = () => {
     { id: "buttons", label: "Buttons" },
     { id: "cards", label: "Cards" },
     { id: "inputs", label: "Inputs" },
+    { id: "textareas", label: "Textareas" },
     { id: "selects", label: "Selects" },
+    { id: "dropdowns", label: "Dropdown Menu" },
+    { id: "tabs", label: "Tabs" },
+    { id: "accordion", label: "Accordion" },
     { id: "badges", label: "Badges" },
     { id: "progress", label: "Progress" },
     { id: "checkboxes", label: "Checkboxes" },
     { id: "radios", label: "Radios" },
     { id: "switches", label: "Switches" },
+    { id: "pagination", label: "Pagination" },
+    { id: "breadcrumbs", label: "Breadcrumbs" },
+    { id: "date-picker", label: "Date Picker" },
+    { id: "slider", label: "Slider" },
+    { id: "toggle-group", label: "Toggle Group" },
+    { id: "popover", label: "Popover" },
+    { id: "drawer", label: "Drawer" },
+    { id: "skeleton", label: "Skeleton" },
+    { id: "empty-state", label: "Empty State" },
     { id: "avatars", label: "Avatars" },
     { id: "alerts", label: "Alerts" },
     { id: "toasts", label: "Toasts" },
@@ -750,23 +782,26 @@ const ComponentShowcase: React.FC = () => {
                 }}
               >
                 {[
-                  "50",
-                  "100",
-                  "200",
-                  "300",
-                  "400",
-                  "500",
-                  "600",
-                  "700",
-                  "800",
-                  "900",
+                  { label: "50", mix: "90%" },
+                  { label: "100", mix: "80%" },
+                  { label: "200", mix: "70%" },
+                  { label: "300", mix: "60%" },
+                  { label: "400", mix: "45%" },
+                  { label: "500", mix: "30%" },
+                  { label: "600", mix: "15%" },
+                  { label: "700", mix: "5%" },
+                  { label: "800", mix: "0%" },
+                  { label: "900", mix: "-10%" },
                 ].map((shade) => (
-                  <div key={shade} style={{ textAlign: "center" }}>
+                  <div key={shade.label} style={{ textAlign: "center" }}>
                     <div
                       style={{
                         width: "40px",
                         height: "40px",
-                        backgroundColor: `var(--color-primary-${shade})`,
+                        backgroundColor:
+                          "color-mix(in srgb, var(--color-primary) " +
+                          shade.mix +
+                          ", var(--color-bg-primary))",
                         borderRadius: "0.375rem",
                         marginBottom: "0.25rem",
                       }}
@@ -777,7 +812,7 @@ const ComponentShowcase: React.FC = () => {
                         color: "var(--color-text-secondary)",
                       }}
                     >
-                      {shade}
+                      {shade.label}
                     </div>
                   </div>
                 ))}
@@ -804,7 +839,7 @@ const ComponentShowcase: React.FC = () => {
                     style={{
                       width: "24px",
                       height: "24px",
-                      backgroundColor: "var(--color-success-500)",
+                      backgroundColor: "var(--color-success)",
                       borderRadius: "0.25rem",
                     }}
                   />
@@ -817,7 +852,7 @@ const ComponentShowcase: React.FC = () => {
                     style={{
                       width: "24px",
                       height: "24px",
-                      backgroundColor: "var(--color-warning-500)",
+                      backgroundColor: "var(--color-warning)",
                       borderRadius: "0.25rem",
                     }}
                   />
@@ -830,7 +865,7 @@ const ComponentShowcase: React.FC = () => {
                     style={{
                       width: "24px",
                       height: "24px",
-                      backgroundColor: "var(--color-error-500)",
+                      backgroundColor: "var(--color-error)",
                       borderRadius: "0.25rem",
                     }}
                   />
@@ -962,6 +997,36 @@ const ComponentShowcase: React.FC = () => {
         </div>
       </section>
 
+      {/* Textarea Section */}
+      <section id="textareas" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Textareas
+        </h2>
+        <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
+          <Textarea label="Trade Notes" placeholder="Add context for this order..." />
+          <Textarea
+            label="Risk Rationale"
+            placeholder="Explain the position size and stop level."
+            helper="Keep it concise and actionable."
+          />
+          <Textarea
+            label="Compliance"
+            placeholder="Required field"
+            error="This field is required"
+          />
+          <Textarea label="Disabled" placeholder="Disabled textarea" disabled />
+          <Textarea label="Small" size="sm" placeholder="Short note" />
+          <Textarea label="Large" size="lg" placeholder="Longer commentary" />
+        </div>
+      </section>
+
       {/* Select Section */}
       <section id="selects" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
         <h2
@@ -1002,6 +1067,88 @@ const ComponentShowcase: React.FC = () => {
             helperText="Multi-select dropdown"
           />
         </div>
+      </section>
+
+      {/* Dropdown Menu Section */}
+      <section id="dropdowns" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Dropdown Menu
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <DropdownMenu
+              label="Market Actions"
+              items={[
+                { label: "Buy", onClick: () => {} },
+                { label: "Sell", onClick: () => {} },
+                { label: "Set Alert", onClick: () => {} },
+                { label: "Disabled", disabled: true },
+              ]}
+            />
+            <DropdownMenu
+              label="More"
+              align="right"
+              items={[
+                { label: "Export", onClick: () => {} },
+                { label: "Share", onClick: () => {} },
+              ]}
+            />
+          </div>
+        </Card>
+      </section>
+
+      {/* Tabs Section */}
+      <section id="tabs" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Tabs
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <Tabs
+            tabs={[
+              { id: "overview", label: "Overview", content: "Market summary and watchlist." },
+              { id: "positions", label: "Positions", content: "Open positions and risk." },
+              { id: "alerts", label: "Alerts", content: "Price and volume alerts." },
+            ]}
+            defaultValue="overview"
+          />
+        </Card>
+      </section>
+
+      {/* Accordion Section */}
+      <section id="accordion" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Accordion
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <Accordion
+            items={[
+              { id: "one", title: "Pre-market notes", content: "Key catalysts and gaps." },
+              { id: "two", title: "Open risk", content: "Exposure by sector and beta." },
+              { id: "three", title: "Earnings watch", content: "Upcoming reports this week." },
+            ]}
+          />
+        </Card>
       </section>
 
       {/* Badge Section */}
@@ -1280,6 +1427,238 @@ const ComponentShowcase: React.FC = () => {
           </div>
         </Card>
       </section>
+
+      {/* Pagination Section */}
+      <section id="pagination" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Pagination
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <Pagination page={currentPage} totalPages={12} onPageChange={setCurrentPage} />
+        </Card>
+      </section>
+
+      {/* Breadcrumbs Section */}
+      <section id="breadcrumbs" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Breadcrumbs
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <Breadcrumbs
+            items={[
+              { label: "Portfolio", href: "#" },
+              { label: "Equities", href: "#" },
+              { label: "Large Cap" },
+            ]}
+          />
+        </Card>
+      </section>
+
+      {/* Date Picker Section */}
+      <section id="date-picker" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Date Picker
+        </h2>
+        <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
+          <DatePicker label="Trade date" helper="Select execution date" />
+          <DatePicker label="Settlement date" variant="filled" />
+        </div>
+      </section>
+
+      {/* Slider Section */}
+      <section id="slider" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Slider
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div style={{ display: "grid", gap: "1rem", maxWidth: "420px" }}>
+            <Slider label="Risk tolerance" min={0} max={100} defaultValue={45} />
+            <Slider label="Position size" min={1} max={10} defaultValue={4} size="lg" />
+          </div>
+        </Card>
+      </section>
+
+      {/* Toggle Group Section */}
+      <section id="toggle-group" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Toggle Group
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div style={{ display: "grid", gap: "1rem" }}>
+            <ToggleGroup
+              items={[
+                { id: "daily", label: "Daily" },
+                { id: "weekly", label: "Weekly" },
+                { id: "monthly", label: "Monthly" },
+              ]}
+              value={toggleValue}
+              onChange={(value) => setToggleValue(value as string)}
+            />
+            <ToggleGroup
+              items={[
+                { id: "buy", label: "Buy" },
+                { id: "sell", label: "Sell" },
+                { id: "hold", label: "Hold" },
+              ]}
+              multiple
+              value={toggleMultiValue}
+              onChange={(value) => setToggleMultiValue(value as string[])}
+            />
+          </div>
+        </Card>
+      </section>
+
+      {/* Popover Section */}
+      <section id="popover" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Popover
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <Popover
+            trigger="Open Details"
+            content={
+              <div>
+                <div style={{ fontWeight: 600, marginBottom: "0.35rem" }}>
+                  Price Ladder
+                </div>
+                <div style={{ color: "var(--color-text-secondary)" }}>
+                  Bid/ask depth and volume at each level.
+                </div>
+              </div>
+            }
+          />
+        </Card>
+      </section>
+
+      {/* Drawer Section */}
+      <section id="drawer" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Drawer
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+            {([
+              "left",
+              "right",
+              "top",
+              "bottom",
+              "top-left",
+              "top-right",
+              "bottom-left",
+              "bottom-right",
+            ] as const).map((pos) => (
+              <Button
+                key={pos}
+                variant={drawerSide === pos ? "primary" : "secondary"}
+                onClick={() => {
+                  setDrawerSide(pos);
+                  setDrawerOpen(true);
+                }}
+              >
+                Open {pos}
+              </Button>
+            ))}
+          </div>
+        </Card>
+        <Drawer
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          title="Order Settings"
+          position={drawerSide}
+        >
+          Configure execution rules and risk limits.
+        </Drawer>
+      </section>
+
+      {/* Skeleton Section */}
+      <section id="skeleton" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Skeleton
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div style={{ display: "grid", gap: "0.75rem" }}>
+            <Skeleton width="60%" height="1.1rem" />
+            <Skeleton width="100%" height="0.9rem" />
+            <Skeleton width="80%" height="0.9rem" />
+          </div>
+        </Card>
+      </section>
+
+      {/* Empty State Section */}
+      <section id="empty-state" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Empty State
+        </h2>
+        <EmptyState
+          title="No positions yet"
+          description="Add a symbol to start tracking performance."
+          action={<Button variant="primary">Add Position</Button>}
+        />
+      </section>
+
 
       {/* Avatar Section */}
       <section id="avatars" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
