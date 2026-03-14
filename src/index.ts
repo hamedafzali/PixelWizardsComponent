@@ -20,6 +20,7 @@ export * from "./components/Alert";
 export * from "./components/Toast";
 export * from "./components/Login";
 export * from "./components/Select";
+export * from "./components/Radio";
 export { default as Table } from "./components/Table";
 export * from "./components/Table";
 export * from "./components/Charts";

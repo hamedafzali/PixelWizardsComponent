@@ -13,6 +13,8 @@ import {
   Modal,
   Login,
   Select,
+  Radio,
+  RadioGroup,
   ThemeToggle,
   Table,
   LineChart,
@@ -114,6 +116,7 @@ const ComponentShowcase: React.FC = () => {
     { id: "badges", label: "Badges" },
     { id: "progress", label: "Progress" },
     { id: "checkboxes", label: "Checkboxes" },
+    { id: "radios", label: "Radios" },
     { id: "avatars", label: "Avatars" },
     { id: "alerts", label: "Alerts" },
     { id: "toasts", label: "Toasts" },
@@ -1204,6 +1207,46 @@ const ComponentShowcase: React.FC = () => {
               <Checkbox size="sm" label="Small checkbox" />
               <Checkbox size="md" label="Medium checkbox" />
               <Checkbox size="lg" label="Large checkbox" />
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      {/* Radio Section */}
+      <section id="radios" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Radio Buttons
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
+          >
+            <RadioGroup
+              name="market-view"
+              defaultValue="daily"
+              options={[
+                { label: "Daily view", value: "daily" },
+                { label: "Weekly view", value: "weekly" },
+                { label: "Monthly view", value: "monthly" },
+              ]}
+            />
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+              <Radio name="risk" label="Low risk" defaultChecked />
+              <Radio name="risk" label="Medium risk" />
+              <Radio name="risk" label="High risk" />
+              <Radio name="risk" label="Disabled option" disabled />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+              <Radio name="size-demo" size="sm" label="Small radio" />
+              <Radio name="size-demo" size="md" label="Medium radio" defaultChecked />
+              <Radio name="size-demo" size="lg" label="Large radio" />
             </div>
           </div>
         </Card>

@@ -251,6 +251,16 @@
   backdrop-filter: blur(14px) saturate(165%);
 }
 
+.theme-liquid-glass.theme-dark .pw-data-grid--glass .pw-data-grid__table th {
+  background: linear-gradient(
+    135deg,
+    rgba(18, 24, 33, 0.78),
+    rgba(30, 41, 59, 0.65)
+  );
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
 .theme-liquid-glass .pw-button {
   border-color: var(--lg-border-subtle);
   background:
@@ -263,4 +273,14 @@
   background:
     linear-gradient(160deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.08)),
     rgba(var(--lg-tint-rgb), 0.46);
+}
+
+.theme-liquid-glass:not(.theme-dark) .pw-button:not(.pw-button--primary):not(.pw-button--danger) {
+  color: var(--color-text-primary);
+}
+
+.theme-liquid-glass:not(.theme-dark) .pw-button--primary,
+.theme-liquid-glass:not(.theme-dark) .pw-button--danger,
+.theme-liquid-glass:not(.theme-dark) .pw-button--loading {
+  color: var(--color-text-primary);
 }

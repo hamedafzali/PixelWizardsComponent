@@ -837,9 +837,21 @@
 .pw-data-grid--glass .pw-data-grid__table th {
   background: linear-gradient(
     135deg,
+    rgba(18, 24, 33, 0.78),
+    rgba(30, 41, 59, 0.65)
+  );
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+[data-theme="light"] .pw-data-grid--glass .pw-data-grid__table th {
+  background: linear-gradient(
+    135deg,
     var(--glass-bg-light-primary),
     var(--glass-bg-light-secondary)
   );
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .pw-data-grid--clean {
@@ -1168,6 +1180,91 @@
 }
 
 .pw-checkbox-text {
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+/* ---------- RADIO ---------- */
+.pw-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pw-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pw-radio--sm {
+  --pw-radio-size: 16px;
+  --pw-radio-dot: 8px;
+  font-size: 0.82rem;
+}
+
+.pw-radio--md {
+  --pw-radio-size: 20px;
+  --pw-radio-dot: 10px;
+  font-size: 0.9rem;
+}
+
+.pw-radio--lg {
+  --pw-radio-size: 24px;
+  --pw-radio-dot: 12px;
+  font-size: 1rem;
+}
+
+.pw-radio--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pw-radio-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.pw-radio-custom {
+  width: var(--pw-radio-size, 20px);
+  height: var(--pw-radio-size, 20px);
+  border-radius: 999px;
+  border: 2px solid var(--color-border);
+  background: var(--color-bg-surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.pw-radio-label:hover:not(.pw-radio--disabled) .pw-radio-custom {
+  border-color: var(--color-primary);
+}
+
+.pw-radio-dot {
+  width: var(--pw-radio-dot, 10px);
+  height: var(--pw-radio-dot, 10px);
+  border-radius: 999px;
+  background: var(--color-primary);
+  transform: scale(0);
+  transition: transform var(--transition-fast);
+}
+
+.pw-radio-input:checked + .pw-radio-custom .pw-radio-dot {
+  transform: scale(1);
+}
+
+.pw-radio-input:focus-visible + .pw-radio-custom {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.pw-radio-text {
   color: var(--color-text-primary);
   font-family: var(--font-sans);
 }
