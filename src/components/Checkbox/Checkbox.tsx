@@ -31,12 +31,6 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         "pw-checkbox--disabled": disabled,
         "pw-checkbox--indeterminate": indeterminate,
       })}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 8,
-        cursor: disabled ? "not-allowed" : "pointer",
-      }}
     >
       <input
         ref={inputRef}
@@ -49,32 +43,15 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         aria-disabled={disabled}
         onChange={onChange}
         {...props}
-        style={{
-          width: size === "sm" ? 16 : size === "lg" ? 24 : 20,
-          height: size === "sm" ? 16 : size === "lg" ? 24 : 20,
-          accentColor: "var(--checkbox-color, #3b82f6)",
-        }}
       />
       <span
         className="pw-checkbox-custom"
-        style={{
-          display: "inline-block",
-          width: size === "sm" ? 16 : size === "lg" ? 24 : 20,
-          height: size === "sm" ? 16 : size === "lg" ? 24 : 20,
-          borderRadius: 4,
-          border: "2px solid var(--checkbox-border, #ccc)",
-          background: "var(--checkbox-bg, #fff)",
-          position: "relative",
-          marginRight: 4,
-        }}
       >
         {/* Tick or indeterminate icon */}
         {(checked || indeterminate) && (
           <svg
-            width={size === "sm" ? 12 : size === "lg" ? 18 : 14}
-            height={size === "sm" ? 12 : size === "lg" ? 18 : 14}
+            className="pw-checkbox-icon"
             viewBox="0 0 16 16"
-            style={{ position: "absolute", top: 2, left: 2 }}
             aria-hidden="true"
           >
             {indeterminate ? (

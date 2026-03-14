@@ -81,16 +81,8 @@ export const Modal: React.FC<ModalProps> = ({
         aria-labelledby={title ? "pw-modal-title" : undefined}
         className={clsx("pw-modal", className)}
         style={{
-          minWidth: 320,
-          maxWidth: 540,
-          width: "100%",
-          background: "var(--modal-bg, #fff)",
-          color: "var(--modal-color, #111)",
-          borderRadius: "var(--radius-lg, 16px)",
           boxShadow:
             (theme as any)?.shadows?.xl || "0 8px 32px rgba(0,0,0,0.15)",
-          padding: 24,
-          outline: "none",
           ...props.style,
         }}
         tabIndex={0}
@@ -99,14 +91,7 @@ export const Modal: React.FC<ModalProps> = ({
         {header || title ? (
           <div className="pw-modal__header">
             {title ? (
-              <div
-                id="pw-modal-title"
-                style={{
-                  fontWeight: 600,
-                  fontSize: "1.25rem",
-                  marginBottom: 8,
-                }}
-              >
+              <div id="pw-modal-title" className="pw-modal__title">
                 {title}
               </div>
             ) : null}
@@ -119,15 +104,6 @@ export const Modal: React.FC<ModalProps> = ({
           <button
             aria-label="Close dialog"
             className="pw-modal__close"
-            style={{
-              position: "absolute",
-              top: 18,
-              right: 18,
-              background: "none",
-              border: "none",
-              fontSize: 20,
-              cursor: "pointer",
-            }}
             onClick={onClose}
           >
             ×
