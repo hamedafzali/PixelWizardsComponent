@@ -37,6 +37,13 @@ export const palette = [
   "#8b5cf6",
   "#06b6d4",
   "#84cc16",
+  "#f97316",
+  "#22c55e",
+  "#0ea5e9",
+  "#a855f7",
+  "#e11d48",
+  "#14b8a6",
+  "#facc15",
 ];
 
 export const movingAverage = (values: number[], period: number): Array<number | null> => {

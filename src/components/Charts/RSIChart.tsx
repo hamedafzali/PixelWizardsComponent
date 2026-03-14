@@ -17,14 +17,18 @@ export const RSIChart: React.FC<RSIChartProps> = ({
 
   const pad = 14;
   const rsiValues = calculateRSI(values, period);
+  const firstValid = rsiValues.find((value) => value !== null);
+  const filledRsi = firstValid
+    ? rsiValues.map((value) => (value === null ? firstValid : value))
+    : rsiValues;
   const stepX = (width - pad * 2) / Math.max(1, values.length - 1);
 
-  const path = rsiValues
+  const path = filledRsi
     .map((value, index) => {
       if (value === null) return "";
       const x = pad + index * stepX;
       const y = scaledY(value, 0, 100, height, pad);
-      return `${index === 0 || rsiValues[index - 1] === null ? "M" : "L"} ${x} ${y}`;
+      return `${index === 0 || filledRsi[index - 1] === null ? "M" : "L"} ${x} ${y}`;
     })
     .filter(Boolean)
     .join(" ");

@@ -44,12 +44,7 @@ import { useMultiTheme } from "../themes/MultiThemeProvider";
 import { LiquidGlassCard, LiquidGlassButton } from "../components/LiquidGlass";
 
 const ComponentShowcase: React.FC = () => {
-  const {
-    isLiquidGlass,
-    themeInfo,
-    isDark,
-    toggleMode,
-  } = useMultiTheme();
+  const { isLiquidGlass, themeInfo, isDark, toggleMode } = useMultiTheme();
   const [loading, setLoading] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<
     "primary" | "secondary" | "ghost" | "outline" | "danger"
@@ -79,7 +74,14 @@ const ComponentShowcase: React.FC = () => {
   >([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerSide, setDrawerSide] = useState<
-    "left" | "right" | "top" | "bottom" | "top-left" | "top-right" | "bottom-left" | "bottom-right"
+    | "left"
+    | "right"
+    | "top"
+    | "bottom"
+    | "top-left"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-right"
   >("right");
   const [toggleValue, setToggleValue] = useState("daily");
   const [toggleMultiValue, setToggleMultiValue] = useState<string[]>(["buy"]);
@@ -178,13 +180,25 @@ const ComponentShowcase: React.FC = () => {
     { label: "Energy", value: 87 },
     { label: "Financials", value: 74 },
     { label: "Healthcare", value: 21 },
+    { label: "Industrials", value: 56 },
+    { label: "Consumer", value: 48 },
+    { label: "Utilities", value: 31 },
+    { label: "Real Estate", value: 27 },
   ];
 
   const donutData = [
     { label: "Large Cap", value: 38 },
-    { label: "Mid Cap", value: 23 },
+    { label: "Mid Cap", value: 3 },
+    { label: "Small Cap", value: 11 },
+    { label: "Cash", value: 23 },
+    { label: "Large Cap", value: 120 },
+    { label: "Mid Cap", value: 225 },
     { label: "Small Cap", value: 29 },
     { label: "Cash", value: 10 },
+    { label: "Large Cap", value: 38 },
+    { label: "Mid Cap", value: 500 },
+    { label: "Small Cap", value: 29 },
+    { label: "Cash", value: 80 },
   ];
 
   const candleData = [
@@ -197,16 +211,58 @@ const ComponentShowcase: React.FC = () => {
     { time: "D7", open: 108, high: 116, low: 106, close: 114, volume: 2250 },
   ];
   const rsiSeries = [
-    99, 101, 102, 100, 104, 106, 105, 108, 109, 107, 110, 112,
-    111, 113, 115, 114, 117, 116, 118, 121, 120, 122, 124, 123,
+    99, 99.4, 99.8, 100.2, 100.6, 101, 101.3, 101.7, 102, 101.6, 101.2, 100.8,
+    100.4, 100, 100.8, 101.6, 102.4, 103.2, 104, 104.6, 105.2, 105.8, 106,
+    105.7, 105.4, 105.1, 104.8, 105, 105.8, 106.6, 107.4, 108, 108.4, 108.8,
+    109, 108.6, 70.2, 55.8, 22.4, 24, 29.6, 40.2, 66.8, 109.4, 110, 110.6,
+    111.2, 111.8, 112, 111.7, 111.4, 111.1, 111, 111.6, 112.2, 112.8, 113,
+    113.6, 114.2, 114.8, 115, 114.7, 114.4, 114.1, 114, 114.8, 115.6, 116.4,
+    117, 116.7, 116.4, 116.1, 116, 116.6, 117.2, 117.8, 118, 118.8, 119.6,
+    120.4, 121, 120.7, 120.4, 120.1, 120, 120.6, 121.2, 121.8, 122, 122.6,
+    123.2, 123.8, 124, 123.7, 123.4, 123.1, 123,
   ];
 
   const marketRows = [
-    { symbol: "AAPL", name: "Apple Inc.", price: 196, change: 1.6, volume: "High" as const, sector: "Tech" },
-    { symbol: "MSFT", name: "Microsoft Corp.", price: 421, change: 0.9, volume: "High" as const, sector: "Tech" },
-    { symbol: "TSLA", name: "Tesla Inc.", price: 218, change: -2.3, volume: "High" as const, sector: "Auto" },
-    { symbol: "JPM", name: "JPMorgan Chase", price: 203, change: 1.1, volume: "Medium" as const, sector: "Financials" },
-    { symbol: "XOM", name: "Exxon Mobil", price: 114, change: -0.7, volume: "Low" as const, sector: "Energy" },
+    {
+      symbol: "AAPL",
+      name: "Apple Inc.",
+      price: 196,
+      change: 1.6,
+      volume: "High" as const,
+      sector: "Tech",
+    },
+    {
+      symbol: "MSFT",
+      name: "Microsoft Corp.",
+      price: 421,
+      change: 0.9,
+      volume: "High" as const,
+      sector: "Tech",
+    },
+    {
+      symbol: "TSLA",
+      name: "Tesla Inc.",
+      price: 218,
+      change: -2.3,
+      volume: "High" as const,
+      sector: "Auto",
+    },
+    {
+      symbol: "JPM",
+      name: "JPMorgan Chase",
+      price: 203,
+      change: 1.1,
+      volume: "Medium" as const,
+      sector: "Financials",
+    },
+    {
+      symbol: "XOM",
+      name: "Exxon Mobil",
+      price: 114,
+      change: -0.7,
+      volume: "Low" as const,
+      sector: "Energy",
+    },
   ];
 
   return (
@@ -277,1887 +333,298 @@ const ComponentShowcase: React.FC = () => {
 
       <div
         className="container"
-        style={{ padding: "2rem 0", marginLeft: "290px", width: "calc(100% - 290px)" }}
-      >
-      <header
         style={{
-          marginBottom: "3rem",
-          paddingBottom: "2rem",
-          borderBottom: "1px solid var(--color-border)",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          flexWrap: "wrap",
-          gap: "1.5rem",
+          padding: "2rem 0",
+          marginLeft: "290px",
+          width: "calc(100% - 290px)",
         }}
       >
-        <div>
-          <h1
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "700",
-              marginBottom: "0.5rem",
-              background:
-                "linear-gradient(90deg, var(--color-primary), #8b5cf6)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            PixelWizards Component Library
-          </h1>
-          <p
-            style={{
-              color: "var(--color-text-secondary)",
-              fontSize: "1.125rem",
-            }}
-          >
-            Complete showcase of all available components and styles
-          </p>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <MultiThemeToggle />
-          <div
-            style={{
-              padding: "0.5rem 1rem",
-              background: "var(--color-bg-surface)",
-              borderRadius: "0.5rem",
-              border: "1px solid var(--color-border)",
-              fontSize: "0.875rem",
-              color: "var(--color-text-primary)",
-            }}
-          >
-            {themeInfo.name} ({themeInfo.type})
-          </div>
-        </div>
-      </header>
-
-      {/* Buttons Section */}
-      <section id="buttons" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
+        <header
           style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
+            marginBottom: "3rem",
+            paddingBottom: "2rem",
+            borderBottom: "1px solid var(--color-border)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            flexWrap: "wrap",
+            gap: "1.5rem",
           }}
         >
-          Buttons
-        </h2>
-
-        <div style={{ marginBottom: "2rem" }}>
-          <h3
-            style={{
-              fontSize: "1.125rem",
-              fontWeight: "500",
-              marginBottom: "1rem",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            Button Variants
-          </h3>
-          <div
-            style={{
-              display: "flex",
-              gap: "1rem",
-              flexWrap: "wrap",
-              marginBottom: "1rem",
-            }}
-          >
-            <Button variant="primary">Primary Button</Button>
-            <Button variant="secondary">Secondary Button</Button>
-            <Button variant="ghost">Ghost Button</Button>
-            <Button variant="outline">Outline Button</Button>
-            <Button variant="danger">Danger Button</Button>
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "2rem" }}>
-          <h3
-            style={{
-              fontSize: "1.125rem",
-              fontWeight: "500",
-              marginBottom: "1rem",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            Button States
-          </h3>
-          <div
-            style={{
-              display: "flex",
-              gap: "1rem",
-              flexWrap: "wrap",
-              marginBottom: "1rem",
-            }}
-          >
-            <Button variant="primary" disabled>
-              Disabled Button
-            </Button>
-            <Button
-              variant="primary"
-              loading={loading}
-              onClick={handleButtonClick}
-            >
-              {loading ? "Loading..." : "Click to Load"}
-            </Button>
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "2rem" }}>
-          <h3
-            style={{
-              fontSize: "1.125rem",
-              fontWeight: "500",
-              marginBottom: "1rem",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            Button Sizes
-          </h3>
-          <div
-            style={{
-              display: "flex",
-              gap: "1rem",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Button variant="primary" size="sm">
-              Small Button
-            </Button>
-            <Button variant="primary">Default Button</Button>
-            <Button variant="primary" size="lg">
-              Large Button
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Cards Section */}
-      <section id="cards" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Cards
-        </h2>
-
-        <div className="stats-grid" style={{ marginBottom: "2rem" }}>
-          <Card variant={isLiquidGlass ? "glass" : "default"}>
-            <div className="stat-card">
-              <div className="stat-value">Default</div>
-              <div className="stat-label">Card Variant</div>
-            </div>
-          </Card>
-
-          <Card variant={isLiquidGlass ? "glass" : "elevated"} hover>
-            <div className="stat-card">
-              <div className="stat-value">Elevated</div>
-              <div className="stat-label">With Hover</div>
-            </div>
-          </Card>
-
-          <Card variant={isLiquidGlass ? "glass" : "outlined"}>
-            <div className="stat-card">
-              <div className="stat-value">Outlined</div>
-              <div className="stat-label">Card Style</div>
-            </div>
-          </Card>
-
-          <Card variant="glass">
-            <div className="stat-card">
-              <div className="stat-value">Glass</div>
-              <div className="stat-label">Morphism</div>
-            </div>
-          </Card>
-        </div>
-
-        <div style={{ marginBottom: "2rem" }}>
-          <h3
-            style={{
-              fontSize: "1.125rem",
-              fontWeight: "500",
-              marginBottom: "1rem",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            Card with Different Padding
-          </h3>
-          <div className="stats-grid">
-            <Card variant="elevated" padding="sm">
-              <div style={{ padding: "1rem", textAlign: "center" }}>
-                <div
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "700",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  Small
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.875rem",
-                    color: "var(--color-text-secondary)",
-                  }}
-                >
-                  Padding
-                </div>
-              </div>
-            </Card>
-
-            <Card variant="elevated" padding="md">
-              <div style={{ padding: "1.5rem", textAlign: "center" }}>
-                <div
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "700",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  Medium
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.875rem",
-                    color: "var(--color-text-secondary)",
-                  }}
-                >
-                  Padding
-                </div>
-              </div>
-            </Card>
-
-            <Card variant="elevated" padding="lg">
-              <div style={{ padding: "2rem", textAlign: "center" }}>
-                <div
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "700",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  Large
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.875rem",
-                    color: "var(--color-text-secondary)",
-                  }}
-                >
-                  Padding
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Layout Examples */}
-      <section style={{ marginBottom: "3rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Layout Examples
-        </h2>
-
-        <div style={{ marginBottom: "2rem" }}>
-          <h3
-            style={{
-              fontSize: "1.125rem",
-              fontWeight: "500",
-              marginBottom: "1rem",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            Stats Grid Layout
-          </h3>
-          <div className="stats-grid">
-            <Card variant="elevated" hover>
-              <div className="stat-card">
-                <div className="stat-value">$125,430</div>
-                <div className="stat-label">Revenue</div>
-              </div>
-            </Card>
-            <Card variant="elevated" hover>
-              <div className="stat-card">
-                <div className="stat-value">342</div>
-                <div className="stat-label">Orders</div>
-              </div>
-            </Card>
-            <Card variant="elevated" hover>
-              <div className="stat-card">
-                <div className="stat-value">89</div>
-                <div className="stat-label">Customers</div>
-              </div>
-            </Card>
-            <Card variant="elevated" hover>
-              <div className="stat-card">
-                <div className="stat-value">456</div>
-                <div className="stat-label">Products</div>
-              </div>
-            </Card>
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "2rem" }}>
-          <h3
-            style={{
-              fontSize: "1.125rem",
-              fontWeight: "500",
-              marginBottom: "1rem",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            Modules Grid Layout
-          </h3>
-          <div className="modules-grid">
-            <Card variant="default" hover>
-              <div style={{ padding: "2rem" }}>
-                <h3
-                  style={{
-                    fontSize: "1.25rem",
-                    fontWeight: "600",
-                    marginBottom: "1rem",
-                    color: "var(--color-text-primary)",
-                  }}
-                >
-                  Organization Module
-                </h3>
-                <p
-                  style={{
-                    color: "var(--color-text-secondary)",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  Manage your organization structure, departments, and teams
-                  with comprehensive IAM features.
-                </p>
-                <Button variant="primary" style={{ width: "100%" }}>
-                  Open Module
-                </Button>
-              </div>
-            </Card>
-
-            <Card variant="default" hover>
-              <div style={{ padding: "2rem" }}>
-                <h3
-                  style={{
-                    fontSize: "1.25rem",
-                    fontWeight: "600",
-                    marginBottom: "1rem",
-                    color: "var(--color-text-primary)",
-                  }}
-                >
-                  User Management
-                </h3>
-                <p
-                  style={{
-                    color: "var(--color-text-secondary)",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  Create and manage user accounts, permissions, and access
-                  control across your organization.
-                </p>
-                <Button variant="secondary" style={{ width: "100%" }}>
-                  Open Module
-                </Button>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Typography Examples */}
-      <section style={{ marginBottom: "3rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Typography
-        </h2>
-
-        <Card variant="elevated" style={{ padding: "2rem" }}>
-          <div style={{ marginBottom: "1rem" }}>
+          <div>
             <h1
               style={{
                 fontSize: "2.5rem",
                 fontWeight: "700",
-                marginBottom: "1rem",
-                color: "var(--color-text-primary)",
+                marginBottom: "0.5rem",
+                background:
+                  "linear-gradient(90deg, var(--color-primary), #8b5cf6)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
-              Heading 1
+              PixelWizards Component Library
             </h1>
-            <h2
-              style={{
-                fontSize: "2rem",
-                fontWeight: "600",
-                marginBottom: "1rem",
-                color: "var(--color-text-primary)",
-              }}
-            >
-              Heading 2
-            </h2>
-            <h3
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: "600",
-                marginBottom: "1rem",
-                color: "var(--color-text-primary)",
-              }}
-            >
-              Heading 3
-            </h3>
             <p
               style={{
-                fontSize: "1rem",
-                lineHeight: "1.6",
-                color: "var(--color-text-primary)",
-                marginBottom: "1rem",
+                color: "var(--color-text-secondary)",
+                fontSize: "1.125rem",
               }}
             >
-              This is a paragraph of body text. The component library provides
-              consistent typography with proper contrast ratios and modern font
-              stacks for optimal readability.
+              Complete showcase of all available components and styles
             </p>
-            <p
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <MultiThemeToggle />
+            <div
               style={{
+                padding: "0.5rem 1rem",
+                background: "var(--color-bg-surface)",
+                borderRadius: "0.5rem",
+                border: "1px solid var(--color-border)",
                 fontSize: "0.875rem",
+                color: "var(--color-text-primary)",
+              }}
+            >
+              {themeInfo.name} ({themeInfo.type})
+            </div>
+          </div>
+        </header>
+
+        {/* Buttons Section */}
+        <section
+          id="buttons"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Buttons
+          </h2>
+
+          <div style={{ marginBottom: "2rem" }}>
+            <h3
+              style={{
+                fontSize: "1.125rem",
+                fontWeight: "500",
+                marginBottom: "1rem",
                 color: "var(--color-text-secondary)",
               }}
             >
-              This is secondary text with reduced opacity for less important
-              information.
-            </p>
-          </div>
-        </Card>
-      </section>
-
-      {/* Color Palette */}
-      <section style={{ marginBottom: "3rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Color Palette
-        </h2>
-
-        <div className="modules-grid">
-          <Card variant="elevated">
-            <div style={{ padding: "1.5rem" }}>
-              <h3
-                style={{
-                  fontSize: "1.125rem",
-                  fontWeight: "600",
-                  marginBottom: "1rem",
-                }}
-              >
-                Primary Colors
-              </h3>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(5, 1fr)",
-                  gap: "0.5rem",
-                }}
-              >
-                {[
-                  { label: "50", mix: "90%" },
-                  { label: "100", mix: "80%" },
-                  { label: "200", mix: "70%" },
-                  { label: "300", mix: "60%" },
-                  { label: "400", mix: "45%" },
-                  { label: "500", mix: "30%" },
-                  { label: "600", mix: "15%" },
-                  { label: "700", mix: "5%" },
-                  { label: "800", mix: "0%" },
-                  { label: "900", mix: "-10%" },
-                ].map((shade) => (
-                  <div key={shade.label} style={{ textAlign: "center" }}>
-                    <div
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        backgroundColor:
-                          "color-mix(in srgb, var(--color-primary) " +
-                          shade.mix +
-                          ", var(--color-bg-primary))",
-                        borderRadius: "0.375rem",
-                        marginBottom: "0.25rem",
-                      }}
-                    />
-                    <div
-                      style={{
-                        fontSize: "0.75rem",
-                        color: "var(--color-text-secondary)",
-                      }}
-                    >
-                      {shade.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Card>
-
-          <Card variant="elevated">
-            <div style={{ padding: "1.5rem" }}>
-              <h3
-                style={{
-                  fontSize: "1.125rem",
-                  fontWeight: "600",
-                  marginBottom: "1rem",
-                }}
-              >
-                Semantic Colors
-              </h3>
-              <div style={{ display: "grid", gap: "0.5rem" }}>
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                >
-                  <div
-                    style={{
-                      width: "24px",
-                      height: "24px",
-                      backgroundColor: "var(--color-success)",
-                      borderRadius: "0.25rem",
-                    }}
-                  />
-                  <span style={{ fontSize: "0.875rem" }}>Success</span>
-                </div>
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                >
-                  <div
-                    style={{
-                      width: "24px",
-                      height: "24px",
-                      backgroundColor: "var(--color-warning)",
-                      borderRadius: "0.25rem",
-                    }}
-                  />
-                  <span style={{ fontSize: "0.875rem" }}>Warning</span>
-                </div>
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                >
-                  <div
-                    style={{
-                      width: "24px",
-                      height: "24px",
-                      backgroundColor: "var(--color-error)",
-                      borderRadius: "0.25rem",
-                    }}
-                  />
-                  <span style={{ fontSize: "0.875rem" }}>Error</span>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      {/* Interactive Demo */}
-      <section style={{ marginBottom: "3rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Interactive Demo
-        </h2>
-
-        <Card variant="glass" style={{ padding: "2rem" }}>
-          <div style={{ textAlign: "center" }}>
-            <h3
+              Button Variants
+            </h3>
+            <div
               style={{
-                fontSize: "1.25rem",
-                fontWeight: "600",
+                display: "flex",
+                gap: "1rem",
+                flexWrap: "wrap",
                 marginBottom: "1rem",
               }}
             >
-              Try the Components
-            </h3>
-            <p
+              <Button variant="primary">Primary Button</Button>
+              <Button variant="secondary">Secondary Button</Button>
+              <Button variant="ghost">Ghost Button</Button>
+              <Button variant="outline">Outline Button</Button>
+              <Button variant="danger">Danger Button</Button>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: "2rem" }}>
+            <h3
               style={{
+                fontSize: "1.125rem",
+                fontWeight: "500",
+                marginBottom: "1rem",
                 color: "var(--color-text-secondary)",
-                marginBottom: "2rem",
               }}
             >
-              Select different button variants and see them in action
-            </p>
-
-            <div style={{ marginBottom: "2rem" }}>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "0.5rem",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                  marginBottom: "1rem",
-                }}
-              >
-                {(
-                  [
-                    "primary",
-                    "secondary",
-                    "ghost",
-                    "outline",
-                    "danger",
-                  ] as const
-                ).map((variant) => (
-                  <Button
-                    key={variant}
-                    variant={variant === selectedVariant ? "primary" : "ghost"}
-                    onClick={() => setSelectedVariant(variant)}
-                  >
-                    {variant.charAt(0).toUpperCase() + variant.slice(1)}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
+              Button States
+            </h3>
             <div
               style={{
-                padding: "2rem",
-                backgroundColor: "var(--color-background-secondary)",
-                borderRadius: "0.75rem",
+                display: "flex",
+                gap: "1rem",
+                flexWrap: "wrap",
+                marginBottom: "1rem",
               }}
             >
+              <Button variant="primary" disabled>
+                Disabled Button
+              </Button>
               <Button
-                variant={selectedVariant}
-                size="lg"
-                onClick={handleButtonClick}
+                variant="primary"
                 loading={loading}
+                onClick={handleButtonClick}
               >
-                {loading ? "Processing..." : `Selected: ${selectedVariant}`}
+                {loading ? "Loading..." : "Click to Load"}
               </Button>
             </div>
           </div>
-        </Card>
-      </section>
 
-      {/* Input Section */}
-      <section id="inputs" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Input Fields
-        </h2>
-        <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
-          <Input
-            label="Email Address"
-            placeholder="Enter your email"
-            required
-          />
-          <Input
-            label="Password"
-            type="password"
-            placeholder="Enter your password"
-            helper="Must be at least 8 characters"
-          />
-          <Input
-            label="Username"
-            placeholder="Enter username"
-            error="This field is required"
-          />
-          <Input
-            label="Disabled Input"
-            placeholder="This is disabled"
-            disabled
-          />
-        </div>
-      </section>
-
-      {/* Textarea Section */}
-      <section id="textareas" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Textareas
-        </h2>
-        <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
-          <Textarea label="Trade Notes" placeholder="Add context for this order..." />
-          <Textarea
-            label="Risk Rationale"
-            placeholder="Explain the position size and stop level."
-            helper="Keep it concise and actionable."
-          />
-          <Textarea
-            label="Compliance"
-            placeholder="Required field"
-            error="This field is required"
-          />
-          <Textarea label="Disabled" placeholder="Disabled textarea" disabled />
-          <Textarea label="Small" size="sm" placeholder="Short note" />
-          <Textarea label="Large" size="lg" placeholder="Longer commentary" />
-        </div>
-      </section>
-
-      {/* Select Section */}
-      <section id="selects" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Select Fields
-        </h2>
-        <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
-          <Select
-            options={selectOptions}
-            value={singleSelectValue}
-            onChange={(next) =>
-              setSingleSelectValue(
-                typeof next === "string" || typeof next === "number"
-                  ? next
-                  : null,
-              )
-            }
-            placeholder="Choose a country"
-            searchable
-            clearable
-            helperText="Single-select searchable dropdown"
-          />
-          <Select
-            options={selectOptions}
-            value={multiSelectValue}
-            onChange={(next) =>
-              setMultiSelectValue(Array.isArray(next) ? next : [])
-            }
-            placeholder="Choose multiple countries"
-            multiple
-            clearable
-            helperText="Multi-select dropdown"
-          />
-        </div>
-      </section>
-
-      {/* Dropdown Menu Section */}
-      <section id="dropdowns" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Dropdown Menu
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <DropdownMenu
-              label="Market Actions"
-              items={[
-                { label: "Buy", onClick: () => {} },
-                { label: "Sell", onClick: () => {} },
-                { label: "Set Alert", onClick: () => {} },
-                { label: "Disabled", disabled: true },
-              ]}
-            />
-            <DropdownMenu
-              label="More"
-              align="right"
-              items={[
-                { label: "Export", onClick: () => {} },
-                { label: "Share", onClick: () => {} },
-              ]}
-            />
-          </div>
-        </Card>
-      </section>
-
-      {/* Tabs Section */}
-      <section id="tabs" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Tabs
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <Tabs
-            tabs={[
-              { id: "overview", label: "Overview", content: "Market summary and watchlist." },
-              { id: "positions", label: "Positions", content: "Open positions and risk." },
-              { id: "alerts", label: "Alerts", content: "Price and volume alerts." },
-            ]}
-            defaultValue="overview"
-          />
-        </Card>
-      </section>
-
-      {/* Accordion Section */}
-      <section id="accordion" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Accordion
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <Accordion
-            items={[
-              { id: "one", title: "Pre-market notes", content: "Key catalysts and gaps." },
-              { id: "two", title: "Open risk", content: "Exposure by sector and beta." },
-              { id: "three", title: "Earnings watch", content: "Upcoming reports this week." },
-            ]}
-          />
-        </Card>
-      </section>
-
-      {/* Badge Section */}
-      <section id="badges" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Badges
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
-          >
-            <div>
-              <h3
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: "600",
-                  marginBottom: "0.75rem",
-                  color: "var(--color-text-secondary)",
-                }}
-              >
-                Colors
-              </h3>
-              <div
-                style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}
-              >
-                <Badge color="primary">Primary</Badge>
-                <Badge color="success">Success</Badge>
-                <Badge color="warning">Warning</Badge>
-                <Badge color="error">Error</Badge>
-                <Badge color="info">Info</Badge>
-              </div>
-            </div>
-            <div>
-              <h3
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: "600",
-                  marginBottom: "0.75rem",
-                  color: "var(--color-text-secondary)",
-                }}
-              >
-                Sizes
-              </h3>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "0.75rem",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                <Badge size="sm">Small</Badge>
-                <Badge size="md">Medium</Badge>
-                <Badge size="lg">Large</Badge>
-              </div>
-            </div>
-            <div>
-              <h3
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: "600",
-                  marginBottom: "0.75rem",
-                  color: "var(--color-text-secondary)",
-                }}
-              >
-                Dot Badges
-              </h3>
-              <div
-                style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}
-              >
-                <Badge dot>New</Badge>
-                <Badge dot color="success">
-                  Active
-                </Badge>
-                <Badge dot color="error">
-                  Error
-                </Badge>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </section>
-
-      {/* Progress Section */}
-      <section id="progress" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Progress Bars
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
-          >
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
-                  Default Progress
-                </span>
-                <span
-                  style={{
-                    fontSize: "0.875rem",
-                    color: "var(--color-text-secondary)",
-                  }}
-                >
-                  {progressValue}%
-                </span>
-              </div>
-              <Progress value={progressValue} showLabel animated />
-            </div>
-            <div>
-              <div style={{ marginBottom: "0.5rem" }}>
-                <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
-                  Striped Variant
-                </span>
-              </div>
-              <Progress
-                value={75}
-                variant="striped"
-                color="success"
-                showLabel
-              />
-            </div>
-            <div>
-              <div style={{ marginBottom: "0.5rem" }}>
-                <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
-                  Gradient Variant
-                </span>
-              </div>
-              <Progress
-                value={60}
-                variant="gradient"
-                color="primary"
-                showLabel
-              />
-            </div>
-            <div>
-              <div style={{ marginBottom: "0.5rem" }}>
-                <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
-                  Different Colors
-                </span>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.75rem",
-                }}
-              >
-                <Progress value={80} color="success" size="sm" />
-                <Progress value={65} color="warning" size="md" />
-                <Progress value={50} color="error" size="lg" />
-              </div>
-            </div>
-          </div>
-        </Card>
-      </section>
-
-      {/* Checkbox Section */}
-      <section id="checkboxes" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Checkboxes
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-          >
-            <Checkbox label="Accept terms and conditions" />
-            <Checkbox label="Subscribe to newsletter" defaultChecked />
-            <Checkbox label="Select all items" indeterminate />
-            <Checkbox label="Disabled checkbox" disabled />
+          <div style={{ marginBottom: "2rem" }}>
+            <h3
+              style={{
+                fontSize: "1.125rem",
+                fontWeight: "500",
+                marginBottom: "1rem",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              Button Sizes
+            </h3>
             <div
               style={{
                 display: "flex",
-                flexDirection: "column",
-                gap: "0.75rem",
-                marginTop: "0.5rem",
+                gap: "1rem",
+                alignItems: "center",
+                flexWrap: "wrap",
               }}
             >
-              <Checkbox size="sm" label="Small checkbox" />
-              <Checkbox size="md" label="Medium checkbox" />
-              <Checkbox size="lg" label="Large checkbox" />
-            </div>
-          </div>
-        </Card>
-      </section>
-
-      {/* Radio Section */}
-      <section id="radios" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Radio Buttons
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
-          >
-            <RadioGroup
-              name="market-view"
-              defaultValue="daily"
-              options={[
-                { label: "Daily view", value: "daily" },
-                { label: "Weekly view", value: "weekly" },
-                { label: "Monthly view", value: "monthly" },
-              ]}
-            />
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-              <Radio name="risk" label="Low risk" defaultChecked />
-              <Radio name="risk" label="Medium risk" />
-              <Radio name="risk" label="High risk" />
-              <Radio name="risk" label="Disabled option" disabled />
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-              <Radio name="size-demo" size="sm" label="Small radio" />
-              <Radio name="size-demo" size="md" label="Medium radio" defaultChecked />
-              <Radio name="size-demo" size="lg" label="Large radio" />
-            </div>
-          </div>
-        </Card>
-      </section>
-
-      {/* Switch Section */}
-      <section id="switches" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Switches
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <Switch label="Enable live pricing" defaultChecked />
-            <Switch label="Dark pool routing" helperText="Routes to alternative venues" />
-            <Switch label="Auto rebalance" />
-            <Switch label="Disabled switch" disabled />
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-              <Switch size="sm" label="Small switch" />
-              <Switch size="md" label="Medium switch" defaultChecked />
-              <Switch size="lg" label="Large switch" />
-            </div>
-          </div>
-        </Card>
-      </section>
-
-      {/* Pagination Section */}
-      <section id="pagination" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Pagination
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <Pagination page={currentPage} totalPages={12} onPageChange={setCurrentPage} />
-        </Card>
-      </section>
-
-      {/* Breadcrumbs Section */}
-      <section id="breadcrumbs" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Breadcrumbs
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <Breadcrumbs
-            items={[
-              { label: "Portfolio", href: "#" },
-              { label: "Equities", href: "#" },
-              { label: "Large Cap" },
-            ]}
-          />
-        </Card>
-      </section>
-
-      {/* Date Picker Section */}
-      <section id="date-picker" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Date Picker
-        </h2>
-        <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
-          <DatePicker label="Trade date" helper="Select execution date" />
-          <DatePicker label="Settlement date" variant="filled" />
-        </div>
-      </section>
-
-      {/* Slider Section */}
-      <section id="slider" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Slider
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div style={{ display: "grid", gap: "1rem", maxWidth: "420px" }}>
-            <Slider label="Risk tolerance" min={0} max={100} defaultValue={45} />
-            <Slider label="Position size" min={1} max={10} defaultValue={4} size="lg" />
-          </div>
-        </Card>
-      </section>
-
-      {/* Toggle Group Section */}
-      <section id="toggle-group" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Toggle Group
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div style={{ display: "grid", gap: "1rem" }}>
-            <ToggleGroup
-              items={[
-                { id: "daily", label: "Daily" },
-                { id: "weekly", label: "Weekly" },
-                { id: "monthly", label: "Monthly" },
-              ]}
-              value={toggleValue}
-              onChange={(value) => setToggleValue(value as string)}
-            />
-            <ToggleGroup
-              items={[
-                { id: "buy", label: "Buy" },
-                { id: "sell", label: "Sell" },
-                { id: "hold", label: "Hold" },
-              ]}
-              multiple
-              value={toggleMultiValue}
-              onChange={(value) => setToggleMultiValue(value as string[])}
-            />
-          </div>
-        </Card>
-      </section>
-
-      {/* Popover Section */}
-      <section id="popover" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Popover
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <Popover
-            trigger="Open Details"
-            content={
-              <div>
-                <div style={{ fontWeight: 600, marginBottom: "0.35rem" }}>
-                  Price Ladder
-                </div>
-                <div style={{ color: "var(--color-text-secondary)" }}>
-                  Bid/ask depth and volume at each level.
-                </div>
-              </div>
-            }
-          />
-        </Card>
-      </section>
-
-      {/* Drawer Section */}
-      <section id="drawer" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Drawer
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-            {([
-              "left",
-              "right",
-              "top",
-              "bottom",
-              "top-left",
-              "top-right",
-              "bottom-left",
-              "bottom-right",
-            ] as const).map((pos) => (
-              <Button
-                key={pos}
-                variant={drawerSide === pos ? "primary" : "secondary"}
-                onClick={() => {
-                  setDrawerSide(pos);
-                  setDrawerOpen(true);
-                }}
-              >
-                Open {pos}
+              <Button variant="primary" size="sm">
+                Small Button
               </Button>
-            ))}
-          </div>
-        </Card>
-        <Drawer
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          title="Order Settings"
-          position={drawerSide}
-        >
-          Configure execution rules and risk limits.
-        </Drawer>
-      </section>
-
-      {/* Skeleton Section */}
-      <section id="skeleton" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Skeleton
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div style={{ display: "grid", gap: "0.75rem" }}>
-            <Skeleton width="60%" height="1.1rem" />
-            <Skeleton width="100%" height="0.9rem" />
-            <Skeleton width="80%" height="0.9rem" />
-          </div>
-        </Card>
-      </section>
-
-      {/* Empty State Section */}
-      <section id="empty-state" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Empty State
-        </h2>
-        <EmptyState
-          title="No positions yet"
-          description="Add a symbol to start tracking performance."
-          action={<Button variant="primary">Add Position</Button>}
-        />
-      </section>
-
-
-      {/* Avatar Section */}
-      <section id="avatars" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Avatars
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
-          >
-            <div>
-              <h3
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: "600",
-                  marginBottom: "0.75rem",
-                  color: "var(--color-text-secondary)",
-                }}
-              >
-                With Initials
-              </h3>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "1rem",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                <Avatar name="John Doe" />
-                <Avatar name="Jane Smith" />
-                <Avatar name="Bob Johnson" />
-              </div>
-            </div>
-            <div>
-              <h3
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: "600",
-                  marginBottom: "0.75rem",
-                  color: "var(--color-text-secondary)",
-                }}
-              >
-                Sizes
-              </h3>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "1rem",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                <Avatar name="User" size="xs" />
-                <Avatar name="User" size="sm" />
-                <Avatar name="User" size="md" />
-                <Avatar name="User" size="lg" />
-                <Avatar name="User" size="xl" />
-              </div>
-            </div>
-            <div>
-              <h3
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: "600",
-                  marginBottom: "0.75rem",
-                  color: "var(--color-text-secondary)",
-                }}
-              >
-                Square Variant
-              </h3>
-              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <Avatar name="Square" variant="square" />
-                <Avatar name="Square" variant="square" size="lg" />
-              </div>
+              <Button variant="primary">Default Button</Button>
+              <Button variant="primary" size="lg">
+                Large Button
+              </Button>
             </div>
           </div>
-        </Card>
-      </section>
+        </section>
 
-      {/* Alert Section */}
-      <section id="alerts" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
+        {/* Cards Section */}
+        <section
+          id="cards"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
         >
-          Alerts
-        </h2>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem",
-            maxWidth: "500px",
-          }}
-        >
-          <Alert
-            status="info"
-            title="Information"
-            description="This is an informational alert message."
-          />
-          <Alert
-            status="success"
-            title="Success"
-            description="Your action was completed successfully!"
-          />
-          <Alert
-            status="warning"
-            title="Warning"
-            description="Please be careful with this action."
-          />
-          <Alert
-            status="error"
-            title="Error"
-            description="Something went wrong. Please try again."
-          />
-          {alertVisible && (
-            <Alert
-              status="info"
-              title="Info Alert"
-              description="This is an informational message."
-              closable
-              onClose={() => setAlertVisible(false)}
-            />
-          )}
-        </div>
-      </section>
-
-      {/* Toast Section */}
-      <section id="toasts" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Toasts
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div
+          <h2
             style={{
-              display: "grid",
-              gap: "1rem",
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
             }}
           >
-            <p style={{ margin: 0, color: "var(--color-text-secondary)" }}>
-              Show different toast variants and positions.
-            </p>
-            <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap" }}>
-              <Button
-                onClick={() =>
-                  pushToast(
-                    "success",
-                    "Saved",
-                    "Your settings were saved successfully.",
-                    { actionLabel: "Undo" },
-                  )
-                }
-              >
-                Success
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() =>
-                  pushToast("info", "Heads up", "A new release is available.")
-                }
-              >
-                Info
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() =>
-                  pushToast(
-                    "warning",
-                    "Storage almost full",
-                    "You are using 92% of your quota.",
-                    { actionLabel: "Manage" },
-                  )
-                }
-              >
-                Warning
-              </Button>
-              <Button
-                variant="danger"
-                onClick={() =>
-                  pushToast(
-                    "error",
-                    "Upload failed",
-                    "Network timeout. Please retry.",
-                    { duration: 5000 },
-                  )
-                }
-              >
-                Error
-              </Button>
-            </div>
-          </div>
-        </Card>
-        {demoToasts.map((toast, index) => (
-          <Toast
-            key={toast.id}
-            open
-            status={toast.status}
-            title={toast.title}
-            description={toast.description}
-            actionLabel={toast.actionLabel}
-            onAction={() => removeToast(toast.id)}
-            onClose={() => removeToast(toast.id)}
-            position="bottom-right"
-            duration={toast.duration}
-            stackIndex={index}
-          />
-        ))}
-      </section>
+            Cards
+          </h2>
 
-      {/* Tooltip Section */}
-      <section id="tooltips" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Tooltips
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div
-            style={{
-              display: "flex",
-              gap: "2rem",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: "wrap",
-              padding: "2rem",
-            }}
-          >
-            <Tooltip content="This is a left tooltip" placement="left" maxWidth={360}>
-              <Button>Hover Left</Button>
-            </Tooltip>
-            <Tooltip content="This is a top tooltip" placement="top" maxWidth={360}>
-              <Button>Hover Top</Button>
-            </Tooltip>
-            <Tooltip content="This is a bottom tooltip" placement="bottom" maxWidth={360}>
-              <Button>Hover Bottom</Button>
-            </Tooltip>
-            <Tooltip content="This is a right tooltip" placement="right" maxWidth={360}>
-              <Button>Hover Right</Button>
-            </Tooltip>
-          </div>
-        </Card>
-      </section>
-
-      {/* Modal Section */}
-      <section id="modals" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Modal Dialog
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div style={{ textAlign: "center" }}>
-            <p
-              style={{
-                marginBottom: "1.5rem",
-                color: "var(--color-text-secondary)",
-              }}
-            >
-              Click the button below to open a modal dialog
-            </p>
-            <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
-          </div>
-        </Card>
-        <Modal
-          open={modalOpen}
-          onClose={() => setModalOpen(false)}
-          title="Example Modal"
-          footer={
-            <div
-              style={{
-                display: "flex",
-                gap: "0.75rem",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Button variant="ghost" onClick={() => setModalOpen(false)}>
-                Cancel
-              </Button>
-              <Button onClick={() => setModalOpen(false)}>Confirm</Button>
-            </div>
-          }
-        >
-          <p
-            style={{
-              color: "var(--color-text-secondary)",
-              marginBottom: "1rem",
-            }}
-          >
-            This is a modal dialog example. You can put any content here.
-          </p>
-          <p style={{ color: "var(--color-text-secondary)" }}>
-            Click outside or press ESC to close, or use the buttons in the
-            footer.
-          </p>
-        </Modal>
-      </section>
-
-      {/* Theme Toggle Section */}
-      <section id="theme-toggle" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Theme Toggle
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <ThemeToggle isDark={isDark} onToggle={toggleMode} size="sm" />
-            <ThemeToggle isDark={isDark} onToggle={toggleMode} size="md" />
-            <ThemeToggle isDark={isDark} onToggle={toggleMode} size="lg" />
-          </div>
-        </Card>
-      </section>
-
-      {/* Multi Theme Toggle Section */}
-      <section id="multi-theme-toggle" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Multi Theme Toggle
-        </h2>
-        <Card variant="elevated" padding="lg">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.5rem",
-              alignItems: "flex-start",
-            }}
-          >
-            <div>
-              <p
-                style={{
-                  marginBottom: "1rem",
-                  color: "var(--color-text-secondary)",
-                }}
-              >
-                Switch between light and dark themes using the toggle in the
-                header, or try these:
-              </p>
-              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <MultiThemeToggle size="sm" />
-                <MultiThemeToggle size="md" />
-                <MultiThemeToggle size="lg" />
+          <div className="stats-grid" style={{ marginBottom: "2rem" }}>
+            <Card variant={isLiquidGlass ? "glass" : "default"}>
+              <div className="stat-card">
+                <div className="stat-value">Default</div>
+                <div className="stat-label">Card Variant</div>
               </div>
-            </div>
-          </div>
-        </Card>
-      </section>
+            </Card>
 
-      {/* Login Section */}
-      <section id="login" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Login Form
-        </h2>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            gap: "2rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <div>
+            <Card variant={isLiquidGlass ? "glass" : "elevated"} hover>
+              <div className="stat-card">
+                <div className="stat-value">Elevated</div>
+                <div className="stat-label">With Hover</div>
+              </div>
+            </Card>
+
+            <Card variant={isLiquidGlass ? "glass" : "outlined"}>
+              <div className="stat-card">
+                <div className="stat-value">Outlined</div>
+                <div className="stat-label">Card Style</div>
+              </div>
+            </Card>
+
+            <Card variant="glass">
+              <div className="stat-card">
+                <div className="stat-value">Glass</div>
+                <div className="stat-label">Morphism</div>
+              </div>
+            </Card>
+          </div>
+
+          <div style={{ marginBottom: "2rem" }}>
             <h3
               style={{
-                fontSize: "1rem",
-                fontWeight: "600",
+                fontSize: "1.125rem",
+                fontWeight: "500",
                 marginBottom: "1rem",
                 color: "var(--color-text-secondary)",
-                textAlign: "center",
               }}
             >
-              Default Login
+              Card with Different Padding
             </h3>
-            <Login
-              onSubmit={(values) => {
-                console.log("Login submitted:", values);
-                alert(
-                  `Login: ${values.username}\nRemember me: ${
-                    values.rememberMe || false
-                  }`,
-                );
-              }}
-              submitText="Sign In"
-            />
-          </div>
-          <div>
-            <h3
-              style={{
-                fontSize: "1rem",
-                fontWeight: "600",
-                marginBottom: "1rem",
-                color: "var(--color-text-secondary)",
-                textAlign: "center",
-              }}
-            >
-              With Error
-            </h3>
-            <Login
-              onSubmit={(values) => {
-                console.log("Login submitted:", values);
-              }}
-              error="Invalid username or password. Please try again."
-              submitText="Sign In"
-            />
-          </div>
-        </div>
-        <div
-          style={{
-            marginTop: "2rem",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Login
-            title="Welcome Back"
-            subtitle="Sign in to continue to your account"
-            onSubmit={(values) => {
-              console.log("Login submitted:", values);
-            }}
-            onForgotPassword={() => alert("Forgot password clicked")}
-            submitText="Sign In"
-          >
-            <div>
-              Don&apos;t have an account?{" "}
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert("Sign up clicked");
-                }}
-                style={{
-                  color: "var(--color-primary)",
-                  textDecoration: "none",
-                  fontWeight: "500",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.textDecoration = "underline";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.textDecoration = "none";
-                }}
-              >
-                Sign up
-              </a>
-            </div>
-          </Login>
-        </div>
-      </section>
+            <div className="stats-grid">
+              <Card variant="elevated" padding="sm">
+                <div style={{ padding: "1rem", textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "700",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Small
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.875rem",
+                      color: "var(--color-text-secondary)",
+                    }}
+                  >
+                    Padding
+                  </div>
+                </div>
+              </Card>
 
-      {/* Liquid Glass Section - Only show when in liquid glass theme */}
-      {isLiquidGlass && (
+              <Card variant="elevated" padding="md">
+                <div style={{ padding: "1.5rem", textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "700",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Medium
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.875rem",
+                      color: "var(--color-text-secondary)",
+                    }}
+                  >
+                    Padding
+                  </div>
+                </div>
+              </Card>
+
+              <Card variant="elevated" padding="lg">
+                <div style={{ padding: "2rem", textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "700",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Large
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.875rem",
+                      color: "var(--color-text-secondary)",
+                    }}
+                  >
+                    Padding
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Layout Examples */}
         <section style={{ marginBottom: "3rem" }}>
           <h2
             style={{
@@ -2167,344 +634,2201 @@ const ComponentShowcase: React.FC = () => {
               color: "var(--color-text-primary)",
             }}
           >
-            Liquid Glass Components
+            Layout Examples
           </h2>
-          <Card>
-            <div
+
+          <div style={{ marginBottom: "2rem" }}>
+            <h3
               style={{
-                padding: "1.5rem",
+                fontSize: "1.125rem",
+                fontWeight: "500",
+                marginBottom: "1rem",
+                color: "var(--color-text-secondary)",
               }}
             >
+              Stats Grid Layout
+            </h3>
+            <div className="stats-grid">
+              <Card variant="elevated" hover>
+                <div className="stat-card">
+                  <div className="stat-value">$125,430</div>
+                  <div className="stat-label">Revenue</div>
+                </div>
+              </Card>
+              <Card variant="elevated" hover>
+                <div className="stat-card">
+                  <div className="stat-value">342</div>
+                  <div className="stat-label">Orders</div>
+                </div>
+              </Card>
+              <Card variant="elevated" hover>
+                <div className="stat-card">
+                  <div className="stat-value">89</div>
+                  <div className="stat-label">Customers</div>
+                </div>
+              </Card>
+              <Card variant="elevated" hover>
+                <div className="stat-card">
+                  <div className="stat-value">456</div>
+                  <div className="stat-label">Products</div>
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: "2rem" }}>
+            <h3
+              style={{
+                fontSize: "1.125rem",
+                fontWeight: "500",
+                marginBottom: "1rem",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              Modules Grid Layout
+            </h3>
+            <div className="modules-grid">
+              <Card variant="default" hover>
+                <div style={{ padding: "2rem" }}>
+                  <h3
+                    style={{
+                      fontSize: "1.25rem",
+                      fontWeight: "600",
+                      marginBottom: "1rem",
+                      color: "var(--color-text-primary)",
+                    }}
+                  >
+                    Organization Module
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--color-text-secondary)",
+                      marginBottom: "1.5rem",
+                    }}
+                  >
+                    Manage your organization structure, departments, and teams
+                    with comprehensive IAM features.
+                  </p>
+                  <Button variant="primary" style={{ width: "100%" }}>
+                    Open Module
+                  </Button>
+                </div>
+              </Card>
+
+              <Card variant="default" hover>
+                <div style={{ padding: "2rem" }}>
+                  <h3
+                    style={{
+                      fontSize: "1.25rem",
+                      fontWeight: "600",
+                      marginBottom: "1rem",
+                      color: "var(--color-text-primary)",
+                    }}
+                  >
+                    User Management
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--color-text-secondary)",
+                      marginBottom: "1.5rem",
+                    }}
+                  >
+                    Create and manage user accounts, permissions, and access
+                    control across your organization.
+                  </p>
+                  <Button variant="secondary" style={{ width: "100%" }}>
+                    Open Module
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Typography Examples */}
+        <section style={{ marginBottom: "3rem" }}>
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Typography
+          </h2>
+
+          <Card variant="elevated" style={{ padding: "2rem" }}>
+            <div style={{ marginBottom: "1rem" }}>
+              <h1
+                style={{
+                  fontSize: "2.5rem",
+                  fontWeight: "700",
+                  marginBottom: "1rem",
+                  color: "var(--color-text-primary)",
+                }}
+              >
+                Heading 1
+              </h1>
+              <h2
+                style={{
+                  fontSize: "2rem",
+                  fontWeight: "600",
+                  marginBottom: "1rem",
+                  color: "var(--color-text-primary)",
+                }}
+              >
+                Heading 2
+              </h2>
+              <h3
+                style={{
+                  fontSize: "1.5rem",
+                  fontWeight: "600",
+                  marginBottom: "1rem",
+                  color: "var(--color-text-primary)",
+                }}
+              >
+                Heading 3
+              </h3>
+              <p
+                style={{
+                  fontSize: "1rem",
+                  lineHeight: "1.6",
+                  color: "var(--color-text-primary)",
+                  marginBottom: "1rem",
+                }}
+              >
+                This is a paragraph of body text. The component library provides
+                consistent typography with proper contrast ratios and modern
+                font stacks for optimal readability.
+              </p>
+              <p
+                style={{
+                  fontSize: "0.875rem",
+                  color: "var(--color-text-secondary)",
+                }}
+              >
+                This is secondary text with reduced opacity for less important
+                information.
+              </p>
+            </div>
+          </Card>
+        </section>
+
+        {/* Color Palette */}
+        <section style={{ marginBottom: "3rem" }}>
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Color Palette
+          </h2>
+
+          <div className="modules-grid">
+            <Card variant="elevated">
+              <div style={{ padding: "1.5rem" }}>
+                <h3
+                  style={{
+                    fontSize: "1.125rem",
+                    fontWeight: "600",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Primary Colors
+                </h3>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(5, 1fr)",
+                    gap: "0.5rem",
+                  }}
+                >
+                  {[
+                    { label: "50", mix: "90%" },
+                    { label: "100", mix: "80%" },
+                    { label: "200", mix: "70%" },
+                    { label: "300", mix: "60%" },
+                    { label: "400", mix: "45%" },
+                    { label: "500", mix: "30%" },
+                    { label: "600", mix: "15%" },
+                    { label: "700", mix: "5%" },
+                    { label: "800", mix: "0%" },
+                    { label: "900", mix: "-10%" },
+                  ].map((shade) => (
+                    <div key={shade.label} style={{ textAlign: "center" }}>
+                      <div
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          backgroundColor:
+                            "color-mix(in srgb, var(--color-primary) " +
+                            shade.mix +
+                            ", var(--color-bg-primary))",
+                          borderRadius: "0.375rem",
+                          marginBottom: "0.25rem",
+                        }}
+                      />
+                      <div
+                        style={{
+                          fontSize: "0.75rem",
+                          color: "var(--color-text-secondary)",
+                        }}
+                      >
+                        {shade.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Card>
+
+            <Card variant="elevated">
+              <div style={{ padding: "1.5rem" }}>
+                <h3
+                  style={{
+                    fontSize: "1.125rem",
+                    fontWeight: "600",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Semantic Colors
+                </h3>
+                <div style={{ display: "grid", gap: "0.5rem" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        backgroundColor: "var(--color-success)",
+                        borderRadius: "0.25rem",
+                      }}
+                    />
+                    <span style={{ fontSize: "0.875rem" }}>Success</span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        backgroundColor: "var(--color-warning)",
+                        borderRadius: "0.25rem",
+                      }}
+                    />
+                    <span style={{ fontSize: "0.875rem" }}>Warning</span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        backgroundColor: "var(--color-error)",
+                        borderRadius: "0.25rem",
+                      }}
+                    />
+                    <span style={{ fontSize: "0.875rem" }}>Error</span>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Interactive Demo */}
+        <section style={{ marginBottom: "3rem" }}>
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Interactive Demo
+          </h2>
+
+          <Card variant="glass" style={{ padding: "2rem" }}>
+            <div style={{ textAlign: "center" }}>
+              <h3
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                  marginBottom: "1rem",
+                }}
+              >
+                Try the Components
+              </h3>
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  marginBottom: "2rem",
+                }}
+              >
+                Select different button variants and see them in action
+              </p>
+
+              <div style={{ marginBottom: "2rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "0.5rem",
+                    justifyContent: "center",
+                    flexWrap: "wrap",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  {(
+                    [
+                      "primary",
+                      "secondary",
+                      "ghost",
+                      "outline",
+                      "danger",
+                    ] as const
+                  ).map((variant) => (
+                    <Button
+                      key={variant}
+                      variant={
+                        variant === selectedVariant ? "primary" : "ghost"
+                      }
+                      onClick={() => setSelectedVariant(variant)}
+                    >
+                      {variant.charAt(0).toUpperCase() + variant.slice(1)}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                style={{
+                  padding: "2rem",
+                  backgroundColor: "var(--color-background-secondary)",
+                  borderRadius: "0.75rem",
+                }}
+              >
+                <Button
+                  variant={selectedVariant}
+                  size="lg"
+                  onClick={handleButtonClick}
+                  loading={loading}
+                >
+                  {loading ? "Processing..." : `Selected: ${selectedVariant}`}
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Input Section */}
+        <section
+          id="inputs"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Input Fields
+          </h2>
+          <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
+            <Input
+              label="Email Address"
+              placeholder="Enter your email"
+              required
+            />
+            <Input
+              label="Password"
+              type="password"
+              placeholder="Enter your password"
+              helper="Must be at least 8 characters"
+            />
+            <Input
+              label="Username"
+              placeholder="Enter username"
+              error="This field is required"
+            />
+            <Input
+              label="Disabled Input"
+              placeholder="This is disabled"
+              disabled
+            />
+          </div>
+        </section>
+
+        {/* Textarea Section */}
+        <section
+          id="textareas"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Textareas
+          </h2>
+          <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
+            <Textarea
+              label="Trade Notes"
+              placeholder="Add context for this order..."
+            />
+            <Textarea
+              label="Risk Rationale"
+              placeholder="Explain the position size and stop level."
+              helper="Keep it concise and actionable."
+            />
+            <Textarea
+              label="Compliance"
+              placeholder="Required field"
+              error="This field is required"
+            />
+            <Textarea
+              label="Disabled"
+              placeholder="Disabled textarea"
+              disabled
+            />
+            <Textarea label="Small" size="sm" placeholder="Short note" />
+            <Textarea label="Large" size="lg" placeholder="Longer commentary" />
+          </div>
+        </section>
+
+        {/* Select Section */}
+        <section
+          id="selects"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Select Fields
+          </h2>
+          <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
+            <Select
+              options={selectOptions}
+              value={singleSelectValue}
+              onChange={(next) =>
+                setSingleSelectValue(
+                  typeof next === "string" || typeof next === "number"
+                    ? next
+                    : null,
+                )
+              }
+              placeholder="Choose a country"
+              searchable
+              clearable
+              helperText="Single-select searchable dropdown"
+            />
+            <Select
+              options={selectOptions}
+              value={multiSelectValue}
+              onChange={(next) =>
+                setMultiSelectValue(Array.isArray(next) ? next : [])
+              }
+              placeholder="Choose multiple countries"
+              multiple
+              clearable
+              helperText="Multi-select dropdown"
+            />
+          </div>
+        </section>
+
+        {/* Dropdown Menu Section */}
+        <section
+          id="dropdowns"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Dropdown Menu
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <DropdownMenu
+                label="Market Actions"
+                items={[
+                  { label: "Buy", onClick: () => {} },
+                  { label: "Sell", onClick: () => {} },
+                  { label: "Set Alert", onClick: () => {} },
+                  { label: "Disabled", disabled: true },
+                ]}
+              />
+              <DropdownMenu
+                label="More"
+                align="right"
+                items={[
+                  { label: "Export", onClick: () => {} },
+                  { label: "Share", onClick: () => {} },
+                ]}
+              />
+            </div>
+          </Card>
+        </section>
+
+        {/* Tabs Section */}
+        <section
+          id="tabs"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Tabs
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <Tabs
+              tabs={[
+                {
+                  id: "overview",
+                  label: "Overview",
+                  content: "Market summary and watchlist.",
+                },
+                {
+                  id: "positions",
+                  label: "Positions",
+                  content: "Open positions and risk.",
+                },
+                {
+                  id: "alerts",
+                  label: "Alerts",
+                  content: "Price and volume alerts.",
+                },
+              ]}
+              defaultValue="overview"
+            />
+          </Card>
+        </section>
+
+        {/* Accordion Section */}
+        <section
+          id="accordion"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Accordion
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <Accordion
+              items={[
+                {
+                  id: "one",
+                  title: "Pre-market notes",
+                  content: "Key catalysts and gaps.",
+                },
+                {
+                  id: "two",
+                  title: "Open risk",
+                  content: "Exposure by sector and beta.",
+                },
+                {
+                  id: "three",
+                  title: "Earnings watch",
+                  content: "Upcoming reports this week.",
+                },
+              ]}
+            />
+          </Card>
+        </section>
+
+        {/* Badge Section */}
+        <section
+          id="badges"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Badges
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+              }}
+            >
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    marginBottom: "0.75rem",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  Colors
+                </h3>
+                <div
+                  style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}
+                >
+                  <Badge color="primary">Primary</Badge>
+                  <Badge color="success">Success</Badge>
+                  <Badge color="warning">Warning</Badge>
+                  <Badge color="error">Error</Badge>
+                  <Badge color="info">Info</Badge>
+                </div>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    marginBottom: "0.75rem",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  Sizes
+                </h3>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "0.75rem",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Badge size="sm">Small</Badge>
+                  <Badge size="md">Medium</Badge>
+                  <Badge size="lg">Large</Badge>
+                </div>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    marginBottom: "0.75rem",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  Dot Badges
+                </h3>
+                <div
+                  style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}
+                >
+                  <Badge dot>New</Badge>
+                  <Badge dot color="success">
+                    Active
+                  </Badge>
+                  <Badge dot color="error">
+                    Error
+                  </Badge>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Progress Section */}
+        <section
+          id="progress"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Progress Bars
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
+                    Default Progress
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "0.875rem",
+                      color: "var(--color-text-secondary)",
+                    }}
+                  >
+                    {progressValue}%
+                  </span>
+                </div>
+                <Progress value={progressValue} showLabel animated />
+              </div>
+              <div>
+                <div style={{ marginBottom: "0.5rem" }}>
+                  <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
+                    Striped Variant
+                  </span>
+                </div>
+                <Progress
+                  value={75}
+                  variant="striped"
+                  color="success"
+                  showLabel
+                />
+              </div>
+              <div>
+                <div style={{ marginBottom: "0.5rem" }}>
+                  <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
+                    Gradient Variant
+                  </span>
+                </div>
+                <Progress
+                  value={60}
+                  variant="gradient"
+                  color="primary"
+                  showLabel
+                />
+              </div>
+              <div>
+                <div style={{ marginBottom: "0.5rem" }}>
+                  <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
+                    Different Colors
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.75rem",
+                  }}
+                >
+                  <Progress value={80} color="success" size="sm" />
+                  <Progress value={65} color="warning" size="md" />
+                  <Progress value={50} color="error" size="lg" />
+                </div>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Checkbox Section */}
+        <section
+          id="checkboxes"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Checkboxes
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+            >
+              <Checkbox label="Accept terms and conditions" />
+              <Checkbox label="Subscribe to newsletter" defaultChecked />
+              <Checkbox label="Select all items" indeterminate />
+              <Checkbox label="Disabled checkbox" disabled />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.75rem",
+                  marginTop: "0.5rem",
+                }}
+              >
+                <Checkbox size="sm" label="Small checkbox" />
+                <Checkbox size="md" label="Medium checkbox" />
+                <Checkbox size="lg" label="Large checkbox" />
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Radio Section */}
+        <section
+          id="radios"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Radio Buttons
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.25rem",
+              }}
+            >
+              <RadioGroup
+                name="market-view"
+                defaultValue="daily"
+                options={[
+                  { label: "Daily view", value: "daily" },
+                  { label: "Weekly view", value: "weekly" },
+                  { label: "Monthly view", value: "monthly" },
+                ]}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.6rem",
+                }}
+              >
+                <Radio name="risk" label="Low risk" defaultChecked />
+                <Radio name="risk" label="Medium risk" />
+                <Radio name="risk" label="High risk" />
+                <Radio name="risk" label="Disabled option" disabled />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.6rem",
+                }}
+              >
+                <Radio name="size-demo" size="sm" label="Small radio" />
+                <Radio
+                  name="size-demo"
+                  size="md"
+                  label="Medium radio"
+                  defaultChecked
+                />
+                <Radio name="size-demo" size="lg" label="Large radio" />
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Switch Section */}
+        <section
+          id="switches"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Switches
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+            >
+              <Switch label="Enable live pricing" defaultChecked />
+              <Switch
+                label="Dark pool routing"
+                helperText="Routes to alternative venues"
+              />
+              <Switch label="Auto rebalance" />
+              <Switch label="Disabled switch" disabled />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.75rem",
+                }}
+              >
+                <Switch size="sm" label="Small switch" />
+                <Switch size="md" label="Medium switch" defaultChecked />
+                <Switch size="lg" label="Large switch" />
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Pagination Section */}
+        <section
+          id="pagination"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Pagination
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <Pagination
+              page={currentPage}
+              totalPages={12}
+              onPageChange={setCurrentPage}
+            />
+          </Card>
+        </section>
+
+        {/* Breadcrumbs Section */}
+        <section
+          id="breadcrumbs"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Breadcrumbs
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <Breadcrumbs
+              items={[
+                { label: "Portfolio", href: "#" },
+                { label: "Equities", href: "#" },
+                { label: "Large Cap" },
+              ]}
+            />
+          </Card>
+        </section>
+
+        {/* Date Picker Section */}
+        <section
+          id="date-picker"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Date Picker
+          </h2>
+          <div style={{ display: "grid", gap: "1.5rem", maxWidth: "500px" }}>
+            <DatePicker label="Trade date" helper="Select execution date" />
+            <DatePicker label="Settlement date" variant="filled" />
+          </div>
+        </section>
+
+        {/* Slider Section */}
+        <section
+          id="slider"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Slider
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div style={{ display: "grid", gap: "1rem", maxWidth: "420px" }}>
+              <Slider
+                label="Risk tolerance"
+                min={0}
+                max={100}
+                defaultValue={45}
+              />
+              <Slider
+                label="Position size"
+                min={1}
+                max={10}
+                defaultValue={4}
+                size="lg"
+              />
+            </div>
+          </Card>
+        </section>
+
+        {/* Toggle Group Section */}
+        <section
+          id="toggle-group"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Toggle Group
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div style={{ display: "grid", gap: "1rem" }}>
+              <ToggleGroup
+                items={[
+                  { id: "daily", label: "Daily" },
+                  { id: "weekly", label: "Weekly" },
+                  { id: "monthly", label: "Monthly" },
+                ]}
+                value={toggleValue}
+                onChange={(value) => setToggleValue(value as string)}
+              />
+              <ToggleGroup
+                items={[
+                  { id: "buy", label: "Buy" },
+                  { id: "sell", label: "Sell" },
+                  { id: "hold", label: "Hold" },
+                ]}
+                multiple
+                value={toggleMultiValue}
+                onChange={(value) => setToggleMultiValue(value as string[])}
+              />
+            </div>
+          </Card>
+        </section>
+
+        {/* Popover Section */}
+        <section
+          id="popover"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Popover
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <Popover
+              trigger="Open Details"
+              content={
+                <div>
+                  <div style={{ fontWeight: 600, marginBottom: "0.35rem" }}>
+                    Price Ladder
+                  </div>
+                  <div style={{ color: "var(--color-text-secondary)" }}>
+                    Bid/ask depth and volume at each level.
+                  </div>
+                </div>
+              }
+            />
+          </Card>
+        </section>
+
+        {/* Drawer Section */}
+        <section
+          id="drawer"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Drawer
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+              {(
+                [
+                  "left",
+                  "right",
+                  "top",
+                  "bottom",
+                  "top-left",
+                  "top-right",
+                  "bottom-left",
+                  "bottom-right",
+                ] as const
+              ).map((pos) => (
+                <Button
+                  key={pos}
+                  variant={drawerSide === pos ? "primary" : "secondary"}
+                  onClick={() => {
+                    setDrawerSide(pos);
+                    setDrawerOpen(true);
+                  }}
+                >
+                  Open {pos}
+                </Button>
+              ))}
+            </div>
+          </Card>
+          <Drawer
+            open={drawerOpen}
+            onClose={() => setDrawerOpen(false)}
+            title="Order Settings"
+            position={drawerSide}
+          >
+            Configure execution rules and risk limits.
+          </Drawer>
+        </section>
+
+        {/* Skeleton Section */}
+        <section
+          id="skeleton"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Skeleton
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div style={{ display: "grid", gap: "0.75rem" }}>
+              <Skeleton width="60%" height="1.1rem" />
+              <Skeleton width="100%" height="0.9rem" />
+              <Skeleton width="80%" height="0.9rem" />
+            </div>
+          </Card>
+        </section>
+
+        {/* Empty State Section */}
+        <section
+          id="empty-state"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Empty State
+          </h2>
+          <EmptyState
+            title="No positions yet"
+            description="Add a symbol to start tracking performance."
+            action={<Button variant="primary">Add Position</Button>}
+          />
+        </section>
+
+        {/* Avatar Section */}
+        <section
+          id="avatars"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Avatars
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+              }}
+            >
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    marginBottom: "0.75rem",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  With Initials
+                </h3>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "1rem",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Avatar name="John Doe" />
+                  <Avatar name="Jane Smith" />
+                  <Avatar name="Bob Johnson" />
+                </div>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    marginBottom: "0.75rem",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  Sizes
+                </h3>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "1rem",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Avatar name="User" size="xs" />
+                  <Avatar name="User" size="sm" />
+                  <Avatar name="User" size="md" />
+                  <Avatar name="User" size="lg" />
+                  <Avatar name="User" size="xl" />
+                </div>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    marginBottom: "0.75rem",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  Square Variant
+                </h3>
+                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                  <Avatar name="Square" variant="square" />
+                  <Avatar name="Square" variant="square" size="lg" />
+                </div>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Alert Section */}
+        <section
+          id="alerts"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Alerts
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+              maxWidth: "500px",
+            }}
+          >
+            <Alert
+              status="info"
+              title="Information"
+              description="This is an informational alert message."
+            />
+            <Alert
+              status="success"
+              title="Success"
+              description="Your action was completed successfully!"
+            />
+            <Alert
+              status="warning"
+              title="Warning"
+              description="Please be careful with this action."
+            />
+            <Alert
+              status="error"
+              title="Error"
+              description="Something went wrong. Please try again."
+            />
+            {alertVisible && (
+              <Alert
+                status="info"
+                title="Info Alert"
+                description="This is an informational message."
+                closable
+                onClose={() => setAlertVisible(false)}
+              />
+            )}
+          </div>
+        </section>
+
+        {/* Toast Section */}
+        <section
+          id="toasts"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Toasts
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{
+                display: "grid",
+                gap: "1rem",
+              }}
+            >
+              <p style={{ margin: 0, color: "var(--color-text-secondary)" }}>
+                Show different toast variants and positions.
+              </p>
+              <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap" }}>
+                <Button
+                  onClick={() =>
+                    pushToast(
+                      "success",
+                      "Saved",
+                      "Your settings were saved successfully.",
+                      { actionLabel: "Undo" },
+                    )
+                  }
+                >
+                  Success
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    pushToast("info", "Heads up", "A new release is available.")
+                  }
+                >
+                  Info
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    pushToast(
+                      "warning",
+                      "Storage almost full",
+                      "You are using 92% of your quota.",
+                      { actionLabel: "Manage" },
+                    )
+                  }
+                >
+                  Warning
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={() =>
+                    pushToast(
+                      "error",
+                      "Upload failed",
+                      "Network timeout. Please retry.",
+                      { duration: 5000 },
+                    )
+                  }
+                >
+                  Error
+                </Button>
+              </div>
+            </div>
+          </Card>
+          {demoToasts.map((toast, index) => (
+            <Toast
+              key={toast.id}
+              open
+              status={toast.status}
+              title={toast.title}
+              description={toast.description}
+              actionLabel={toast.actionLabel}
+              onAction={() => removeToast(toast.id)}
+              onClose={() => removeToast(toast.id)}
+              position="bottom-right"
+              duration={toast.duration}
+              stackIndex={index}
+            />
+          ))}
+        </section>
+
+        {/* Tooltip Section */}
+        <section
+          id="tooltips"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Tooltips
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{
+                display: "flex",
+                gap: "2rem",
+                justifyContent: "center",
+                alignItems: "center",
+                flexWrap: "wrap",
+                padding: "2rem",
+              }}
+            >
+              <Tooltip
+                content="This is a left tooltip"
+                placement="left"
+                maxWidth={360}
+              >
+                <Button>Hover Left</Button>
+              </Tooltip>
+              <Tooltip
+                content="This is a top tooltip"
+                placement="top"
+                maxWidth={360}
+              >
+                <Button>Hover Top</Button>
+              </Tooltip>
+              <Tooltip
+                content="This is a bottom tooltip"
+                placement="bottom"
+                maxWidth={360}
+              >
+                <Button>Hover Bottom</Button>
+              </Tooltip>
+              <Tooltip
+                content="This is a right tooltip"
+                placement="right"
+                maxWidth={360}
+              >
+                <Button>Hover Right</Button>
+              </Tooltip>
+            </div>
+          </Card>
+        </section>
+
+        {/* Modal Section */}
+        <section
+          id="modals"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Modal Dialog
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div style={{ textAlign: "center" }}>
               <p
                 style={{
                   marginBottom: "1.5rem",
                   color: "var(--color-text-secondary)",
                 }}
               >
-                Advanced glassmorphism effects with modern Liquid Glass design.
-                These components use backdrop-filter, transparency, and light
-                effects.
+                Click the button below to open a modal dialog
               </p>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-                  gap: "1.5rem",
-                  marginBottom: "2rem",
-                }}
-              >
-                <LiquidGlassCard blur="medium" alpha={0.75} edgeLight="soft">
-                  <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.5rem" }}>
-                    Basic Glass Card
-                  </h3>
-                  <p
-                    style={{
-                      color: "var(--color-text-secondary)",
-                      fontSize: "0.875rem",
-                    }}
-                  >
-                    Simple liquid glass effect with medium blur and soft edge
-                    lighting.
-                  </p>
-                </LiquidGlassCard>
-
-                <LiquidGlassCard
-                  blur="strong"
-                  alpha={0.65}
-                  edgeLight="medium"
-                  reflection="subtle"
-                >
-                  <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.5rem" }}>
-                    Advanced Glass Card
-                  </h3>
-                  <p
-                    style={{
-                      color: "var(--color-text-secondary)",
-                      fontSize: "0.875rem",
-                    }}
-                  >
-                    Strong blur with medium edge lighting and subtle reflection
-                    effects.
-                  </p>
-                </LiquidGlassCard>
-
-                <LiquidGlassCard
-                  blur="ultra"
-                  alpha={0.55}
-                  edgeLight="strong"
-                  reflection="medium"
-                  floating={true}
-                >
-                  <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.5rem" }}>
-                    Premium Glass Card
-                  </h3>
-                  <p
-                    style={{
-                      color: "var(--color-text-secondary)",
-                      fontSize: "0.875rem",
-                    }}
-                  >
-                    Ultra blur with strong edge lighting, medium reflection, and
-                    floating animation.
-                  </p>
-                </LiquidGlassCard>
-              </div>
-
+              <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
+            </div>
+          </Card>
+          <Modal
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+            title="Example Modal"
+            footer={
               <div
                 style={{
                   display: "flex",
-                  gap: "1rem",
-                  flexWrap: "wrap",
-                  marginBottom: "2rem",
+                  gap: "0.75rem",
+                  justifyContent: "flex-end",
                 }}
               >
-                <LiquidGlassButton variant="primary">
-                  Primary Glass
-                </LiquidGlassButton>
-                <LiquidGlassButton variant="secondary">
-                  Secondary Glass
-                </LiquidGlassButton>
-                <LiquidGlassButton variant="ghost">
-                  Ghost Glass
-                </LiquidGlassButton>
-                <LiquidGlassButton loading>Loading Glass</LiquidGlassButton>
+                <Button variant="ghost" onClick={() => setModalOpen(false)}>
+                  Cancel
+                </Button>
+                <Button onClick={() => setModalOpen(false)}>Confirm</Button>
+              </div>
+            }
+          >
+            <p
+              style={{
+                color: "var(--color-text-secondary)",
+                marginBottom: "1rem",
+              }}
+            >
+              This is a modal dialog example. You can put any content here.
+            </p>
+            <p style={{ color: "var(--color-text-secondary)" }}>
+              Click outside or press ESC to close, or use the buttons in the
+              footer.
+            </p>
+          </Modal>
+        </section>
+
+        {/* Theme Toggle Section */}
+        <section
+          id="theme-toggle"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Theme Toggle
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <ThemeToggle isDark={isDark} onToggle={toggleMode} size="sm" />
+              <ThemeToggle isDark={isDark} onToggle={toggleMode} size="md" />
+              <ThemeToggle isDark={isDark} onToggle={toggleMode} size="lg" />
+            </div>
+          </Card>
+        </section>
+
+        {/* Multi Theme Toggle Section */}
+        <section
+          id="multi-theme-toggle"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Multi Theme Toggle
+          </h2>
+          <Card variant="elevated" padding="lg">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+                alignItems: "flex-start",
+              }}
+            >
+              <div>
+                <p
+                  style={{
+                    marginBottom: "1rem",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  Switch between light and dark themes using the toggle in the
+                  header, or try these:
+                </p>
+                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                  <MultiThemeToggle size="sm" />
+                  <MultiThemeToggle size="md" />
+                  <MultiThemeToggle size="lg" />
+                </div>
               </div>
             </div>
           </Card>
         </section>
-      )}
 
-      {/* Table Section */}
-      <section id="table" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
+        {/* Login Section */}
+        <section
+          id="login"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
         >
-          Data Table
-        </h2>
-        <div
-          style={{
-            display: "flex",
-            gap: "0.5rem",
-            flexWrap: "wrap",
-            marginBottom: "1rem",
-          }}
-        >
-          {["glass", "clean", "zebra", "compact"].map((theme) => (
-            <Button
-              key={theme}
-              size="sm"
-              variant={tableTheme === theme ? "primary" : "outline"}
-              onClick={() =>
-                setTableTheme(theme as "glass" | "clean" | "zebra" | "compact")
-              }
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Login Form
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              gap: "2rem",
+              flexWrap: "wrap",
+            }}
+          >
+            <div>
+              <h3
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: "600",
+                  marginBottom: "1rem",
+                  color: "var(--color-text-secondary)",
+                  textAlign: "center",
+                }}
+              >
+                Default Login
+              </h3>
+              <Login
+                onSubmit={(values) => {
+                  console.log("Login submitted:", values);
+                  alert(
+                    `Login: ${values.username}\nRemember me: ${
+                      values.rememberMe || false
+                    }`,
+                  );
+                }}
+                submitText="Sign In"
+              />
+            </div>
+            <div>
+              <h3
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: "600",
+                  marginBottom: "1rem",
+                  color: "var(--color-text-secondary)",
+                  textAlign: "center",
+                }}
+              >
+                With Error
+              </h3>
+              <Login
+                onSubmit={(values) => {
+                  console.log("Login submitted:", values);
+                }}
+                error="Invalid username or password. Please try again."
+                submitText="Sign In"
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              marginTop: "2rem",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Login
+              title="Welcome Back"
+              subtitle="Sign in to continue to your account"
+              onSubmit={(values) => {
+                console.log("Login submitted:", values);
+              }}
+              onForgotPassword={() => alert("Forgot password clicked")}
+              submitText="Sign In"
             >
-              {theme}
-            </Button>
-          ))}
-        </div>
+              <div>
+                Don&apos;t have an account?{" "}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    alert("Sign up clicked");
+                  }}
+                  style={{
+                    color: "var(--color-primary)",
+                    textDecoration: "none",
+                    fontWeight: "500",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.textDecoration = "underline";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.textDecoration = "none";
+                  }}
+                >
+                  Sign up
+                </a>
+              </div>
+            </Login>
+          </div>
+        </section>
 
-        <Table
-          theme={tableTheme}
-          data={{
-            table: "Users",
-            columns: [
-              {
-                column_name: "id",
-                data_type: "integer",
-                is_nullable: "NO",
-                column_default: null,
-              },
-              {
-                column_name: "name",
-                data_type: "varchar",
-                is_nullable: "NO",
-                column_default: null,
-              },
-              {
-                column_name: "email",
-                data_type: "varchar",
-                is_nullable: "YES",
-                column_default: null,
-              },
-              {
-                column_name: "role",
-                data_type: "varchar",
-                is_nullable: "NO",
-                column_default: "'user'",
-              },
-            ],
-            data: [
-              {
-                id: 1,
-                name: "John Doe",
-                email: "john@example.com",
-                role: "admin",
-              },
-              {
-                id: 2,
-                name: "Jane Smith",
-                email: "jane@example.com",
-                role: "user",
-              },
-              {
-                id: 3,
-                name: "Bob Johnson",
-                email: "bob@example.com",
-                role: "user",
-              },
-              {
-                id: 4,
-                name: "Alice Brown",
-                email: "alice@example.com",
-                role: "moderator",
-              },
-              {
-                id: 5,
-                name: "Charlie Wilson",
-                email: "charlie@example.com",
-                role: "user",
-              },
-            ],
-            pagination: {
-              page: currentPage,
-              limit: 5,
-              total: 25,
-              totalPages: 5,
-            },
-          }}
-          onPageChange={setCurrentPage}
-        />
-      </section>
+        {/* Liquid Glass Section - Only show when in liquid glass theme */}
+        {isLiquidGlass && (
+          <section style={{ marginBottom: "3rem" }}>
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "600",
+                marginBottom: "1.5rem",
+                color: "var(--color-text-primary)",
+              }}
+            >
+              Liquid Glass Components
+            </h2>
+            <Card>
+              <div
+                style={{
+                  padding: "1.5rem",
+                }}
+              >
+                <p
+                  style={{
+                    marginBottom: "1.5rem",
+                    color: "var(--color-text-secondary)",
+                  }}
+                >
+                  Advanced glassmorphism effects with modern Liquid Glass
+                  design. These components use backdrop-filter, transparency,
+                  and light effects.
+                </p>
 
-      {/* Charts Section */}
-      <section id="charts" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            marginBottom: "1.5rem",
-            color: "var(--color-text-primary)",
-          }}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                    gap: "1.5rem",
+                    marginBottom: "2rem",
+                  }}
+                >
+                  <LiquidGlassCard blur="medium" alpha={0.75} edgeLight="soft">
+                    <h3
+                      style={{
+                        color: "var(--color-text-primary)",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      Basic Glass Card
+                    </h3>
+                    <p
+                      style={{
+                        color: "var(--color-text-secondary)",
+                        fontSize: "0.875rem",
+                      }}
+                    >
+                      Simple liquid glass effect with medium blur and soft edge
+                      lighting.
+                    </p>
+                  </LiquidGlassCard>
+
+                  <LiquidGlassCard
+                    blur="strong"
+                    alpha={0.65}
+                    edgeLight="medium"
+                    reflection="subtle"
+                  >
+                    <h3
+                      style={{
+                        color: "var(--color-text-primary)",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      Advanced Glass Card
+                    </h3>
+                    <p
+                      style={{
+                        color: "var(--color-text-secondary)",
+                        fontSize: "0.875rem",
+                      }}
+                    >
+                      Strong blur with medium edge lighting and subtle
+                      reflection effects.
+                    </p>
+                  </LiquidGlassCard>
+
+                  <LiquidGlassCard
+                    blur="ultra"
+                    alpha={0.55}
+                    edgeLight="strong"
+                    reflection="medium"
+                    floating={true}
+                  >
+                    <h3
+                      style={{
+                        color: "var(--color-text-primary)",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      Premium Glass Card
+                    </h3>
+                    <p
+                      style={{
+                        color: "var(--color-text-secondary)",
+                        fontSize: "0.875rem",
+                      }}
+                    >
+                      Ultra blur with strong edge lighting, medium reflection,
+                      and floating animation.
+                    </p>
+                  </LiquidGlassCard>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "1rem",
+                    flexWrap: "wrap",
+                    marginBottom: "2rem",
+                  }}
+                >
+                  <LiquidGlassButton variant="primary">
+                    Primary Glass
+                  </LiquidGlassButton>
+                  <LiquidGlassButton variant="secondary">
+                    Secondary Glass
+                  </LiquidGlassButton>
+                  <LiquidGlassButton variant="ghost">
+                    Ghost Glass
+                  </LiquidGlassButton>
+                  <LiquidGlassButton loading>Loading Glass</LiquidGlassButton>
+                </div>
+              </div>
+            </Card>
+          </section>
+        )}
+
+        {/* Table Section */}
+        <section
+          id="table"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
         >
-          Charts
-        </h2>
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Data Table
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              gap: "0.5rem",
+              flexWrap: "wrap",
+              marginBottom: "1rem",
+            }}
+          >
+            {["glass", "clean", "zebra", "compact"].map((theme) => (
+              <Button
+                key={theme}
+                size="sm"
+                variant={tableTheme === theme ? "primary" : "outline"}
+                onClick={() =>
+                  setTableTheme(
+                    theme as "glass" | "clean" | "zebra" | "compact",
+                  )
+                }
+              >
+                {theme}
+              </Button>
+            ))}
+          </div>
 
-        <div
-          style={{
-            display: "grid",
-            gap: "1rem",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            marginBottom: "1rem",
-          }}
+          <Table
+            theme={tableTheme}
+            data={{
+              table: "Users",
+              columns: [
+                {
+                  column_name: "id",
+                  data_type: "integer",
+                  is_nullable: "NO",
+                  column_default: null,
+                },
+                {
+                  column_name: "name",
+                  data_type: "varchar",
+                  is_nullable: "NO",
+                  column_default: null,
+                },
+                {
+                  column_name: "email",
+                  data_type: "varchar",
+                  is_nullable: "YES",
+                  column_default: null,
+                },
+                {
+                  column_name: "role",
+                  data_type: "varchar",
+                  is_nullable: "NO",
+                  column_default: "'user'",
+                },
+              ],
+              data: [
+                {
+                  id: 1,
+                  name: "John Doe",
+                  email: "john@example.com",
+                  role: "admin",
+                },
+                {
+                  id: 2,
+                  name: "Jane Smith",
+                  email: "jane@example.com",
+                  role: "user",
+                },
+                {
+                  id: 3,
+                  name: "Bob Johnson",
+                  email: "bob@example.com",
+                  role: "user",
+                },
+                {
+                  id: 4,
+                  name: "Alice Brown",
+                  email: "alice@example.com",
+                  role: "moderator",
+                },
+                {
+                  id: 5,
+                  name: "Charlie Wilson",
+                  email: "charlie@example.com",
+                  role: "user",
+                },
+              ],
+              pagination: {
+                page: currentPage,
+                limit: 5,
+                total: 25,
+                totalPages: 5,
+              },
+            }}
+            onPageChange={setCurrentPage}
+          />
+        </section>
+
+        {/* Charts Section */}
+        <section
+          id="charts"
+          style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}
         >
-          <KpiChartCard
-            title="Portfolio Value"
-            value="$1,284,200"
-            change="+8.2%"
-            subtitle="Last 30 sessions"
-            trendValues={[72, 78, 81, 74, 89, 92, 95, 99, 103, 110]}
-          />
-          <KpiChartCard
-            title="Daily P/L"
-            value="+$62,980"
-            change="+2.1%"
-            subtitle="Today"
-            trendValues={[66, 64, 62, 61, 63, 60, 58, 59, 57, 56]}
-          />
-          <KpiChartCard
-            title="Open Positions"
-            value="87"
-            change="+4.4%"
-            subtitle="Active book"
-            trendValues={[42, 45, 47, 44, 50, 58, 62, 71, 79, 87]}
-          />
-        </div>
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              marginBottom: "1.5rem",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            Charts
+          </h2>
 
-        <Card style={{ marginBottom: "1rem" }}>
-          <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
-            Price Trend
-          </h3>
-          <LineChart
-            data={lineData}
-            height={180}
-            showArea
-            movingAverages={[3, 5]}
-            supportLevel={46}
-            resistanceLevel={63}
-          />
-        </Card>
+          <div
+            style={{
+              display: "grid",
+              gap: "1rem",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              marginBottom: "1rem",
+            }}
+          >
+            <KpiChartCard
+              title="Portfolio Value"
+              value="$1,284,200"
+              change="+8.2%"
+              subtitle="Last 30 sessions"
+              trendValues={[72, 78, 81, 74, 89, 92, 95, 99, 103, 110]}
+            />
+            <KpiChartCard
+              title="Daily P/L"
+              value="+$62,980"
+              change="+2.1%"
+              subtitle="Today"
+              trendValues={[66, 64, 62, 61, 63, 60, 58, 59, 57, 56]}
+            />
+            <KpiChartCard
+              title="Open Positions"
+              value="87"
+              change="+4.4%"
+              subtitle="Active book"
+              trendValues={[42, 45, 47, 44, 50, 58, 62, 71, 79, 87]}
+            />
+          </div>
 
-        <div
-          style={{
-            display: "grid",
-            gap: "1rem",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            marginBottom: "1rem",
-          }}
-        >
-          <Card>
-            <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
-              Sector Rotation
+          <Card style={{ marginBottom: "1rem" }}>
+            <h3
+              style={{
+                color: "var(--color-text-primary)",
+                marginBottom: "0.75rem",
+              }}
+            >
+              Price Trend
             </h3>
-            <BarChart data={barData} height={180} />
+            <LineChart
+              data={lineData}
+              height={180}
+              showArea
+              movingAverages={[3, 5]}
+              supportLevel={46}
+              resistanceLevel={63}
+            />
           </Card>
+
+          <div
+            style={{
+              display: "grid",
+              gap: "1rem",
+              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+              marginBottom: "1rem",
+            }}
+          >
+            <Card>
+              <h3
+                style={{
+                  color: "var(--color-text-primary)",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Sector Rotation
+              </h3>
+              <BarChart data={barData} height={180} />
+            </Card>
+            <Card>
+              <h3
+                style={{
+                  color: "var(--color-text-primary)",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Allocation Mix
+              </h3>
+              <DonutChart
+                data={donutData}
+                width={240}
+                height={240}
+                innerRadius={48}
+              />
+            </Card>
+          </div>
+
           <Card>
-            <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
-              Allocation Mix
+            <h3
+              style={{
+                color: "var(--color-text-primary)",
+                marginBottom: "0.75rem",
+              }}
+            >
+              Stock-Style Candlestick
             </h3>
-            <DonutChart data={donutData} width={240} height={240} innerRadius={48} />
+            <CandlestickChart
+              data={candleData}
+              height={220}
+              showVolume
+              maPeriods={[3, 5]}
+              supportLevel={100}
+              resistanceLevel={113}
+            />
           </Card>
-        </div>
 
-        <Card>
-          <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
-            Stock-Style Candlestick
-          </h3>
-          <CandlestickChart
-            data={candleData}
-            height={220}
-            showVolume
-            maPeriods={[3, 5]}
-            supportLevel={100}
-            resistanceLevel={113}
-          />
-        </Card>
+          <div style={{ marginTop: "1rem" }}>
+            <StockMarketBoard
+              title="US Market Watch"
+              rows={marketRows}
+              portfolioChange={2.8}
+              sortable
+            />
+          </div>
 
-        <div style={{ marginTop: "1rem" }}>
-          <StockMarketBoard
-            title="US Market Watch"
-            rows={marketRows}
-            portfolioChange={2.8}
-            sortable
-          />
-        </div>
+          <Card style={{ marginTop: "1rem" }}>
+            <h3
+              style={{
+                color: "var(--color-text-primary)",
+                marginBottom: "0.75rem",
+              }}
+            >
+              RSI Momentum
+            </h3>
+            <RSIChart values={rsiSeries} period={14} height={140} />
+          </Card>
+        </section>
 
-        <Card style={{ marginTop: "1rem" }}>
-          <h3 style={{ color: "var(--color-text-primary)", marginBottom: "0.75rem" }}>
-            RSI Momentum
-          </h3>
-          <RSIChart values={rsiSeries} period={14} height={140} />
-        </Card>
-      </section>
-
-      {/* Footer */}
-      <footer
-        style={{
-          textAlign: "center",
-          padding: "2rem 0",
-          borderTop: "1px solid var(--color-border)",
-        }}
-      >
-        <p style={{ color: "var(--color-text-secondary)" }}>
-          Pixel Wizards Component Library - Modern, Professional, Accessible
-        </p>
-      </footer>
+        {/* Footer */}
+        <footer
+          style={{
+            textAlign: "center",
+            padding: "2rem 0",
+            borderTop: "1px solid var(--color-border)",
+          }}
+        >
+          <p style={{ color: "var(--color-text-secondary)" }}>
+            Pixel Wizards Component Library - Modern, Professional, Accessible
+          </p>
+        </footer>
       </div>
     </div>
   );

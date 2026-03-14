@@ -1671,6 +1671,60 @@
   font-family: var(--font-sans);
 }
 
+.pw-date-picker__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pw-date-picker__icon {
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: inherit;
+  opacity: 1;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--color-border-light);
+}
+
+.pw-date-picker__icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.pw-date-picker::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+[data-theme="dark"] .pw-date-picker {
+  padding-right: 2.2rem;
+}
+
+[data-theme="dark"] .pw-date-picker::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+[data-theme="light"] .pw-date-picker__icon {
+  background: transparent;
+  color: #111111;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .pw-date-picker__icon {
+  background: rgba(15, 23, 42, 0.6);
+  color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
 .pw-date-picker:focus {
   outline: none;
   border-color: var(--color-primary);

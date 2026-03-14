@@ -54,9 +54,21 @@
 
 .theme-liquid-glass body {
   background-image:
-    radial-gradient(circle at 8% 12%, rgba(59, 130, 246, 0.34), transparent 36%),
-    radial-gradient(circle at 84% 20%, rgba(16, 185, 129, 0.28), transparent 34%),
-    radial-gradient(circle at 45% 88%, rgba(99, 102, 241, 0.3), transparent 38%),
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(59, 130, 246, 0.34),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 84% 20%,
+      rgba(16, 185, 129, 0.28),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 45% 88%,
+      rgba(99, 102, 241, 0.3),
+      transparent 38%
+    ),
     linear-gradient(140deg, #e7f0ff 0%, #eefbf6 40%, #f2efff 75%, #e8f7ff 100%);
   background-size: cover;
   background-attachment: fixed;
@@ -64,9 +76,21 @@
 
 .theme-liquid-glass.theme-dark body {
   background-image:
-    radial-gradient(circle at 10% 14%, rgba(59, 130, 246, 0.26), transparent 34%),
-    radial-gradient(circle at 86% 18%, rgba(16, 185, 129, 0.2), transparent 30%),
-    radial-gradient(circle at 42% 84%, rgba(99, 102, 241, 0.24), transparent 36%),
+    radial-gradient(
+      circle at 10% 14%,
+      rgba(59, 130, 246, 0.26),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 86% 18%,
+      rgba(16, 185, 129, 0.2),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 42% 84%,
+      rgba(99, 102, 241, 0.24),
+      transparent 36%
+    ),
     linear-gradient(145deg, #0b1222 0%, #0f1a2e 45%, #141a33 75%, #0d1d30 100%);
 }
 
@@ -76,14 +100,13 @@
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  background:
-    repeating-linear-gradient(
-      125deg,
-      rgba(255, 255, 255, 0.04) 0px,
-      rgba(255, 255, 255, 0.04) 1px,
-      transparent 1px,
-      transparent 7px
-    );
+  background: repeating-linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.04) 0px,
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 7px
+  );
   mix-blend-mode: soft-light;
   opacity: 0.65;
 }
@@ -102,7 +125,10 @@
   -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
   box-shadow: var(--lg-shadow-soft);
   color: var(--lg-text-primary);
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease,
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
     background-color 220ms ease;
 }
 
@@ -118,8 +144,17 @@
 /* Edge-light + caustic reflection */
 .liquid-glass::before {
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.06) 34%, transparent 64%),
-    radial-gradient(110% 70% at -8% -18%, rgba(255, 255, 255, 0.45), transparent 48%);
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.34),
+      rgba(255, 255, 255, 0.06) 34%,
+      transparent 64%
+    ),
+    radial-gradient(
+      110% 70% at -8% -18%,
+      rgba(255, 255, 255, 0.45),
+      transparent 48%
+    );
   opacity: 0.62;
 }
 
@@ -179,41 +214,77 @@
 }
 
 /* Blur presets */
-.liquid-glass--blur-subtle { --lg-blur: 10px; }
-.liquid-glass--blur-medium { --lg-blur: 16px; }
-.liquid-glass--blur-strong { --lg-blur: 24px; }
-.liquid-glass--blur-ultra { --lg-blur: 32px; }
+.liquid-glass--blur-subtle {
+  --lg-blur: 10px;
+}
+.liquid-glass--blur-medium {
+  --lg-blur: 16px;
+}
+.liquid-glass--blur-strong {
+  --lg-blur: 24px;
+}
+.liquid-glass--blur-ultra {
+  --lg-blur: 32px;
+}
 
 /* Effect strength */
-.liquid-glass--edge-light-soft::before { opacity: 0.48; }
-.liquid-glass--edge-light-medium::before { opacity: 0.66; }
-.liquid-glass--edge-light-strong::before { opacity: 0.82; }
+.liquid-glass--edge-light-soft::before {
+  opacity: 0.48;
+}
+.liquid-glass--edge-light-medium::before {
+  opacity: 0.66;
+}
+.liquid-glass--edge-light-strong::before {
+  opacity: 0.82;
+}
 
-.liquid-glass--reflection-subtle::after { opacity: 0.35; }
-.liquid-glass--reflection-medium::after { opacity: 0.52; }
-.liquid-glass--reflection-strong::after { opacity: 0.72; }
+.liquid-glass--reflection-subtle::after {
+  opacity: 0.35;
+}
+.liquid-glass--reflection-medium::after {
+  opacity: 0.52;
+}
+.liquid-glass--reflection-strong::after {
+  opacity: 0.72;
+}
 
 /* Motion */
 @keyframes glassFloat {
   0%,
-  100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes glassPulse {
   0%,
-  100% { box-shadow: var(--lg-shadow-soft); }
-  50% { box-shadow: var(--lg-shadow-mid); }
+  100% {
+    box-shadow: var(--lg-shadow-soft);
+  }
+  50% {
+    box-shadow: var(--lg-shadow-mid);
+  }
 }
 
-.liquid-glass--floating { animation: glassFloat 5.5s ease-in-out infinite; }
-.liquid-glass--pulse { animation: glassPulse 3.8s ease-in-out infinite; }
+.liquid-glass--floating {
+  animation: glassFloat 5.5s ease-in-out infinite;
+}
+.liquid-glass--pulse {
+  animation: glassPulse 3.8s ease-in-out infinite;
+}
 
 /* Component-specific integration */
 .theme-liquid-glass .pw-card {
   border-color: var(--lg-border-subtle);
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.05)),
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.22),
+      rgba(255, 255, 255, 0.05)
+    ),
     rgba(var(--lg-tint-rgb), 0.42);
   backdrop-filter: blur(var(--lg-blur-card)) saturate(170%);
   box-shadow: var(--lg-shadow-soft);
@@ -222,7 +293,11 @@
 .theme-liquid-glass .pw-card--glass {
   border-color: var(--lg-border);
   background:
-    linear-gradient(155deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.06)),
+    linear-gradient(
+      155deg,
+      rgba(255, 255, 255, 0.28),
+      rgba(255, 255, 255, 0.06)
+    ),
     rgba(var(--lg-tint-rgb), var(--lg-layer-card-alpha));
   backdrop-filter: blur(var(--lg-blur-card)) saturate(170%);
   box-shadow: var(--lg-shadow-soft);
@@ -232,7 +307,11 @@
 .theme-liquid-glass .pw-card--outlined,
 .theme-liquid-glass .pw-card--default {
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.04)),
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.04)
+    ),
     rgba(var(--lg-tint-rgb), 0.4);
   backdrop-filter: blur(var(--lg-blur-card)) saturate(170%);
   border: 1px solid var(--lg-border-subtle);
@@ -246,9 +325,30 @@
 .theme-liquid-glass .pw-toast {
   border-color: var(--lg-border-subtle);
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05)),
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.05)
+    ),
     rgba(var(--lg-tint-rgb), 0.45);
   backdrop-filter: blur(14px) saturate(165%);
+}
+
+.theme-liquid-glass.theme-dark .pw-date-picker {
+  color-scheme: dark;
+  padding-right: 2.2rem;
+}
+
+.theme-liquid-glass.theme-dark .pw-date-picker__icon {
+  background: rgba(15, 23, 42, 0.55);
+  color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.theme-liquid-glass:not(.theme-dark) .pw-date-picker__icon {
+  background: transparent;
+  color: #111111;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 .theme-liquid-glass.theme-dark .pw-data-grid--glass .pw-data-grid__table th {
@@ -264,18 +364,27 @@
 .theme-liquid-glass .pw-button {
   border-color: var(--lg-border-subtle);
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06)),
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.22),
+      rgba(255, 255, 255, 0.06)
+    ),
     rgba(var(--lg-tint-rgb), 0.36);
   backdrop-filter: blur(10px) saturate(165%);
 }
 
 .theme-liquid-glass .pw-button:hover:not(:disabled) {
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.08)),
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.08)
+    ),
     rgba(var(--lg-tint-rgb), 0.46);
 }
 
-.theme-liquid-glass:not(.theme-dark) .pw-button:not(.pw-button--primary):not(.pw-button--danger) {
+.theme-liquid-glass:not(.theme-dark)
+  .pw-button:not(.pw-button--primary):not(.pw-button--danger) {
   color: var(--color-text-primary);
 }
 
