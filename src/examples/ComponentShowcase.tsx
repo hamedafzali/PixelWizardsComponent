@@ -15,6 +15,7 @@ import {
   Select,
   Radio,
   RadioGroup,
+  Switch,
   ThemeToggle,
   Table,
   LineChart,
@@ -117,6 +118,7 @@ const ComponentShowcase: React.FC = () => {
     { id: "progress", label: "Progress" },
     { id: "checkboxes", label: "Checkboxes" },
     { id: "radios", label: "Radios" },
+    { id: "switches", label: "Switches" },
     { id: "avatars", label: "Avatars" },
     { id: "alerts", label: "Alerts" },
     { id: "toasts", label: "Toasts" },
@@ -1247,6 +1249,33 @@ const ComponentShowcase: React.FC = () => {
               <Radio name="size-demo" size="sm" label="Small radio" />
               <Radio name="size-demo" size="md" label="Medium radio" defaultChecked />
               <Radio name="size-demo" size="lg" label="Large radio" />
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      {/* Switch Section */}
+      <section id="switches" style={{ marginBottom: "3rem", scrollMarginTop: "1rem" }}>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "1.5rem",
+            color: "var(--color-text-primary)",
+          }}
+        >
+          Switches
+        </h2>
+        <Card variant="elevated" padding="lg">
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <Switch label="Enable live pricing" defaultChecked />
+            <Switch label="Dark pool routing" helperText="Routes to alternative venues" />
+            <Switch label="Auto rebalance" />
+            <Switch label="Disabled switch" disabled />
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              <Switch size="sm" label="Small switch" />
+              <Switch size="md" label="Medium switch" defaultChecked />
+              <Switch size="lg" label="Large switch" />
             </div>
           </div>
         </Card>

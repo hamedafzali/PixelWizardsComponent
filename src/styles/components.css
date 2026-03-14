@@ -1269,6 +1269,99 @@
   font-family: var(--font-sans);
 }
 
+/* ---------- SWITCH ---------- */
+.pw-switch {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pw-switch--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pw-switch__control {
+  display: inline-flex;
+  align-items: center;
+}
+
+.pw-switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.pw-switch__track {
+  position: relative;
+  width: var(--pw-switch-width, 42px);
+  height: var(--pw-switch-height, 24px);
+  background: var(--color-border);
+  border-radius: 999px;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+}
+
+.pw-switch__thumb {
+  width: var(--pw-switch-thumb, 18px);
+  height: var(--pw-switch-thumb, 18px);
+  background: var(--color-bg-surface);
+  border-radius: 999px;
+  transform: translateX(3px);
+  transition: transform var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.pw-switch__input:checked + .pw-switch__track {
+  background: var(--color-primary);
+}
+
+.pw-switch__input:checked + .pw-switch__track .pw-switch__thumb {
+  transform: translateX(calc(var(--pw-switch-width, 42px) - var(--pw-switch-thumb, 18px) - 3px));
+}
+
+.pw-switch__input:focus-visible + .pw-switch__track {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.pw-switch__label {
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.pw-switch__helper {
+  grid-column: 2 / 3;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.pw-switch--sm {
+  --pw-switch-width: 34px;
+  --pw-switch-height: 20px;
+  --pw-switch-thumb: 14px;
+  font-size: 0.82rem;
+}
+
+.pw-switch--md {
+  --pw-switch-width: 42px;
+  --pw-switch-height: 24px;
+  --pw-switch-thumb: 18px;
+}
+
+.pw-switch--lg {
+  --pw-switch-width: 52px;
+  --pw-switch-height: 30px;
+  --pw-switch-thumb: 22px;
+  font-size: 1rem;
+}
+
 /* ---------- ALERT ---------- */
 .pw-alert {
   position: relative;
