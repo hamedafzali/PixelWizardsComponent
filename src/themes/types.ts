@@ -1,5 +1,12 @@
 import { DesignTokens } from "../tokens";
 
+type ThemeExtensionValue =
+  | string
+  | number
+  | boolean
+  | undefined
+  | Record<string, string | number | boolean | undefined>;
+
 export interface GlassEffect {
   background?: string;
   backgroundDark?: string;
@@ -19,9 +26,9 @@ export interface GlassEffect {
   borderDark?: string;
   highlight: string;
   shadow?: string; // For glass panel shadows
-  transparency?: any; // Allow transparency properties
-  light?: any; // Allow light properties
-  motion?: any; // Allow motion properties
+  transparency?: ThemeExtensionValue;
+  light?: ThemeExtensionValue;
+  motion?: ThemeExtensionValue;
 }
 
 export interface MotionSettings {
@@ -99,8 +106,8 @@ export interface Theme {
       background: DesignTokens["colors"]["semantic"]["background"] & {
         surface?: string;
         overlay?: string;
-        glass?: any; // Allow glass properties
-        glassDark?: any; // Allow dark glass properties
+        glass?: ThemeExtensionValue;
+        glassDark?: ThemeExtensionValue;
       };
       text: DesignTokens["colors"]["semantic"]["text"] & {
         accent?: string;
@@ -118,8 +125,8 @@ export interface Theme {
         success: string;
         accent: string;
         glow: string;
-        glass?: any; // Allow glass properties
-        glassDark?: any; // Allow dark glass properties
+        glass?: ThemeExtensionValue;
+        glassDark?: ThemeExtensionValue;
       };
     };
     surface: {

@@ -196,7 +196,7 @@ export type ThemeInfo = {
   mode: "light" | "dark";
   isLiquidGlass: boolean;
   isDark: boolean;
-  colors: any;
+  colors: Theme["colors"];
   type?: string;
 };
 

@@ -3,6 +3,7 @@ import { MultiThemeProvider } from "../themes/MultiThemeProvider";
 import MultiThemeToggle from "../components/MultiThemeToggle";
 import { useMultiTheme } from "../themes/MultiThemeProvider";
 import { clsx } from "clsx";
+import { ThemeType } from "../themes/multiThemeSystem";
 
 // Demo component to showcase multi-theme system
 const MultiThemeDemoContent: React.FC = () => {
@@ -64,7 +65,7 @@ const MultiThemeDemoContent: React.FC = () => {
               </label>
               <select
                 value={currentThemeType}
-                onChange={(e) => setThemeType(e.target.value as any)}
+                onChange={(e) => setThemeType(e.target.value as ThemeType)}
                 className="w-full p-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white"
               >
                 {availableThemes.map((themeType) => (

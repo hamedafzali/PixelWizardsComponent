@@ -81,8 +81,7 @@ export const Modal: React.FC<ModalProps> = ({
         aria-labelledby={title ? "pw-modal-title" : undefined}
         className={clsx("pw-modal", className)}
         style={{
-          boxShadow:
-            (theme as any)?.shadows?.xl || "0 8px 32px rgba(0,0,0,0.15)",
+          boxShadow: theme.shadows.xl || "0 8px 32px rgba(0,0,0,0.15)",
           ...props.style,
         }}
         tabIndex={0}
