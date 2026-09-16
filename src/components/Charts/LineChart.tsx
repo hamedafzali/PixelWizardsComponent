@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { LineChartProps } from "./Charts.types";
 import { movingAverage, range, scaledY } from "./chartUtils";
 
@@ -13,7 +13,9 @@ export const LineChart: React.FC<LineChartProps> = ({
   movingAverages = [],
   supportLevel,
   resistanceLevel,
+  interactive = true,
 }) => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   if (data.length === 0) {
     return <div className={`pw-chart pw-chart--empty ${className || ""}`}>No data</div>;
   }
@@ -64,9 +66,29 @@ export const LineChart: React.FC<LineChartProps> = ({
       ? scaledY(resistanceLevel, min, max, height, pad)
       : null;
 
+  const handleMouseMove = (event: React.MouseEvent<SVGSVGElement>) => {
+    if (!interactive || data.length === 0) return;
+    const svg = event.currentTarget;
+    const rect = svg.getBoundingClientRect();
+    const scaleX = width / rect.width;
+    const mouseX = (event.clientX - rect.left) * scaleX;
+    const index = stepX > 0 ? Math.round((mouseX - pad) / stepX) : 0;
+    const clamped = Math.min(Math.max(index, 0), data.length - 1);
+    setHoveredIndex(clamped);
+  };
+
+  const hovered = hoveredIndex !== null ? points[hoveredIndex] : null;
+  const hoveredPoint = hoveredIndex !== null ? data[hoveredIndex] : null;
+
   return (
     <div className={`pw-chart ${className || ""}`}>
-      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Line chart">
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-label="Line chart"
+        onMouseMove={interactive ? handleMouseMove : undefined}
+        onMouseLeave={interactive ? () => setHoveredIndex(null) : undefined}
+      >
         <rect x="0" y="0" width={width} height={height} fill="transparent" />
         {supportY !== null ? (
           <line
@@ -107,6 +129,18 @@ export const LineChart: React.FC<LineChartProps> = ({
         {points.map((point, index) => (
           <circle key={index} cx={point.x} cy={point.y} r="3" fill={lineColor} />
         ))}
+        {hovered && hoveredPoint ? (
+          <g className="pw-chart__crosshair" pointerEvents="none">
+            <line x1={hovered.x} y1={pad} x2={hovered.x} y2={height - pad} stroke="currentColor" strokeOpacity={0.3} strokeWidth="1" strokeDasharray="3 3" />
+            <circle cx={hovered.x} cy={hovered.y} r="5" fill={lineColor} stroke="white" strokeWidth="1.5" />
+            <g transform={`translate(${Math.min(Math.max(hovered.x, pad + 30), width - pad - 30)}, ${pad + 12})`}>
+              <rect x="-30" y="-12" width="60" height="20" rx="4" fill="rgba(17,24,39,0.85)" />
+              <text x="0" y="2" textAnchor="middle" fontSize="10" fill="white">
+                {hoveredPoint.y.toFixed(2)}
+              </text>
+            </g>
+          </g>
+        ) : null}
       </svg>
     </div>
   );

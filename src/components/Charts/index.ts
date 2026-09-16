@@ -7,3 +7,4 @@ export * from "./CandlestickChart";
 export * from "./RSIChart";
 export * from "./KpiChartCard";
 export * from "./StockMarketBoard";
+export * from "./TimeRangeSelector";

@@ -40,6 +40,8 @@ export type LineChartProps = BaseChartProps & {
   movingAverages?: number[];
   supportLevel?: number;
   resistanceLevel?: number;
+  /** Show a hover crosshair with the value under the cursor (default: true) */
+  interactive?: boolean;
 };
 
 export type BarChartProps = BaseChartProps & {
