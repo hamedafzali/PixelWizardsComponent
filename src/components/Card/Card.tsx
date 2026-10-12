@@ -1,8 +1,11 @@
 import React, { forwardRef } from "react";
 import { clsx } from "clsx";
-import { useTheme } from "../../themes";
-import { CardProps } from "./Card.types";
+import { CardFooterProps, CardHeaderProps, CardProps } from "./Card.types";
 
+/**
+ * Surface container. Styling comes from CSS variables, so it works with or
+ * without a theme provider.
+ */
 const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
@@ -12,38 +15,14 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       hover = false,
       children,
       className,
-      style,
       ...props
     },
     ref,
   ) => {
-    const { theme } = useTheme();
-
-    const getVariantClasses = () => {
-      const variants = {
-        default: "pw-card--default",
-        elevated: "pw-card--elevated",
-        outlined: "pw-card--outlined",
-        glass: "pw-card--glass",
-      };
-      return variants[variant];
-    };
-
-    const getPaddingClasses = () => {
-      const paddings = {
-        none: "pw-card--padding-none",
-        sm: "pw-card--padding-sm",
-        md: "pw-card--padding-md",
-        lg: "pw-card--padding-lg",
-        xl: "pw-card--padding-xl",
-      };
-      return paddings[padding];
-    };
-
     const classes = clsx(
       "pw-card",
-      getVariantClasses(),
-      getPaddingClasses(),
+      `pw-card--${variant}`,
+      `pw-card--padding-${padding}`,
       {
         "pw-card--rounded": rounded,
         "pw-card--hover": hover,
@@ -51,24 +30,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       className,
     );
 
-    const cardStyle = {
-      ...style,
-      // CSS custom properties for theming
-      "--background-color": theme.colors.semantic.surface.primary,
-      "--border-color": theme.colors.semantic.border.primary,
-      "--text-color": theme.colors.semantic.text.primary,
-      "--shadow-elevated": theme.shadows.lg,
-      "--shadow-glass": theme.shadows.glass,
-    } as React.CSSProperties;
-
     return (
-      <div
-        ref={ref}
-        className={classes}
-        style={cardStyle}
-        role={props.role || "region"}
-        {...props}
-      >
+      <div ref={ref} className={classes} {...props}>
         {children}
       </div>
     );
@@ -77,4 +40,46 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
 Card.displayName = "Card";
 
-export { Card };
+/**
+ * Card header: optional leading visual, a title and subtitle that truncate,
+ * and trailing actions that never wrap under the title.
+ */
+const CardHeader: React.FC<CardHeaderProps> = ({
+  leading,
+  title,
+  subtitle,
+  meta,
+  actions,
+  as: Heading = "h3",
+  className,
+}) => (
+  <div className={clsx("pw-card-header", className)}>
+    {leading && <div className="pw-card-header__leading">{leading}</div>}
+    <div className="pw-card-header__text">
+      <Heading className="pw-card-header__title">{title}</Heading>
+      {subtitle && <div className="pw-card-header__subtitle">{subtitle}</div>}
+      {meta && <div className="pw-card-header__meta">{meta}</div>}
+    </div>
+    {actions && <div className="pw-card-header__actions">{actions}</div>}
+  </div>
+);
+
+/** Card body that grows, so footers line up across a grid of cards. */
+const CardBody: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => <div className={clsx("pw-card-body", className)} {...props} />;
+
+/** Card footer pinned to the bottom edge of the card. */
+const CardFooter: React.FC<CardFooterProps> = ({
+  className,
+  justify = "between",
+  ...props
+}) => (
+  <div
+    className={clsx("pw-card-footer", `pw-card-footer--${justify}`, className)}
+    {...props}
+  />
+);
+
+export { Card, CardHeader, CardBody, CardFooter };

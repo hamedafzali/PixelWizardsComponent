@@ -54,4 +54,44 @@ describe("Modal", () => {
     await user.keyboard("{Escape}");
     expect(onClose).not.toHaveBeenCalled();
   });
+
+  it("labels the dialog with a unique title id", () => {
+    render(
+      <>
+        <Modal open onClose={vi.fn()} title="First">
+          A
+        </Modal>
+        <Modal open onClose={vi.fn()} title="Second">
+          B
+        </Modal>
+      </>,
+    );
+    expect(screen.getByRole("dialog", { name: "First" })).toBeInTheDocument();
+    expect(screen.getByRole("dialog", { name: "Second" })).toBeInTheDocument();
+  });
+
+  it("works without a theme provider and focuses the first field", () => {
+    render(
+      <Modal open onClose={vi.fn()} title="Edit">
+        <input aria-label="Name" />
+      </Modal>,
+    );
+    expect(screen.getByLabelText("Name")).toHaveFocus();
+  });
+
+  it("keeps Tab inside the dialog", async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <button>Outside</button>
+        <Modal open onClose={vi.fn()} title="Edit" footer={<button>Save</button>}>
+          <input aria-label="Name" />
+        </Modal>
+      </>,
+    );
+    await user.tab();
+    expect(screen.getByRole("button", { name: "Save" })).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole("button", { name: "Close dialog" })).toHaveFocus();
+  });
 });

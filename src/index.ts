@@ -40,6 +40,15 @@ export * from "./components/Table";
 export * from "./components/Charts";
 export * from "./components/LiquidGlass";
 export * from "./components/Form";
+export * from "./components/IconButton";
+export * from "./components/PageHeader";
+export * from "./components/StatCard";
+export * from "./components/DescriptionList";
+export * from "./components/ConfirmDialog";
+export * from "./components/ViewSwitcher";
+export * from "./components/DataTable";
+export * from "./components/List";
+export * from "./components/Sidebar";
 
 // Hooks
 export * from "./hooks";

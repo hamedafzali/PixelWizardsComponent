@@ -33,6 +33,11 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
    */
   disableClose?: boolean;
   /**
+   * Dialog width on larger screens.
+   * @default "md"
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  /**
    * Additional className for modal root.
    */
   className?: string;

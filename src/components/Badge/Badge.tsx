@@ -1,7 +1,13 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import { clsx } from "clsx";
 import { BadgeProps } from "./Badge.types";
 
+/**
+ * Small label for status, counts and metadata.
+ * - `dot` with children renders a status dot followed by the label, so the
+ *   colour is never the only signal.
+ * - `dot` without children renders a dot-only indicator (give it aria-label).
+ */
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   (
     {
@@ -9,65 +15,54 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       size = "md",
       color = "primary",
       dot = false,
+      pulse = false,
+      icon,
+      mono = false,
       children,
       className,
       ...props
     },
     ref,
   ) => {
-    const getVariantClasses = (): string => {
-      const variants: Record<string, string> = {
-        default: "pw-badge--default",
-        solid: "pw-badge--solid",
-        outline: "pw-badge--outline",
-        subtle: "pw-badge--subtle",
-      };
-      return variants[variant];
-    };
-
-    const getColorClasses = (): string => {
-      const colors: Record<string, string> = {
-        primary: "pw-badge--primary",
-        secondary: "pw-badge--secondary",
-        success: "pw-badge--success",
-        warning: "pw-badge--warning",
-        error: "pw-badge--error",
-        info: "pw-badge--info",
-      };
-      return colors[color];
-    };
-
-    const getSizeClasses = (): string => {
-      const sizes: Record<string, string> = {
-        sm: "pw-badge--sm",
-        md: "pw-badge--md",
-        lg: "pw-badge--lg",
-      };
-      return sizes[size];
-    };
+    const dotOnly = dot && (children === undefined || children === null);
 
     const classes = clsx(
       "pw-badge",
-      getVariantClasses(),
-      getColorClasses(),
-      getSizeClasses(),
+      `pw-badge--${variant}`,
+      `pw-badge--${color}`,
+      `pw-badge--${size}`,
       {
-        "pw-badge--dot": dot,
+        "pw-badge--dot": dotOnly,
+        "pw-badge--with-dot": dot && !dotOnly,
+        "pw-badge--mono": mono,
       },
       className,
     );
 
-    if (dot) {
+    const dotEl = (
+      <span
+        className={clsx("pw-badge__dot", { "pw-badge__dot--pulse": pulse })}
+        aria-hidden="true"
+      />
+    );
+
+    if (dotOnly) {
       return (
         <span ref={ref} className={classes} {...props}>
-          <span className="pw-badge__dot" />
+          {dotEl}
         </span>
       );
     }
 
     return (
       <span ref={ref} className={classes} {...props}>
-        {children}
+        {dot && dotEl}
+        {icon && (
+          <span className="pw-badge__icon" aria-hidden="true">
+            {icon}
+          </span>
+        )}
+        <span className="pw-badge__label">{children}</span>
       </span>
     );
   },

@@ -1,16 +1,19 @@
 {
   "name": "pixelwizards-components",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "React + TypeScript component library with forms, tables, alerts, toasts, tooltips, modals, theme toggles, login UI, and stock-style charts.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "dev": "vite",
     "storybook": "storybook dev -p 6006",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && node scripts/build-css.mjs",
     "build:types": "tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --outDir dist",
     "prepublishOnly": "npm run build && npm run build:types",
     "lint": "eslint . --ext ts,tsx",

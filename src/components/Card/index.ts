@@ -1,2 +1,2 @@
-export { Card } from './Card'
-export type { CardProps } from './Card.types'
+export { Card, CardHeader, CardBody, CardFooter } from "./Card";
+export type { CardProps, CardHeaderProps, CardFooterProps } from "./Card.types";

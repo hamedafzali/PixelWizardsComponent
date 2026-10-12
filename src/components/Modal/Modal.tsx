@@ -1,13 +1,17 @@
-import React, { useEffect, useRef } from "react";
-import { ModalProps } from "./Modal.types";
-import { useTheme } from "../../themes";
+import React, { useEffect, useId, useRef } from "react";
 import { clsx } from "clsx";
+import { ModalProps } from "./Modal.types";
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /**
  * Accessible, styled Modal/Dialog component.
- * - Trap focus, restore on close.
- * - ESC/backdrop closes unless disabled.
- * - Light/dark theme with CSS vars.
+ * - Focus moves into the dialog, Tab cycles inside it, and focus returns to
+ *   the opener on close.
+ * - ESC/backdrop closes unless disabled; with stacked dialogs only the
+ *   innermost one reacts.
+ * - Becomes a bottom sheet on narrow screens.
  */
 export const Modal: React.FC<ModalProps> = ({
   open,
@@ -17,97 +21,108 @@ export const Modal: React.FC<ModalProps> = ({
   header,
   footer,
   disableClose,
+  size = "md",
   className,
   ...props
 }) => {
-  const { theme } = useTheme();
+  const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
-
-  // Trap focus when open
+  const closeRef = useRef(onClose);
+  const disableRef = useRef(disableClose);
   useEffect(() => {
-    if (!open || !dialogRef.current) return;
-    const prev = document.activeElement as HTMLElement;
-    dialogRef.current.focus();
-    const handleFocus = (e: FocusEvent) => {
-      if (!dialogRef.current?.contains(e.target as Node)) {
+    closeRef.current = onClose;
+    disableRef.current = disableClose;
+  });
+
+  useEffect(() => {
+    if (!open) return;
+    const opener = document.activeElement as HTMLElement | null;
+    const el = dialogRef.current;
+    if (el && !el.contains(document.activeElement)) {
+      const first = el
+        .querySelector(".pw-modal__body")
+        ?.querySelector<HTMLElement>(FOCUSABLE);
+      (first ?? el).focus();
+    }
+
+    const onKey = (e: KeyboardEvent) => {
+      const active = document.activeElement as HTMLElement | null;
+      if (!el || active?.closest('[role="dialog"]') !== el) return;
+      if (e.key === "Escape") {
+        if (!disableRef.current) closeRef.current();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = Array.from(el.querySelectorAll<HTMLElement>(FOCUSABLE));
+      if (!items.length) {
         e.preventDefault();
-        dialogRef.current?.focus();
+        return;
+      }
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
       }
     };
-    document.addEventListener("focus", handleFocus, true);
+    window.addEventListener("keydown", onKey);
     return () => {
-      document.removeEventListener("focus", handleFocus, true);
-      if (prev) prev.focus();
+      window.removeEventListener("keydown", onKey);
+      opener?.focus?.();
     };
   }, [open]);
 
-  // ESC key closes
-  useEffect(() => {
-    if (!open || disableClose) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, disableClose, onClose]);
-
   if (!open) return null;
 
-  // Backdrop click closes
   const handleBackdrop = (e: React.MouseEvent) => {
     if (!disableClose && e.target === e.currentTarget) onClose();
   };
 
   return (
-    <div
-      className={clsx("pw-modal-backdrop", { "pw-modal-open": open })}
-      style={{
-        position: "fixed",
-        zIndex: 1000,
-        inset: 0,
-        background: "rgba(0,0,0,0.45)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      tabIndex={-1}
-      aria-hidden={!open}
-      onMouseDown={handleBackdrop}
-    >
+    <div className="pw-modal-backdrop pw-modal-open" onMouseDown={handleBackdrop}>
       <div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={title ? "pw-modal-title" : undefined}
-        className={clsx("pw-modal", className)}
-        style={{
-          boxShadow: theme.shadows.xl || "0 8px 32px rgba(0,0,0,0.15)",
-          ...props.style,
-        }}
-        tabIndex={0}
+        aria-labelledby={title ? titleId : undefined}
+        tabIndex={-1}
+        className={clsx("pw-modal", `pw-modal--${size}`, className)}
         {...props}
       >
-        {header || title ? (
+        {(header || title || !disableClose) && (
           <div className="pw-modal__header">
-            {title ? (
-              <div id="pw-modal-title" className="pw-modal__title">
-                {title}
-              </div>
-            ) : null}
-            {header}
+            <div className="pw-modal__heading">
+              {title ? (
+                <h2 id={titleId} className="pw-modal__title">
+                  {title}
+                </h2>
+              ) : null}
+              {header}
+            </div>
+            {!disableClose && (
+              <button
+                type="button"
+                aria-label="Close dialog"
+                className="pw-modal__close"
+                onClick={onClose}
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path
+                    d="M18 6 6 18M6 6l12 12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
-        ) : null}
+        )}
         <div className="pw-modal__body">{children}</div>
         {footer && <div className="pw-modal__footer">{footer}</div>}
-        {!disableClose && (
-          <button
-            aria-label="Close dialog"
-            className="pw-modal__close"
-            onClick={onClose}
-          >
-            ×
-          </button>
-        )}
       </div>
     </div>
   );

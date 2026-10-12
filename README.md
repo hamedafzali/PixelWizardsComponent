@@ -21,6 +21,14 @@ PixelWizards is a professional React + TypeScript component library built for mo
 npm install pixelwizards-components
 ```
 
+Import the styles once, at your app entry:
+
+```ts
+import "pixelwizards-components/dist/index.css"; // reset + base styles + components
+// or, when the app already has its own reset (Tailwind, etc.):
+import "pixelwizards-components/dist/components.css";
+```
+
 Peer dependencies:
 
 - `react >=18 <20`
@@ -60,13 +68,16 @@ export default function App() {
 
 ### Layout and Surface
 
-- `Card`
+- `Card`, `CardHeader`, `CardBody`, `CardFooter`
+- `PageHeader`
 - `EmptyState`
 - `Skeleton`
 - `Drawer`
 
 ### Navigation
 
+- `Sidebar` (collapsible rail, mobile drawer, router-agnostic links)
+- `ViewSwitcher` + `useViewMode` (grid / list / table, remembered per page)
 - `Tabs`
 - `Accordion`
 - `Breadcrumbs`
@@ -89,6 +100,10 @@ export default function App() {
 ### Data Display
 
 - `Table`
+- `DataTable` (column renderers, responsive hidden columns, row groups)
+- `List`, `ListItem`
+- `DescriptionList`
+- `StatCard`
 - `Badge`
 - `Progress`
 - `Avatar`
@@ -99,6 +114,12 @@ export default function App() {
 - `Toast`
 - `Tooltip`
 - `Modal`
+- `ConfirmDialog` (optional type-to-confirm)
+
+### Actions
+
+- `Button`
+- `IconButton`
 
 ### Auth
 
@@ -339,6 +360,47 @@ function ThemeControls() {
   );
 }
 ```
+
+## Dashboard example
+
+```tsx
+import {
+  PageHeader, ViewSwitcher, useViewMode, Card, CardHeader, CardBody,
+  DataTable, Badge, IconButton,
+} from "pixelwizards-components";
+
+function Images({ images }) {
+  const [view, setView] = useViewMode("images", "grid", ["grid", "table"] as const);
+  return (
+    <>
+      <PageHeader
+        title="Images"
+        subtitle={`${images.length} images`}
+        actions={<ViewSwitcher value={view} onChange={setView} options={["grid", "table"]} />}
+      />
+      {view === "grid" ? (
+        images.map((img) => (
+          <Card key={img.id} padding="none">
+            <CardHeader title={img.name} meta={<Badge color="success" dot>in use</Badge>} />
+            <CardBody>{img.size}</CardBody>
+          </Card>
+        ))
+      ) : (
+        <DataTable
+          rows={images}
+          rowKey={(r) => r.id}
+          columns={[
+            { key: "name", header: "Name" },
+            { key: "size", header: "Size", align: "right", hideBelow: "sm" },
+          ]}
+        />
+      )}
+    </>
+  );
+}
+```
+
+Theme tokens are CSS variables (`--color-primary`, `--color-bg-primary`, `--color-text-primary`, `--color-border`, `--radius-md`, ...). Override them on `:root` to match an existing design system.
 
 ## Development
 
