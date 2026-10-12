@@ -13,6 +13,7 @@ export * from "./components/MultiThemeToggle";
 export * from "./components/Badge";
 export * from "./components/Progress";
 export * from "./components/Modal";
+export * from "./components/CommandPalette";
 export * from "./components/Tooltip";
 export * from "./components/Checkbox";
 export * from "./components/Avatar";
