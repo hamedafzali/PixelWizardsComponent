@@ -43,6 +43,7 @@ export const Alert: React.FC<AlertProps> = ({
   status = "info",
   title,
   description,
+  action,
   icon,
   closable = false,
   onClose,
@@ -76,6 +77,7 @@ export const Alert: React.FC<AlertProps> = ({
         )}
         {description && <div className="pw-alert__desc">{description}</div>}
       </div>
+      {action && <div className="pw-alert__action">{action}</div>}
       {closable && (
         <button
           type="button"

@@ -9,9 +9,11 @@ export interface AlertProps {
   /** Status (affects color/icon), default: info */
   status?: AlertStatus;
   /** Alert title */
-  title?: string;
+  title?: ReactNode;
   /** Alert description */
-  description?: string;
+  description?: ReactNode;
+  /** Inline action shown before the close button, e.g. a Retry link. */
+  action?: ReactNode;
   /** Show close button, default: false */
   closable?: boolean;
   /** Callback when close button clicked */

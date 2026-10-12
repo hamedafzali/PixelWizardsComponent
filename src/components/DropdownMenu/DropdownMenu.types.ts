@@ -24,6 +24,8 @@ export interface DropdownMenuProps {
   triggerLabel?: string;
   /** Render the trigger as a compact square icon button. */
   iconTrigger?: boolean;
+  /** Trigger look when it has a label: outlined (default) or a primary button. */
+  triggerVariant?: "outline" | "primary";
   className?: string;
   triggerClassName?: string;
 }

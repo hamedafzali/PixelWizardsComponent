@@ -22,6 +22,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   align = "left",
   triggerLabel = "More actions",
   iconTrigger,
+  triggerVariant = "outline",
   className,
   triggerClassName,
 }) => {
@@ -114,7 +115,10 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         type="button"
         className={clsx(
           "pw-dropdown__trigger",
-          { "pw-dropdown__trigger--icon": iconOnly },
+          {
+            "pw-dropdown__trigger--icon": iconOnly,
+            "pw-dropdown__trigger--primary": !iconOnly && triggerVariant === "primary",
+          },
           triggerClassName,
         )}
         ref={triggerRef}
